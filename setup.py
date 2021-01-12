@@ -47,6 +47,13 @@ if __name__ == "__main__":
             'Programming Language :: Python :: 3.8',
         ],
         packages=[
+            'decider_border',
+            'decider_border.features',
             'decider_lay',
         ],
+        entry_points={
+            'console_scripts': [
+                'decider_border = decider_border.cli:main',
+            ],
+        },
     )

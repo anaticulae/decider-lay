@@ -1,0 +1,59 @@
+#==============================================================================
+# C O P Y R I G H T
+#------------------------------------------------------------------------------
+# Copyright (c) 2019-2021 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+#==============================================================================
+
+import utila
+
+import decider_border
+
+FEATURE_NAME = 'detection'
+DESCRIPTION = """\
+The border_decider detects overlapping content to different extracted
+border. There are four types of border.
+
+1. The crop-border which contains the every element in the document.
+2. The left-right border describes the border in books which is different
+   for the left page and the right page.
+3. The page border excludes page number on the bottom of the page.
+4. The footer border excludes the area of the footer.
+"""
+
+WORKPLAN = [
+    utila.create_step(
+        'distance',
+        [
+            utila.ResultFile('groupme', 'area_area'),
+            utila.ResultFile('groupme', 'distance_distance'),
+        ],
+        ('user', 'developer'),
+    ),
+    utila.create_step(
+        FEATURE_NAME,
+        [
+            utila.ResultFile('rawmaker', 'border_boundingboxes'),
+            utila.ResultFile('rawmaker', 'border_pages'),
+            utila.ResultFile('groupme', 'border_leftright'),
+        ],
+        ('hits', 'user', 'developer'),
+    )
+]
+
+
+def main():
+    utila.featurepack(
+        workplan=WORKPLAN,
+        root=decider_border.ROOT,
+        featurepackage='decider_border.features',
+        config=utila.FeaturePackConfig(
+            description=DESCRIPTION,
+            name=decider_border.PROCESS,
+            pages=True,
+            multiprocessed=True,
+            version=decider_border.__version__,
+        ),
+    )
