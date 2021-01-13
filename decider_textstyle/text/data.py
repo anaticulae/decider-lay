@@ -15,6 +15,7 @@ import textflow.serialize
 import utila
 
 import decider_textstyle
+import decider_textstyle.utils
 
 
 def load_driver(  # pylint:disable=R0913,R0914
