@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.3.0
+
+### Feature
+
+* add space validation step (e63d6163a9a6)
+
 ## v0.2.1
 
 ### Feature
