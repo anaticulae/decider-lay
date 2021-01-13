@@ -10,7 +10,6 @@
 import operator
 
 import iamraw
-import protocol
 import texmex.style
 import utila
 
@@ -93,53 +92,4 @@ def page_chunks(items):
             page = item[0]
         else:
             result[-1][1].append(item[2])
-    return result
-
-
-def merge_lintings(items):
-    """Merge lintings which are neighbors and lint the same error.
-
-    1. Group by page
-    2. Group by message id
-    3. Merge equal neighbors
-    """
-    ranged, notranged = utila.partition(
-        key=lambda x: x.location.shortcut == 'r',
-        items=items,
-    )
-    result = []
-    result.extend(notranged)
-
-    paged = protocol.bypage(ranged)
-    for page in paged:
-        msgid = protocol.byid(page)
-        for messagegroup in msgid.values():
-            merged = merge_equal_finding_id(messagegroup)
-            result.extend(merged)
-    return result
-
-
-def merge_equal_finding_id(findings):
-    if not findings:
-        return []
-    findings = sorted(findings, key=lambda x: x.location.line)
-    result = [findings[0]]
-    for item in findings[1:]:
-        before = result[-1]
-        linebefore = before.location.line
-        if before.location.line_end is not None:
-            linebefore = before.location.line_end
-        if item.msgid != before.msgid:
-            result.append(item)
-            continue
-        if item.solution.description != before.solution.description:
-            result.append(item)
-            continue
-        if item.location.line != linebefore + 1:
-            result.append(item)
-            continue
-        before.location.line_end = linebefore + 1
-    # update finding number
-    for finding in result:
-        finding.number = protocol.finding.hash_finding(finding)
     return result

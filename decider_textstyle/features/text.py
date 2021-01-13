@@ -83,7 +83,7 @@ def work(  # pylint:disable=R0913,R0914
 
     result = linter.result(unique=True)
 
-    result = decider_textstyle.utils.merge_lintings(result)
+    result = protocol.merge_findings(result)
 
     user, developer = protocol.dump_result(result)
     return user, developer
