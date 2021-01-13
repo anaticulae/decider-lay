@@ -44,10 +44,14 @@ if __name__ == "__main__":
             'decider_border',
             'decider_border.features',
             'decider_lay',
+            'decider_textstyle',
+            'decider_textstyle.headlines',
+            'decider_textstyle.features',
         ],
         entry_points={
             'console_scripts': [
                 'decider_border = decider_border.cli:main',
+                'decider_textstyle = decider_textstyle.cli:main',
             ],
         },
     )

@@ -23,14 +23,21 @@ WORKER = 6
 
 RESOURCES = [
     (power.MASTER116_PDF, '0:50,75:115'),
-    (power.BACHELOR076_PDF, ':'),
-    (power.BACHELOR056_PDF, '0:20'),
     (power.DISS266_PDF, '0:90'),
-    (power.DOCU35_PDF, '0:10'),
-    (power.BOOK007_PDF, '0:10'),
-    (power.MASTER078_PDF, '0:10'),
-    (power.DOCU07_PDF, '0:10'),
+    (power.BACHELOR090_PDF, ':'),
+    (power.BACHELOR076_PDF, ':'),
+    (power.MASTER072_PDF, ':'),
+    (power.BACHELOR063_PDF, ':'),
+    (power.MASTER098_PDF, '0:10,43:65,88:97'),
+    (power.MASTER110_PDF, '0:70'),
+    (power.HOME025_PDF, ':'),
+    (power.BACHELOR056_PDF, '0:20'),
     (power.TECH024_PDF, '0:15'),
+    (power.DOCU35_PDF, '0:10'),
+    (power.MASTER078_PDF, '0:10'),
+    (power.BACHELOR051_PDF, '25:40'),
+    (power.BOOK007_PDF, ':'),
+    (power.DOCU07_PDF, ':'),
 ]
 
 
