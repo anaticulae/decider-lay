@@ -17,7 +17,7 @@ def test_decider_textstyle_cli_help(monkeypatch):
     tests.textstyle_.run('--help', monkeypatch=monkeypatch)
 
 
-@utilatest.longrun
+@utilatest.nightly
 def test_decider_textstyle_master72(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     tests.textstyle_.run(f'-i {source}', monkeypatch=monkeypatch)

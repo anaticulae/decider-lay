@@ -32,7 +32,7 @@ def decide_text_style(source, pages, style, testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parser')
-@utilatest.longrun
+@utilatest.nightly
 def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
     style = iamraw.DocTextStyle(text_size=12.0)
     source = power.link(power.MASTER072_PDF)
@@ -81,7 +81,7 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
     assert len(findings) == 5
 
 
-@utilatest.longrun
+@utilatest.nightly
 def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
     """Merge more than one line with the same finding into a single
     finding."""

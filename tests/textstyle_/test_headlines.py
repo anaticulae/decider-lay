@@ -50,7 +50,7 @@ def decide_headline_style(source, pages, style, testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
-@utilatest.longrun
+@utilatest.nightly
 def test_decider_headlines_master72_2_20(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     pages = '2:20'
@@ -66,7 +66,7 @@ def test_decider_headlines_master72_2_20(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
-@utilatest.longrun
+@utilatest.nightly
 def test_decider_headlines_master72_all(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     pages = '3:65'
