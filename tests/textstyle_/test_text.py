@@ -10,7 +10,6 @@
 import iamraw
 import power
 import protocol
-import pytest
 import serializeraw
 import utilatest
 
@@ -50,7 +49,6 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
 
 
 @utilatest.longrun
-@pytest.mark.xfail(reason='magic content disable too much data')
 def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
     # Hint: adjust text_family after text parser change
     style = iamraw.DocTextStyle(text_family=-1702503278)
@@ -64,7 +62,7 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
         monkeypatch,
     )
     # not correct, but indicates that algo changed
-    assert len(findings) == 7
+    assert protocol.count_findings(findings, 7551) == 0
 
 
 @utilatest.longrun
