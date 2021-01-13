@@ -45,8 +45,9 @@ if __name__ == "__main__":
             'decider_border.features',
             'decider_lay',
             'decider_textstyle',
-            'decider_textstyle.headlines',
             'decider_textstyle.features',
+            'decider_textstyle.headlines',
+            'decider_textstyle.text',
         ],
         entry_points={
             'console_scripts': [
