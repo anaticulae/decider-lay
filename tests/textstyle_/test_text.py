@@ -113,7 +113,7 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
         msgids=7550,
     )
     # select page 30
-    findings = protocol.select_pages(findings, 30)  # pylint:disable=E1101
+    findings = protocol.select_pages(findings, 30)
     assert not findings
 
 
@@ -130,5 +130,5 @@ def test_textstyle_master110_page29(testdir, monkeypatch):
         msgids={7550, 7551},
     )
     # select page 29
-    findings = protocol.select_pages(findings, 29)  # pylint:disable=E1101
+    findings = protocol.select_pages(findings, 29)
     assert len(findings) == 7  # may change in the future
