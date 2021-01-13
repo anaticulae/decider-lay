@@ -31,7 +31,6 @@ def decide_text_style(source, pages, style, testdir, monkeypatch):
     return findings
 
 
-@pytest.mark.xfail(reason='failing magic/list parser')
 @utilatest.nightly
 def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
     style = iamraw.DocTextStyle(text_size=12.0)
@@ -44,7 +43,10 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
         testdir,
         monkeypatch,
     )
-    assert not findings
+    # text family
+    assert protocol.count_findings(findings, 7551) == 1
+    # text size
+    assert not protocol.count_findings(findings, 7550)
 
 
 @utilatest.longrun
