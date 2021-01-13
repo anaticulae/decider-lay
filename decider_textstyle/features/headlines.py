@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import typing
-
 import protocol
 import utila
 
@@ -28,7 +26,7 @@ def work(
         sizeandborders: str,
         headerfooter: str,
         pages: tuple = None,
-) -> typing.Tuple[str, str]:
+) -> protocol.ResultType:
     data = decider_textstyle.headlines.data.load_driver(
         textstyle,
         headlines,
