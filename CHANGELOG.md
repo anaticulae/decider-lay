@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.2.1
+
+### Feature
+
+* extend logging information (e252f7bf4abb)
+
 ## v0.2.0
 
 ### Feature
