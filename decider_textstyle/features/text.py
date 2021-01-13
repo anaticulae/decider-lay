@@ -97,7 +97,7 @@ der erwarteten Schriftgröße **{{expected}}**.
 """
 
 
-def check_7550_check_text_size(linter: callable, driver):
+def check_7550_text_size(linter: callable, driver):
     if not driver.style.text_size:
         return
     chunks = driver.text_chunks
@@ -122,7 +122,7 @@ der erwarteten Schriftart **{{expected}}** ab.
 """
 
 
-def check_7551_check_text_family(linter: callable, driver):
+def check_7551_text_family(linter: callable, driver):
     if not driver.style.text_family:
         utila.error('7551: no text family given - driver')
         return
