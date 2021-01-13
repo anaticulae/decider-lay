@@ -11,6 +11,7 @@ import protocol
 import utila
 
 import decider_textstyle.text.data
+import decider_textstyle.text.space
 import decider_textstyle.text.style
 
 
@@ -23,6 +24,7 @@ def work(  # pylint:disable=R0913,R0914
         headerfooter: str,
         fontheader: str,
         fontcontent: str,
+        wordspaces: str,
         magiccontent: str,
         pages: tuple = None,
 ) -> protocol.ResultType:
@@ -35,10 +37,12 @@ def work(  # pylint:disable=R0913,R0914
         headerfooter,
         fontheader,
         fontcontent,
+        wordspaces,
         magiccontent,
         pages=pages,
     )
     linter = protocol.from_modules([
+        decider_textstyle.text.space,
         decider_textstyle.text.style,
     ])
     if driver:

@@ -11,12 +11,13 @@ import os
 
 import protocol
 import serializeraw
+import textflow.serialize
 import utila
 
 import decider_textstyle
 
 
-def load_driver(
+def load_driver(  # pylint:disable=R0913,R0914
         textstyle: str,
         headlines: str,
         text: str,
@@ -25,6 +26,7 @@ def load_driver(
         headerfooter: str,
         fontheader: str,
         fontcontent: str,
+        wordspaces: str,
         magiccontent: str,
         pages: tuple = None,
 ):
@@ -58,6 +60,7 @@ def load_driver(
         utila.error('no navigators given')
 
     if navigators and headlines:
+        wordspaces = textflow.serialize.load_wordspaces(wordspaces, pages=pages)
         # TODO: DO WE REALY REQUIRE HEADLINES?
         chunks = decider_textstyle.utils.text_chunks(
             headlines,
@@ -67,10 +70,12 @@ def load_driver(
             yieldnone=True,
         )
         data = protocol.driver(
-            text_chunks=chunks,
             fontstore=fontstore,
             headlines=headlines,
             style=expected,
+            text_chunks=chunks,
+            wordspaces=wordspaces,
         )
+
         return data
     return None
