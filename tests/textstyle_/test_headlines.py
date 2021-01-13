@@ -94,7 +94,7 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
         monkeypatch,
     )
     # TODO: IMPROVE HEADLINE EXTRACTOR
-    expected = 32  # not correct, but indicates that algo changed
+    expected = 26  # not correct, but indicates that algo changed
     # TODO: FILTER EXPECTED FINDINGS AND MAKE TEST MORE CONCRETE
     assert len(findings) == expected
 
