@@ -79,8 +79,7 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
         monkeypatch,
     )
     # five words marked bold
-    findings = protocol.select_findings(findings, msgid=7555)
-    assert len(findings) == 5
+    assert protocol.count_findings(findings, msgid=7555) == 5
 
 
 @utilatest.nightly
