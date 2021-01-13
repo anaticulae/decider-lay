@@ -51,7 +51,7 @@ def decide_headline_style(source, pages, style, testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.nightly
-def test_decider_headlines_master72_2_20(testdir, monkeypatch):
+def test_decider_headlines_master72_2_20_fontsize(testdir, monkeypatch):
     source = power.link(power.MASTER072_PDF)
     pages = '2:20'
     findings = decide_headline_style(
@@ -62,6 +62,9 @@ def test_decider_headlines_master72_2_20(testdir, monkeypatch):
         monkeypatch,
     )
     # no font size error
+    assert not protocol.count_findings(findings, 7500)
+    assert not protocol.count_findings(findings, 7510)
+    assert not protocol.count_findings(findings, 7520)
     assert not findings
 
 
