@@ -79,17 +79,3 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
             (item[0], item[1], None) for item in flat
         ]
     return flat
-
-
-def page_chunks(items):
-    if not items:
-        return []
-    result = []
-    page = None
-    for item in items:
-        if item[0] != page:
-            result.append([item[0], [item[2]]])
-            page = item[0]
-        else:
-            result[-1][1].append(item[2])
-    return result
