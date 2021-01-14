@@ -12,18 +12,22 @@ import protocol
 import serializeraw
 
 import decider_textstyle
+import decider_textstyle.text.space
 import tests.textstyle_
 
 
 def test_textspace_bachelor56page9(testdir, monkeypatch):
     source = power.link(power.BACHELOR056_PDF)
-    tests.textstyle_.run(
-        f'-i {source} --text --pages=5:10',
-        monkeypatch=monkeypatch,
-    )
+    with monkeypatch.context() as context:
+        maxwidth = lambda height: 10  # smallest gap to ensure findings
+        context.setattr(decider_textstyle.text.space, "maxwidth", maxwidth)
+        tests.textstyle_.run(
+            f'-i {source} --text --pages=5:10',
+            monkeypatch=monkeypatch,
+        )
     findings = serializeraw.load_findings(
         decider_textstyle.path.text(testdir.tmpdir),
         msgids=7770,
     )
     findings = protocol.select_pages(findings, 9)
-    assert findings  # TODO: NOT VALIDATED
+    assert len(findings) == 5  # TODO: NOT VALIDATED
