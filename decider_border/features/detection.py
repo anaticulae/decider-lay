@@ -115,52 +115,62 @@ class BorderExpected:
 
 def boxes_outside_border(
         boxes,
-        page_sizes: dict,
+        pagesizes: dict,
         expected: BorderExpected,
         tol=None,
 ) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
-    if tol is None:
-        tol = (BORDER_LEFT, BORDER_RIGHT, BORDER_TOP, BORDER_BOTTOM)
     result = []
-
     # x0 y0 x1 y1
     for page in boxes:
-        pagesize = page_sizes[page.page]
-        border_box = expected(page.page)
-        if not border_box:
+        pagesize = pagesizes[page.page]
+        borderbox = expected(page.page)
+        if not borderbox:
             continue
-        valid = utila.roundme((
-            border_box[0] - tol[0],  # x0
-            border_box[2] - tol[2],  # y0
-            pagesize.width - border_box[1] + tol[1],  # x1
-            pagesize.height - border_box[3] + tol[3],  # y1
-        ))
+        contentbox = contentbox_valid(borderbox, pagesize, tol=tol)
         hits = []
         for index, bounding in page.boundings:
-            # BOUNDING:     'left, top,   right, bottom'
-            # move bounding to center of page to make approach more robust
-            rounded_bounding = round_small(bounding)
-            if utila.rectangle_inside(valid, rounded_bounding):
-                # all items in the box
-                continue
-            if covers_complete_page(bounding, pagesize):
-                continue
-            if utila.rectangle_size(rounded_bounding) <= 50:  # TODO: HOLY VALUE
-                # white space pdf printer errors
-                # TODO: USE THIS INFORMATION FOR EXPERT LINTING
+            if contentbox_inside(bounding, contentbox, pagesize):
                 continue
             hits.append((index, bounding))
         result.append(
             iamraw.PageContentHit(
-                border=border_box,
+                border=borderbox,
                 hits=hits,
                 page=page.page,
             ))
     return result
 
 
-def covers_complete_page(bounding: tuple, page) -> bool:
+def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
+    if tol is None:
+        tol = (BORDER_LEFT, BORDER_RIGHT, BORDER_TOP, BORDER_BOTTOM)
+    valid = utila.roundme((
+        border_box[0] - tol[0],  # x0
+        border_box[2] - tol[2],  # y0
+        pagesize.width - border_box[1] + tol[1],  # x1
+        pagesize.height - border_box[3] + tol[3],  # y1
+    ))
+    return valid
+
+
+def contentbox_inside(bounding, contentbox, pagesize) -> bool:
+    # BOUNDING:     'left, top,   right, bottom'
+    # move bounding to center of page to make approach more robust
+    rounded_bounding = round_small(bounding)
+    if utila.rectangle_inside(contentbox, rounded_bounding):
+        # all items in the box
+        return True
+    if covers_completepage(bounding, pagesize):
+        return True
+    if utila.rectangle_size(rounded_bounding) <= 50:  # TODO: HOLY VALUE
+        # white space pdf printer errors
+        # TODO: USE THIS INFORMATION FOR EXPERT LINTING
+        return True
+    return False
+
+
+def covers_completepage(bounding: tuple, page) -> bool:
     """Bounding covers the complete page."""
     expected = (0, 0, page.width, page.height)
     return utila.nears(bounding, expected, diff=5.0)  # TODO: HOLY VALUE
