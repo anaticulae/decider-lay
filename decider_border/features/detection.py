@@ -66,10 +66,15 @@ def work(
     return dumped, user, developer
 
 
-def linting(hits, linter: protocol.Linter):
+def linting(hits: iamraw.PageContentHits, linter: protocol.Linter):
     checkers = protocol.parse_checkers(__name__)
+    # determine multi page hits
+    repeating = boxes_repeating(hits)
+    # remove multi page hits
+    unique = hits_unique(hits, repeating)
     for checker in checkers:
-        for page in hits:
+        # TODO: MOVE THIS ITER TO CHECK METHOD ITSELF. USE DRIVER CONCEPT
+        for page in unique:
             call = functools.partial(
                 linter.add_finding,
                 msgid=checker.msgid,
@@ -140,6 +145,52 @@ def boxes_outside_border(
                 page=page.page,
             ))
     return result
+
+
+def boxes_repeating(
+        pagecontenthits: iamraw.PageContentHits,
+        required_ratio: float = 0.6,
+) -> set:
+    count_min = int(len(pagecontenthits) * required_ratio)
+    collected = []
+    for page in pagecontenthits:
+        collected.extend(utila.make_unique([item[1] for item in page.hits]))
+    clustered = utila.same_area_cluster(
+        collected,
+        max_difference=2.5,
+        selector=lambda x: x,
+    )
+    result = {
+        cluster.center for cluster in clustered if len(cluster) >= count_min
+    }
+    return result
+
+
+def hits_unique(
+        pagecontenthits: iamraw.PageContentHits,
+        repeating: set,
+) -> iamraw.PageContentHits:
+    """Remove `repeating` hits."""
+    result = []
+    for page in pagecontenthits:
+        selected = [
+            hit for hit in page.hits if not hits_match(hit[1], repeating)
+        ]
+        result.append(
+            iamraw.PageContentHit(
+                border=page.border,
+                hits=selected,
+                page=page.page,
+            ))
+    return result
+
+
+def hits_match(
+        bounding: tuple,
+        hits: set,
+        maxdiff: float = 10.0,  # TODO: HOLY VALUE
+) -> bool:
+    return any([utila.nears(bounding, item, diff=maxdiff) for item in hits])
 
 
 def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
