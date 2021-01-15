@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.4.0
+
+### Feature
+
+* do not lint duplicated page bounding errors (8190e18e6445)
+
+### Fix
+
+* adjust valid space to fixed number (eae939ee9510)
+
 ## v0.3.1
 
 ### Fix
