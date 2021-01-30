@@ -9,6 +9,7 @@
 
 import doctextstyle
 import doctextstyle.cli
+import protocol
 import utila
 
 import decider_textstyle
@@ -50,15 +51,20 @@ WORKPLAN = [
 
 
 def main():
+    hook = protocol.integrate(
+        root=decider_textstyle.ROOT,
+        features='decider_textstyle.features',
+    )
     utila.featurepack(
         workplan=WORKPLAN,
         root=decider_textstyle.ROOT,
         featurepackage='decider_textstyle.features',
         config=utila.FeaturePackConfig(
+            cli_hook=hook,
             description=DESCRIPTION,
             multiprocessed=True,
-            pages=True,
             name=decider_textstyle.PROCESS,
+            pages=True,
             version=decider_textstyle.__version__,
         ),
     )

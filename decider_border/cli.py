@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
+import protocol
 import utila
 
 import decider_border
@@ -45,15 +46,20 @@ WORKPLAN = [
 
 
 def main():
+    hook = protocol.integrate(
+        root=decider_border.ROOT,
+        features='decider_border.features',
+    )
     utila.featurepack(
         workplan=WORKPLAN,
         root=decider_border.ROOT,
         featurepackage='decider_border.features',
         config=utila.FeaturePackConfig(
+            cli_hook=hook,
             description=DESCRIPTION,
+            multiprocessed=True,
             name=decider_border.PROCESS,
             pages=True,
-            multiprocessed=True,
             version=decider_border.__version__,
         ),
     )
