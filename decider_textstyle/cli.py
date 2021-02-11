@@ -53,7 +53,11 @@ WORKPLAN = [
 def main():
     hook = protocol.integrate(
         root=decider_textstyle.ROOT,
-        features='decider_textstyle.features',
+        features=[
+            'decider_textstyle.features',
+            'decider_textstyle.headlines',
+            'decider_textstyle.text',
+        ],
     )
     utila.featurepack(
         workplan=WORKPLAN,
