@@ -12,9 +12,9 @@ import string
 import configo
 import doctextstyle.parser
 import iamraw
+import protocol
 import utila
 
-import decider_textstyle.features
 import decider_textstyle.headlines.utils
 
 FONT_SIZE_ERROR = string.Template("""\
@@ -290,7 +290,7 @@ def check_7535_headline_h1_too_huge(linter: callable, driver):
     if style.h1_size <= MAX_H1_FONT_SIZE:
         return
     linter(
-        location=decider_textstyle.features.OVERVIEW,
+        location=protocol.OVERVIEW,
         current=style.h1_size,
         max_font_size=MAX_H1_FONT_SIZE,
     )
@@ -313,7 +313,7 @@ def check_7536_headline_h2_too_huge(linter: callable, driver):
     if style.h2_size <= MAX_H2_FONT_SIZE:
         return
     linter(
-        location=decider_textstyle.features.OVERVIEW,
+        location=protocol.OVERVIEW,
         current=style.h2_size,
         max_font_size=MAX_H2_FONT_SIZE,
     )
