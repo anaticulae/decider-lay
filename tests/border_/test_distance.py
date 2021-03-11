@@ -17,7 +17,7 @@ import decider_border.features.distance
 
 @pytest.mark.parametrize('page, expected', [
     (0, 0),
-    (5, 6),
+    (5, 3),
 ])
 def test_border_distances_linting(page, expected):
     area = groupme.path.area(power.link(power.DOCU07_PDF))
