@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.5.1
+
+### Fix
+
+* add missing feature packages (0a94f5f9bc8b)
+
 ## v0.5.0
 
 ### Feature
