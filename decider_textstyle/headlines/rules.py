@@ -15,11 +15,11 @@ import decider_textstyle.headlines.utils
 SOLUTION_7540 = """\
 Kapitel beginnt nicht auf neuer Seite
 
-Das Kapitel „{{chapter}}“ beginnt nicht auf einer neuen Seite. Fügen
+Das Kapitel „{{chapter}}“ beginnt nicht auf einer neuen Seite. Fügen \
 Sie vor dem Kapitelstart einen Seitenumbruch ein.
 
 {WORD}
-Passen Sie dazu die **Formatvorlage der Überschriften** Level 1 an oder
+Passen Sie dazu die **Formatvorlage der Überschriften** Level 1 an oder \
 verwenden Sie einen **manuellen Zeilenumbruch**.
 {END}
 

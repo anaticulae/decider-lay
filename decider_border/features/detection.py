@@ -89,7 +89,7 @@ def linting(hits: iamraw.PageContentHits, linter: protocol.Linter):
 SOLUTION_2020 = """\
 Objekt beschreibt Seitenrand
 
-Passen Sie die Formatierung an, so dass der Inhalt nicht mehr in den
+Passen Sie die Formatierung an, so dass der Inhalt nicht mehr in den \
 Seitenrad ragt.
 """
 
