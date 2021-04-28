@@ -20,10 +20,22 @@ def maxwidth(height: float) -> float:  # pylint:disable=W0613
     return 25.0
 
 
+SKIP = {
+    None,
+    iamraw.PageContentType.BLOCKQUOTE,
+    iamraw.PageContentType.TEXT,
+}
+
+
 def check_7770_text_hole_simple(linter: callable, driver):
+    skipper = driver.magiccontent_oneline
     for page in driver.wordspaces:
         pagenumber, pagecontent = page.page, page.content
-        for _, line in pagecontent:
+        for linenumber, line in pagecontent:
+            typ = skipper(pagenumber, linenumber)
+            if typ not in SKIP:
+                # skip hole checker in captions and formula
+                continue
             for space in line:
                 width = space[2] - space[0]  # x1 - x0
                 height = space[3] - space[1]  # y1 - y0

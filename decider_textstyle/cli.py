@@ -43,7 +43,7 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'oneline_fonts_header'),
             utila.ResultFile('rawmaker', 'oneline_fonts_content'),
             utila.ResultFile('textflow', 'wordspace_wordspace'),
-            utila.ResultFile('magic', 'content_content', optional=True),
+            utila.ResultFile('magic', 'oneline_content', optional=True),
         ],
         output=('user', 'developer'),
     ),
