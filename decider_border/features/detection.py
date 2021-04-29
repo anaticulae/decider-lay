@@ -24,7 +24,6 @@ are a lot of `hit the box` errors.
 
 import contextlib
 import functools
-import math
 import typing
 
 import iamraw
@@ -208,7 +207,7 @@ def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
 def contentbox_inside(bounding, contentbox, pagesize) -> bool:
     # BOUNDING:     'left, top,   right, bottom'
     # move bounding to center of page to make approach more robust
-    rounded_bounding = round_small(bounding)
+    rounded_bounding = utila.rectangle_roundsmall(bounding)
     if utila.rectangle_inside(contentbox, rounded_bounding):
         # all items in the box
         return True
@@ -225,31 +224,3 @@ def covers_completepage(bounding: tuple, page) -> bool:
     """Bounding covers the complete page."""
     expected = (0, 0, page.width, page.height)
     return utila.nears(bounding, expected, diff=5.0)  # TODO: HOLY VALUE
-
-
-def round_small(item: utila.Rectangle) -> utila.Rectangle:
-    """Round border in direction to the center of the rectangle to get a
-    `smaller` rectangle which fit in more parent rectangles."""
-    # round to move coordinate in center direction of page
-    rounding = [
-        math.ceil,  # x0
-        math.ceil,  # y0
-        math.floor,  # x1
-        math.floor,  # y1
-    ]
-    result = [method(item[index]) for index, method in enumerate(rounding)]
-    # rounding to the middle can flip min and max. Therefore we have to
-    # ensure x0/x1 and y0/y1 constraint.
-    result = ensure_bounding(item)
-    return tuple(result)
-
-
-def ensure_bounding(item):
-    """ensure x0/x1 and y0/y1 constraint."""
-    result = (
-        min(item[0], item[2]),
-        min(item[1], item[3]),
-        max(item[0], item[2]),
-        max(item[1], item[3]),
-    )
-    return utila.roundme(result)
