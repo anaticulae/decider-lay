@@ -31,3 +31,18 @@ def test_textspace_bachelor56page9(testdir, monkeypatch):
     )
     findings = protocol.select_pages(findings, 9)
     assert len(findings) == 5  # TODO: NOT VALIDATED
+
+
+def test_textspace_master75page23(testdir, monkeypatch):
+    """Regression test; do not detect any holes in figure captions."""
+    source = power.link(power.MASTER075_PDF)
+    tests.textstyle_.run(
+        f'-i {source} --text --pages=10:25',
+        monkeypatch=monkeypatch,
+    )
+    findings = serializeraw.load_findings(
+        decider_textstyle.path.text(testdir.tmpdir),
+        msgids=7770,
+    )
+    findings = protocol.select(findings, pages=23, msgid=7770)
+    assert not findings
