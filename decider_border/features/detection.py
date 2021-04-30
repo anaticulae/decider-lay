@@ -24,12 +24,15 @@ are a lot of `hit the box` errors.
 
 import typing
 
+import configo
 import iamraw
 import protocol
 import serializeraw
 import utila
 
 import decider_border.detection.hits
+
+MULTIPLE_BOUNDING_ERROR_COUNT = configo.HV_INT_PLUS(10).value
 
 
 def work(
@@ -90,9 +93,43 @@ def check_2020_content_inside_box(linter, driver):
     unique = decider_border.detection.hits.hits_unique(hits, repeating)
 
     for page in unique:
+        if len(page.hits) > MULTIPLE_BOUNDING_ERROR_COUNT:
+            # switch to 2025
+            continue
         for _, bounding in page.hits:
             location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,
                 page=page.page,
             )
             linter(location=location)
+
+
+SOLUTION_2025 = """\
+Seitenrand überprüfen
+
+{{number}} Objekte auf Seite {{page}} ragen in den erwarteten Seitenrand. \
+Überprüfen Sie ob dies so gewollt ist.
+"""
+
+
+def check_2025_multiple_bounding_error(linter, driver):
+    """Ensure that content fits in detected content box."""
+    hits: iamraw.PageContentHits = driver.hits
+    # determine multi page hits
+    repeating = decider_border.detection.hits.boxes_repeating(hits)
+    # remove multi page hits
+    unique = decider_border.detection.hits.hits_unique(hits, repeating)
+
+    for page in unique:
+        if len(page.hits) <= MULTIPLE_BOUNDING_ERROR_COUNT:
+            continue
+        bounding = utila.rectangle_max([bound for _, bound in page.hits])
+        location = iamraw.BoundingLocation.fromtuple(
+            bounding=bounding,
+            page=page.page,
+        )
+        linter(
+            number=len(page.hits),
+            page=page.page,
+            location=location,
+        )
