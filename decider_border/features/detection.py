@@ -45,6 +45,19 @@ def work(
         pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
+
+    driver = create_driver(border_boxes, border_pages, border_leftright, pages)
+
+    linter = protocol.from_module(__name__)
+    linter.run(driver=driver)
+
+    result = linter.result(unique=True)
+    user, developer = protocol.dump_result(result)
+    dumped = serializeraw.dump_hits(driver.hits)
+    return dumped, user, developer
+
+
+def create_driver(border_boxes, border_pages, border_leftright, pages):
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
     border_pages = serializeraw.load_pageborders(border_pages, pages=pages)
 
@@ -55,31 +68,8 @@ def work(
     hits = boxes_outside_border(boxes, page_sizes, expected)
     utila.debug(hits)
 
-    dumped = serializeraw.dump_hits(hits)
-
-    linter = protocol.from_module(__name__)
-    linting(hits, linter)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
-    return dumped, user, developer
-
-
-def linting(hits: iamraw.PageContentHits, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    # determine multi page hits
-    repeating = boxes_repeating(hits)
-    # remove multi page hits
-    unique = hits_unique(hits, repeating)
-    for checker in checkers:
-        # TODO: MOVE THIS ITER TO CHECK METHOD ITSELF. USE DRIVER CONCEPT
-        for page in unique:
-            call = functools.partial(
-                linter.add_finding,
-                msgid=checker.msgid,
-            )
-            for hit in page.hits:
-                checker(call, hit, page=page.page)
+    data = protocol.driver(hits=hits)
+    return data
 
 
 # TODO: ADD DIFFERENT BORDER CHECKER LINTER FOR DIFFRENT AREAS, footenote,
@@ -93,16 +83,21 @@ Seitenrad ragt.
 """
 
 
-def check_2020_content_inside_box(linter, item, page):  # pylint:disable=W0613
+def check_2020_content_inside_box(linter, driver):  # pylint:disable=W0613
     """Ensure that content fits in detected content box."""
-    assert isinstance(page, int), type(page)
-    _, bounding = item
-    assert isinstance(bounding, tuple), type(bounding)
-    location = iamraw.BoundingLocation.fromtuple(
-        bounding=bounding,
-        page=page,
-    )
-    linter(location=location)
+    hits: iamraw.PageContentHits = driver.hits
+    # determine multi page hits
+    repeating = boxes_repeating(hits)
+    # remove multi page hits
+    unique = hits_unique(hits, repeating)
+
+    for page in unique:
+        for _, bounding in page.hits:
+            location = iamraw.BoundingLocation.fromtuple(
+                bounding=bounding,
+                page=page.page,
+            )
+            linter(location=location)
 
 
 class BorderExpected:
