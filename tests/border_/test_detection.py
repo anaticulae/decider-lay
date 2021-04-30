@@ -26,3 +26,23 @@ def test_border_repeating_element(testdir, monkeypatch):
     findings = utila.flatten([item.content for item in findings])
     findings = protocol.select_findings(findings, 2020)
     assert len(findings) == 8  # TODO: NOT VALIDATED
+
+
+def test_decider_border_merge_pagewarning(testdir, monkeypatch):
+    """Merge more than 10 bounding lintings into a single page linting."""
+    source = power.link(power.MASTER155_PDF)
+    tests.border_.run(f'-i {source} --detection', monkeypatch=monkeypatch)
+    findings = protocol.select(
+        protocol.findings_from_path(testdir.tmpdir),
+        pages=1,
+        msgid=2020,
+    )
+    # deactivate normal bounding checker
+    assert not findings
+    findings = protocol.select(
+        protocol.findings_from_path(testdir.tmpdir),
+        pages=1,
+        msgid=2025,
+    )
+    # ensure that single page bounding error is raised
+    assert len(findings) == 1
