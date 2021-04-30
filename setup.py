@@ -42,6 +42,7 @@ if __name__ == "__main__":
         ],
         packages=[
             'decider_border',
+            'decider_border.detection',
             'decider_border.features',
             'decider_lay',
             'decider_textstyle',

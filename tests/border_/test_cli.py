@@ -15,7 +15,7 @@ import serializeraw
 import utila
 import utilatest
 
-import decider_border.features.detection
+import decider_border.detection.hits
 import decider_border.path
 import tests.border_
 
@@ -101,10 +101,10 @@ def test_border_cli_decider_complex_validation(
 @contextlib.contextmanager
 def patch_zero_border_tolerance(monkeypatch):
     with monkeypatch.context() as context:
-        context.setattr(decider_border.features.detection, 'BORDER_LEFT', 0)
-        context.setattr(decider_border.features.detection, 'BORDER_RIGHT', 0)
-        context.setattr(decider_border.features.detection, 'BORDER_TOP', 0)
-        context.setattr(decider_border.features.detection, 'BORDER_BOTTOM', 0)
+        context.setattr(decider_border.detection.hits, 'BORDER_LEFT', 0)
+        context.setattr(decider_border.detection.hits, 'BORDER_RIGHT', 0)
+        context.setattr(decider_border.detection.hits, 'BORDER_TOP', 0)
+        context.setattr(decider_border.detection.hits, 'BORDER_BOTTOM', 0)
         yield
 
 
