@@ -20,28 +20,28 @@ import decider_textstyle.headlines.utils
 FONT_SIZE_ERROR = string.Template("""\
 $headline falsch formatiert
 
-Die Schriftgröße **{{current}}** weicht von der \
+Die Schriftgröße **{{current}}** der $headline „{{title}}“ weicht von der \
 erwarteten Schriftgröße **{{expected}}** ab.
 """)
 
 FONT_FAMILY_ERROR = string.Template("""\
 $headline falsch formatiert
 
-Die Schriftart **{{current}}** weicht von der \
+Die Schriftart **{{current}}** der $headline „{{title}}“ weicht von der \
 erwarteten Schriftart **{{expected}}** ab.
 """)
 
 FONT_DISTANCE_BEFORE_ERROR = string.Template("""\
 $headline falsch formatiert
 
-Der Abstand vor der $headline **{{current}}** weicht vom \
+Der Abstand **{{current}}** vor der $headline „{{title}}“ weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
 FONT_DISTANCE_AFTER_ERROR = string.Template("""\
 $headline falsch formatiert
 
-Der Abstand nach der $headline **{{current}}** weicht vom \
+Der Abstand **{{current}}**  nach der $headline „{{title}}“ weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
@@ -355,6 +355,7 @@ def validate_headline_size(
             line_end=containers_[-1],
         )
         linter(
+            title=headline.title,
             location=location,
             expected=expected_size,
             current=', '.join([f'{item}' for item in textsizes_]),
@@ -388,6 +389,7 @@ def validate_headlines_family(
             continue
         font, position = finding
         linter(
+            title=headline.title,
             location=decider_textstyle.headlines.utils.headline_location(
                 headline,
                 position,
@@ -493,6 +495,7 @@ def validate_headline_distance(  # pylint:disable=R1260
             line_end=containers_[-1],
         )
         linter(
+            title=headline.title,
             location=location,
             expected=expected_distance,
             current=before if check_before else after,
