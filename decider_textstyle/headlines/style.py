@@ -18,30 +18,30 @@ import utila
 import decider_textstyle.headlines.utils
 
 FONT_SIZE_ERROR = string.Template("""\
-$title falsch formatiert
+$headline falsch formatiert
 
 Die Schriftgröße **{{current}}** weicht von der \
 erwarteten Schriftgröße **{{expected}}** ab.
 """)
 
 FONT_FAMILY_ERROR = string.Template("""\
-$title falsch formatiert
+$headline falsch formatiert
 
 Die Schriftart **{{current}}** weicht von der \
 erwarteten Schriftart **{{expected}}** ab.
 """)
 
 FONT_DISTANCE_BEFORE_ERROR = string.Template("""\
-$title falsch formatiert
+$headline falsch formatiert
 
-Der Abstand vor der $title **{{current}}** weicht vom \
+Der Abstand vor der $headline **{{current}}** weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
 FONT_DISTANCE_AFTER_ERROR = string.Template("""\
-$title falsch formatiert
+$headline falsch formatiert
 
-Der Abstand nach der $title **{{current}}** weicht vom \
+Der Abstand nach der $headline **{{current}}** weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
@@ -62,7 +62,7 @@ WHITESPACE_LINTING = False  # HOLY VALUE
 
 LEVEL_1 = 1  # TODO: HOLY VALUE
 
-SOLUTION_7500 = FONT_SIZE_ERROR.substitute(title='Hauptüberschrift')
+SOLUTION_7500 = FONT_SIZE_ERROR.substitute(headline='Hauptüberschrift')
 
 
 def check_7500_check_h1_font_size(linter: callable, driver):
@@ -79,7 +79,7 @@ def check_7500_check_h1_font_size(linter: callable, driver):
     )
 
 
-SOLUTION_7501 = FONT_FAMILY_ERROR.substitute(title='Hauptüberschrift')
+SOLUTION_7501 = FONT_FAMILY_ERROR.substitute(headline='Hauptüberschrift')
 
 
 def check_7501_check_h1_font_family(linter: callable, driver):
@@ -96,7 +96,7 @@ def check_7501_check_h1_font_family(linter: callable, driver):
     )
 
 
-SOLUTION_7502 = FONT_DISTANCE_BEFORE_ERROR.substitute(title='Hauptüberschrift')
+SOLUTION_7502 = FONT_DISTANCE_BEFORE_ERROR.substitute(headline='Hauptüberschrift')  # yapf:disable
 
 
 def check_7502_check_h1_distance_before(linter: callable, driver):
@@ -113,7 +113,7 @@ def check_7502_check_h1_distance_before(linter: callable, driver):
     )
 
 
-SOLUTION_7503 = FONT_DISTANCE_AFTER_ERROR.substitute(title='Hauptüberschrift')
+SOLUTION_7503 = FONT_DISTANCE_AFTER_ERROR.substitute(headline='Hauptüberschrift')  # yapf:disable
 
 
 def check_7503_check_h1_distance_after(linter: callable, driver):
@@ -132,7 +132,7 @@ def check_7503_check_h1_distance_after(linter: callable, driver):
 
 LEVEL_2 = 2  # TODO: HOLY VALUE
 
-SOLUTION_7510 = FONT_SIZE_ERROR.substitute(title='Teilüberschrift')
+SOLUTION_7510 = FONT_SIZE_ERROR.substitute(headline='Teilüberschrift')
 
 
 def check_7510_check_h2_font_size(linter: callable, driver):
@@ -149,7 +149,7 @@ def check_7510_check_h2_font_size(linter: callable, driver):
     )
 
 
-SOLUTION_7511 = FONT_FAMILY_ERROR.substitute(title='Teilüberschrift')
+SOLUTION_7511 = FONT_FAMILY_ERROR.substitute(headline='Teilüberschrift')
 
 
 def check_7511_check_h2_font_family(linter: callable, driver):
@@ -166,7 +166,7 @@ def check_7511_check_h2_font_family(linter: callable, driver):
     )
 
 
-SOLUTION_7512 = FONT_DISTANCE_BEFORE_ERROR.substitute(title='Teilüberschrift')
+SOLUTION_7512 = FONT_DISTANCE_BEFORE_ERROR.substitute(headline='Teilüberschrift')  # yapf:disable
 
 
 def check_7512_check_h2_distance_before(linter: callable, driver):
@@ -183,7 +183,7 @@ def check_7512_check_h2_distance_before(linter: callable, driver):
     )
 
 
-SOLUTION_7513 = FONT_DISTANCE_AFTER_ERROR.substitute(title='Teilüberschrift')
+SOLUTION_7513 = FONT_DISTANCE_AFTER_ERROR.substitute(headline='Teilüberschrift')
 
 
 def check_7513_check_h2_distance_after(linter: callable, driver):
@@ -202,7 +202,7 @@ def check_7513_check_h2_distance_after(linter: callable, driver):
 
 LEVEL_3 = 3  # TODO: HOLY VALUE
 
-SOLUTION_7520 = FONT_SIZE_ERROR.substitute(title='Unterüberschrift')
+SOLUTION_7520 = FONT_SIZE_ERROR.substitute(headline='Unterüberschrift')
 
 
 def check_7520_check_h3_font_size(linter: callable, driver):
@@ -219,7 +219,7 @@ def check_7520_check_h3_font_size(linter: callable, driver):
     )
 
 
-SOLUTION_7521 = FONT_FAMILY_ERROR.substitute(title='Unterüberschrift')
+SOLUTION_7521 = FONT_FAMILY_ERROR.substitute(headline='Unterüberschrift')
 
 
 def check_7521_check_h3_font_family(linter: callable, driver):
@@ -236,7 +236,7 @@ def check_7521_check_h3_font_family(linter: callable, driver):
     )
 
 
-SOLUTION_7522 = FONT_DISTANCE_BEFORE_ERROR.substitute(title='Unterüberschrift')
+SOLUTION_7522 = FONT_DISTANCE_BEFORE_ERROR.substitute(headline='Unterüberschrift')  # yapf:disable
 
 
 def check_7522_check_h3_distance_before(linter: callable, driver):
@@ -253,7 +253,7 @@ def check_7522_check_h3_distance_before(linter: callable, driver):
     )
 
 
-SOLUTION_7523 = FONT_DISTANCE_AFTER_ERROR.substitute(title='Unterüberschrift')
+SOLUTION_7523 = FONT_DISTANCE_AFTER_ERROR.substitute(headline='Unterüberschrift')  # yapf:disable
 
 
 def check_7523_check_h3_distance_after(linter: callable, driver):
