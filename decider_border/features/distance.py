@@ -61,7 +61,7 @@ def linting(areas, distances, linter: protocol.Linter):
 
 
 SOLUTION_3030 = """\
-Abstand vor dem Object zu gering
+Abstand vor dem Objekt zu gering
 
 Der Abstand nach dem Text und vor dem Objekt ist zu gering.
 
