@@ -41,15 +41,14 @@ def work(  # pylint:disable=R0913,R0914
         magiccontent,
         pages=pages,
     )
-    linter = protocol.from_modules([
-        decider_textstyle.text.space,
-        decider_textstyle.text.style,
-    ])
-    if driver:
-        linter.run(driver=driver)
-    else:
+    if not driver:
         utila.error('could not run --text linter')
-    result = linter.result(unique=True)
-    result = protocol.merge_findings(result)
-    user, developer = protocol.dump_result(result)
+    user, developer = protocol.run(
+        module=[
+            decider_textstyle.text.space,
+            decider_textstyle.text.style,
+        ],
+        driver=driver,
+        before_dump=protocol.merge_findings,
+    )
     return user, developer
