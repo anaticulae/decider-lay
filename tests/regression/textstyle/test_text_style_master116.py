@@ -29,4 +29,4 @@ def test_textstyle_formula_master116_page22(testdir, monkeypatch):
     )
     # HINT: COLUMBSCHES is detected as font face error. This may change in
     # the future. TODO: MAY SKIP MATH IN TEXT IN THE FUTURE
-    assert len(findings) == 15
+    assert not findings  # disabled by feature disabler

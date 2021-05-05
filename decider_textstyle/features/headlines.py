@@ -27,7 +27,7 @@ def work(
         headerfooter: str,
         pages: tuple = None,
 ) -> protocol.ResultType:
-    data = decider_textstyle.headlines.data.load_driver(
+    driver = decider_textstyle.headlines.data.load_driver(
         textstyle,
         headlines,
         fontheader,
@@ -38,22 +38,21 @@ def work(
         headerfooter,
         pages,
     )
-    if not data.headlines:  # pylint:disable=E1101
+    if not driver.headlines:  # pylint:disable=E1101
         utila.error('no headlines given')
-    if not data.navigators:  # pylint:disable=E1101
+    if not driver.navigators:  # pylint:disable=E1101
         utila.error('no navigators given')
 
-    linter = protocol.from_modules([  # pylint:disable=E1101
-        decider_textstyle.headlines.improve,
-        decider_textstyle.headlines.rules,
-        decider_textstyle.headlines.style,
-    ])
-
-    if data.navigators and data.headlines:  # pylint:disable=E1101
-        linter.run(driver=data)
-    else:
+    if not driver.navigators or not driver.headlines:
         utila.error('could not run --headlines linter')
+        return protocol.RESULT_EMPTY
 
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
+    user, developer = protocol.run(
+        modulename=[
+            decider_textstyle.headlines.improve,
+            decider_textstyle.headlines.rules,
+            decider_textstyle.headlines.style,
+        ],
+        driver=driver,
+    )
     return user, developer

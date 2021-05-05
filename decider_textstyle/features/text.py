@@ -43,12 +43,12 @@ def work(  # pylint:disable=R0913,R0914
     )
     if not driver:
         utila.error('could not run --text linter')
+        return protocol.RESULT_EMPTY
     user, developer = protocol.run(
-        module=[
+        modulename=[
             decider_textstyle.text.space,
             decider_textstyle.text.style,
         ],
         driver=driver,
-        before_dump=protocol.merge_findings,
     )
     return user, developer
