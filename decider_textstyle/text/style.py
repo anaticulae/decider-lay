@@ -8,6 +8,7 @@
 # =============================================================================
 
 import iamraw
+import protocol
 import utila
 
 SOLUTION_7550 = """\
@@ -18,6 +19,7 @@ der erwarteten Schriftgröße **{{expected}}**.
 """
 
 
+@protocol.disable_perpage(morethan=10)  # TODO: HOLY VALUE
 def check_7550_text_size(linter: callable, driver):
     if not driver.style.text_size:
         return
@@ -43,6 +45,7 @@ der erwarteten Schriftart **{{expected}}** ab.
 """
 
 
+@protocol.disable_perpage(morethan=10)  # TODO: HOLY VALUE
 def check_7551_text_family(linter: callable, driver):
     if not driver.style.text_family:
         utila.error('7551: no text family given - driver')
