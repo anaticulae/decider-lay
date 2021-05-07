@@ -20,7 +20,7 @@ def test_textspace_bachelor56page9(testdir, monkeypatch):
     source = power.link(power.BACHELOR056_PDF)
     with monkeypatch.context() as context:
         maxwidth = lambda height: 10  # smallest gap to ensure findings
-        context.setattr(decider_textstyle.text.space, "maxwidth", maxwidth)
+        context.setattr(decider_textstyle.text.space, "MAXWIDTH", maxwidth)
         tests.textstyle_.run(
             f'-i {source} --text --pages=5:10',
             monkeypatch=monkeypatch,

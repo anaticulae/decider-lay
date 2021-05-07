@@ -8,23 +8,19 @@
 # =============================================================================
 
 import iamraw
-
-SOLUTION_7770 = """\
-Loch im Textbild erhalten
-
-TODO:
-"""
-
-
-def maxwidth(height: float) -> float:  # pylint:disable=W0613
-    return 25.0
-
+import utila
 
 SKIP = {
     None,
     iamraw.PageContentType.BLOCKQUOTE,
     iamraw.PageContentType.TEXT,
 }
+
+SOLUTION_7770 = """\
+Loch im Textbild erhalten
+
+TODO:
+"""
 
 
 def check_7770_text_hole_simple(linter: callable, driver):
@@ -37,8 +33,8 @@ def check_7770_text_hole_simple(linter: callable, driver):
                 # skip hole checker in captions and formula
                 continue
             for space in line:
-                width = space[2] - space[0]  # x1 - x0
-                height = space[3] - space[1]  # y1 - y0
+                width = utila.rectangle_width(space)
+                height = utila.rectangle_height(space)
                 if width <= maxwidth(height):
                     continue
                 location = iamraw.BoundingLocation.fromtuple(
@@ -46,6 +42,10 @@ def check_7770_text_hole_simple(linter: callable, driver):
                     page=pagenumber,
                 )
                 linter(location=location)
+
+
+def maxwidth(height: float) -> float:  # pylint:disable=W0613
+    return 25.0
 
 
 SOLUTION_7771 = """\
