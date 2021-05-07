@@ -19,7 +19,7 @@ SKIP = {
 SOLUTION_7770 = """\
 Loch im Textbild erhalten
 
-TODO:
+Fügen Sie Trennungen ein um das Schriftbild zu verbessern.
 """
 
 
