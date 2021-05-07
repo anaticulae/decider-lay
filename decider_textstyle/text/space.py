@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import iamraw
 import utila
 
@@ -35,7 +36,7 @@ def check_7770_text_hole_simple(linter: callable, driver):
             for space in line:
                 width = utila.rectangle_width(space)
                 height = utila.rectangle_height(space)
-                if width <= maxwidth(height):
+                if width <= MAXWIDTH(height):
                     continue
                 location = iamraw.BoundingLocation.fromtuple(
                     bounding=space,
@@ -44,9 +45,17 @@ def check_7770_text_hole_simple(linter: callable, driver):
                 linter(location=location)
 
 
-def maxwidth(height: float) -> float:  # pylint:disable=W0613
-    return 25.0
-
+MAXWIDTH = configo.HolyTable(  # TODO: ADJUST LATER
+    items=[
+        (0, 15.0),
+        (9, 15.0),
+        (12, 25.0),
+        (30, 35.0),
+    ],
+    strategy=utila.Strategy.LOWER,
+    left_outranges_none=False,
+    right_outranges_none=False,
+)
 
 SOLUTION_7771 = """\
 Zeile äußerst löcherig
