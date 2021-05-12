@@ -20,7 +20,7 @@ Sie vor dem Kapitelstart einen Seitenumbruch ein.
 
 {WORD}
 Passen Sie dazu die **Formatvorlage der Überschriften** Level 1 an oder \
-verwenden Sie einen **manuellen Zeilenumbruch**.
+verwenden Sie einen **manuellen Seitenumbruch**.
 {END}
 
 * TODO: Article with explaination
