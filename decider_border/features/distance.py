@@ -51,7 +51,7 @@ def linting(areas, distances, linter: protocol.Linter):
     for checker in checkers:
         for page in distances:
             area = utila.select_page(areas, page.page)
-            bounds = utila.flatten([item for item in area.border.values()])
+            bounds = utila.flatten(list(area.border.values()))
             call = functools.partial(
                 linter.add_finding,
                 msgid=checker.msgid,

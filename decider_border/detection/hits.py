@@ -103,7 +103,7 @@ def hits_match(
         hits: set,
         maxdiff: float = 10.0,  # TODO: HOLY VALUE
 ) -> bool:
-    return any([utila.nears(bounding, item, diff=maxdiff) for item in hits])
+    return any(utila.nears(bounding, item, diff=maxdiff) for item in hits)
 
 
 def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
