@@ -320,11 +320,11 @@ def check_7536_headline_h2_too_huge(linter: callable, driver):
 
 
 def validate_headline_size(
-        linter,
-        navigators,
-        headlines,
-        level,
-        expected_size,
+    linter,
+    navigators,
+    headlines,
+    level,
+    expected_size,
 ):
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
@@ -363,12 +363,12 @@ def validate_headline_size(
 
 
 def validate_headlines_family(
-        linter,
-        navigators,
-        fontstore,
-        headlines,
-        level,
-        expected_family,
+    linter,
+    navigators,
+    fontstore,
+    headlines,
+    level,
+    expected_family,
 ):
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
@@ -439,12 +439,12 @@ def validate_headline_family(headline, navigators, fontstore, expected_family): 
 
 
 def validate_headline_distance(  # pylint:disable=R1260
-        linter,
-        navigators,
-        headlines,
-        level,
-        expected_distance,
-        check_before: bool = True,
+    linter,
+    navigators,
+    headlines,
+    level,
+    expected_distance,
+    check_before: bool = True,
 ):
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]

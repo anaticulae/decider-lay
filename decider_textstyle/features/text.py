@@ -16,17 +16,17 @@ import decider_textstyle.text.style
 
 
 def work(  # pylint:disable=R0913,R0914
-        textstyle: str,
-        headlines: str,
-        text: str,
-        textpositions: str,
-        sizeandborders: str,
-        headerfooter: str,
-        fontheader: str,
-        fontcontent: str,
-        wordspaces: str,
-        magiccontent: str,
-        pages: tuple = None,
+    textstyle: str,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    sizeandborders: str,
+    headerfooter: str,
+    fontheader: str,
+    fontcontent: str,
+    wordspaces: str,
+    magiccontent: str,
+    pages: tuple = None,
 ) -> protocol.ResultType:
     driver = decider_textstyle.text.data.load_driver(
         textstyle,

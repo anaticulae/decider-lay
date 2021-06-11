@@ -36,10 +36,10 @@ MULTIPLE_BOUNDING_ERROR_COUNT = configo.HV_INT_PLUS(10).value
 
 
 def work(
-        border_boxes: str,
-        border_pages: str,
-        border_leftright: str,
-        pages: tuple = None,
+    border_boxes: str,
+    border_pages: str,
+    border_leftright: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
 

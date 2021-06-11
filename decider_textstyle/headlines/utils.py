@@ -52,8 +52,8 @@ def textsizes(style: texmex.TextInfo) -> utila.Floats:
 
 
 def textfamily(
-        item: texmex.TextInfo,
-        skip_whitespaces: bool = True,
+    item: texmex.TextInfo,
+    skip_whitespaces: bool = True,
 ) -> utila.Ints:
     fonts = []
     positions = []

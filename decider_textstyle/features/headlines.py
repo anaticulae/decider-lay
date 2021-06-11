@@ -17,15 +17,15 @@ import decider_textstyle.headlines.style
 
 
 def work(
-        textstyle: str,
-        headlines: str,
-        text: str,
-        textpositions: str,
-        fontheader: str,
-        fontcontent: str,
-        sizeandborders: str,
-        headerfooter: str,
-        pages: tuple = None,
+    textstyle: str,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    fontheader: str,
+    fontcontent: str,
+    sizeandborders: str,
+    headerfooter: str,
+    pages: tuple = None,
 ) -> protocol.ResultType:
     driver = decider_textstyle.headlines.data.load_driver(
         textstyle,

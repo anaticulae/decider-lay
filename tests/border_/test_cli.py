@@ -38,10 +38,10 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
 ])
 @utilatest.longrun
 def test_border_cli_decider_list(
-        source,
-        validate,
-        testdir,
-        monkeypatch,
+    source,
+    validate,
+    testdir,
+    monkeypatch,
 ):  # pylint:disable=W0621
     """Run `border` to extract common BoundingBox and check pages
     against this common box."""
@@ -83,10 +83,10 @@ def validate_leftright(hits):
 ])
 @utilatest.longrun
 def test_border_cli_decider_complex_validation(
-        source,
-        validate,
-        testdir,
-        monkeypatch,
+    source,
+    validate,
+    testdir,
+    monkeypatch,
 ):  # pylint:disable=W0621
     """Ensure to run border detection and load linter result later."""
     root = testdir.tmpdir

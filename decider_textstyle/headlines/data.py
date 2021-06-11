@@ -12,15 +12,15 @@ import serializeraw
 
 
 def load_driver(
-        textstyle,
-        headlines,
-        fontheader,
-        fontcontent,
-        text,
-        textpositions,
-        sizeandborders,
-        headerfooter,
-        pages,
+    textstyle,
+    headlines,
+    fontheader,
+    fontcontent,
+    text,
+    textpositions,
+    sizeandborders,
+    headerfooter,
+    pages,
 ):
     expected = serializeraw.load_doctextstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)

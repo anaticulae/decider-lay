@@ -20,17 +20,17 @@ import decider_textstyle.utils
 
 
 def load_driver(  # pylint:disable=R0913,R0914
-        textstyle: str,
-        headlines: str,
-        text: str,
-        textpositions: str,
-        sizeandborders: str,
-        headerfooter: str,
-        fontheader: str,
-        fontcontent: str,
-        wordspaces: str,
-        magiccontent: str,
-        pages: tuple = None,
+    textstyle: str,
+    headlines: str,
+    text: str,
+    textpositions: str,
+    sizeandborders: str,
+    headerfooter: str,
+    fontheader: str,
+    fontcontent: str,
+    wordspaces: str,
+    magiccontent: str,
+    pages: tuple = None,
 ):
     expected = serializeraw.load_doctextstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)

@@ -33,10 +33,10 @@ fail = functools.partial(
 
 
 def extract_border_hits(
-        root: str,
-        source: str,
-        monkeypatch,
-        pages: str = '0:10',
+    root: str,
+    source: str,
+    monkeypatch,
+    pages: str = '0:10',
 ) -> iamraw.PageContentHits:
     cmd = f'-i {source} -o {root} --pages={pages}'
     run(cmd, monkeypatch=monkeypatch)

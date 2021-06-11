@@ -32,10 +32,10 @@ class BorderExpected:
 
 
 def boxes_outside_border(
-        boxes,
-        pagesizes: dict,
-        expected: BorderExpected,
-        tol=None,
+    boxes,
+    pagesizes: dict,
+    expected: BorderExpected,
+    tol=None,
 ) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
     result = []
@@ -61,8 +61,8 @@ def boxes_outside_border(
 
 
 def boxes_repeating(
-        pagecontenthits: iamraw.PageContentHits,
-        required_ratio: float = 0.6,
+    pagecontenthits: iamraw.PageContentHits,
+    required_ratio: float = 0.6,
 ) -> set:
     count_min = int(len(pagecontenthits) * required_ratio)
     collected = []
@@ -80,8 +80,8 @@ def boxes_repeating(
 
 
 def hits_unique(
-        pagecontenthits: iamraw.PageContentHits,
-        repeating: set,
+    pagecontenthits: iamraw.PageContentHits,
+    repeating: set,
 ) -> iamraw.PageContentHits:
     """Remove `repeating` hits."""
     result = []

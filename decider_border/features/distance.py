@@ -31,9 +31,9 @@ MIN_DISTANCE_AFTER = configo.HV_FLOAT_PLUS(10.0)
 
 
 def work(
-        area: str,
-        distances: str,
-        pages: tuple = None,
+    area: str,
+    distances: str,
+    pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     area = groupme.feature.area.load_area(area, pages=pages)
     distances = groupme.feature.distance.load_distance(distances, pages=pages)
