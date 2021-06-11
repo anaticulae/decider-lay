@@ -77,13 +77,13 @@ def check_7551_text_family(linter: callable, driver):
 
 
 SOLUTION_7555 = """\
-Text: Unzulässige Markierung
+Unzulässige Markierung
 
 Der Text weist unnötige Hervorhebungen auf. Es ist nicht nötig den Leser \
 durch typografische Veränderungen auf besonders `wichtige` Punkte \
 hinzuweisen. Dies erschwert den Lesefluss.
 
-TODO: SIEHE ARTIKEL THEISSEN
+{darstellung/grauwert#text-grauwert}
 """
 
 
