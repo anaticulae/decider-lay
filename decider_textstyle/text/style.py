@@ -66,6 +66,11 @@ def check_7551_text_family(linter: callable, driver):
             current = driver.fontstore[style.font].name
             if current == expected:
                 continue
+            current_text = item.text[style.start:style.end]
+            if not current_text.strip():
+                # TODO: INTRODUCE FLAG TO LINT WHITESPACE ALSO
+                # only white spaces
+                continue
             location = iamraw.RangedLocation(
                 page=page,
                 line=line,

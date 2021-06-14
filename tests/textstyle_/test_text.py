@@ -43,8 +43,8 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
         testdir,
         monkeypatch,
     )
-    # text family
-    assert protocol.count_findings(findings, 7551) == 1
+    # no text family error, cause only whitespace error is detected
+    assert not protocol.count_findings(findings, 7551)
     # text size
     assert not protocol.count_findings(findings, 7550)
 
