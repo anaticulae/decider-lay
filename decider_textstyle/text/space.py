@@ -9,6 +9,7 @@
 
 import configo
 import iamraw
+import protocol
 import utila
 
 SKIP = {
@@ -24,6 +25,7 @@ Fügen Sie Trennungen ein um das Schriftbild zu verbessern.
 """
 
 
+@protocol.disable_perpage(morethan=10)  # TODO HOLY VALUE
 def check_7770_text_hole_simple(linter: callable, driver):
     skipper = driver.magiccontent_oneline
     for page in driver.wordspaces:

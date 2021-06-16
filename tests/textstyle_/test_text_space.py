@@ -46,3 +46,18 @@ def test_textspace_master75page23(testdir, monkeypatch):
     )
     findings = protocol.select(findings, pages=23, msgid=7770)
     assert not findings
+
+
+def test_textspace_diss170page58_skip_text_hole(testdir, monkeypatch):
+    """Regression test; do not detect any holes in table."""
+    source = power.link(power.MASTER075_PDF)
+    tests.textstyle_.run(
+        f'-i {source} --text --pages=50:60',
+        monkeypatch=monkeypatch,
+    )
+    findings = serializeraw.load_findings(
+        decider_textstyle.path.text(testdir.tmpdir),
+        msgids=7770,
+    )
+    findings = protocol.select(findings, pages=58, msgid=7770)
+    assert not findings
