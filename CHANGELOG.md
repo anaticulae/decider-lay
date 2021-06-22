@@ -2,6 +2,25 @@
 
 Every noteable change is logged here.
 
+## v0.6.0
+
+### Feature
+
+* skip to many text holes on a single page (d6ae0389eeb4)
+* do not lint white space font face errors (87c7d6646d11)
+* add link to article (9d990f4baa7e)
+* make space check font size dependent (c6274733dc29)
+* extend linter information (b4f51626bf40)
+* disable text style error if occurs to often (b5659ef31958)
+* clarify headline message (b7f85669aff7)
+* add bounding detection merger (73a21c616a0f)
+* skip hole checker in caption and formula (56a36f7547e8)
+
+### Fix
+
+* fix error message (e23b9adfc629)
+* fix newlines (a1f6f9024631)
+
 ## v0.5.1
 
 ### Fix
