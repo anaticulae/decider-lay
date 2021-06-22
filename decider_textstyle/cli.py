@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import doctextstyle
-import doctextstyle.cli
 import protocol
 import utila
 
@@ -20,7 +18,7 @@ WORKPLAN = [
     utila.create_step(
         'headlines',
         inputs=[
-            utila.ResultFile(doctextstyle.PROCESS, 'textstyle'),
+            utila.ResultFile('doctextstyle', 'textstyle'),
             utila.ResultFile('words', 'headlines_headlines'),
             utila.ResultFile('rawmaker', 'oneline_text_text'),
             utila.ResultFile('rawmaker', 'oneline_text_positions'),
@@ -29,12 +27,12 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'border_pages'),
             utila.ResultFile('groupme', 'footer_footerheader'),
         ],
-        output=('user', 'developer'),
+        output=protocol.ResultDefault,
     ),
     utila.create_step(
         'text',
         inputs=[
-            utila.ResultFile(doctextstyle.PROCESS, 'textstyle'),
+            utila.ResultFile('doctextstyle', 'textstyle'),
             utila.ResultFile('words', 'headlines_headlines'),
             utila.ResultFile('rawmaker', 'oneline_text_text'),
             utila.ResultFile('rawmaker', 'oneline_text_positions'),
@@ -45,7 +43,7 @@ WORKPLAN = [
             utila.ResultFile('textflow', 'wordspace_wordspace'),
             utila.ResultFile('magic', 'oneline_content', optional=True),
         ],
-        output=('user', 'developer'),
+        output=protocol.ResultDefault,
     ),
 ]
 
