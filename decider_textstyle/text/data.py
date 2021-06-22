@@ -71,15 +71,14 @@ def load_driver(  # pylint:disable=R0913,R0914
             sync=True,  # TODO: REMOVE?
             yieldnone=True,
         )
-        magiccontent_oneline = decider_textstyle.magic.MagicSkipper(
-            magiccontent)
+        magic_oneline = decider_textstyle.magic.MagicSkipper(magiccontent)
         data = protocol.driver(
             fontstore=fontstore,
             headlines=headlines,
             style=expected,
             text_chunks=chunks,
             wordspaces=wordspaces,
-            magiccontent_oneline=magiccontent_oneline,
+            magiccontent_oneline=magic_oneline,
         )
         return data
     return None
