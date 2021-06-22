@@ -13,10 +13,7 @@ import contextlib
 class MagicSkipper:
 
     def __init__(self, magiccontent):
-        self.content = {
-            item.page: {number: typ for number, typ in item.content
-                       } for item in magiccontent
-        }
+        self.content = {item.page: dict(item.content) for item in magiccontent}
 
     def __call__(self, page, line):
         with contextlib.suppress(KeyError):
