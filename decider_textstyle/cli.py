@@ -45,6 +45,15 @@ WORKPLAN = [
         ],
         output=protocol.ResultDefault,
     ),
+    utila.create_step(
+        'fonts',
+        inputs=[
+            utila.ResultFile('doctextstyle', 'textstyle'),
+            utila.ResultFile('spacestation', 'worddist_worddist'),
+            utila.ResultFile('spacestation', 'chardist_chardist'),
+        ],
+        output=protocol.ResultDefault,
+    ),
 ]
 
 
