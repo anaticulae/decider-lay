@@ -18,3 +18,7 @@ def headlines(path: str, prefix: str = '') -> str:
 
 def text(path: str, prefix: str = '') -> str:
     return connect(path, decider_textstyle.PROCESS, 'text_user', prefix)
+
+
+def fonts(path: str, prefix: str = '') -> str:
+    return connect(path, decider_textstyle.PROCESS, 'fonts_user', prefix)
