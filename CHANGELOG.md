@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v0.7.0
+
+### Feature
+
+* add font decider step (2a1355bc32a6)
+* add path to fonts linting (7cbb7bea8513)
+
+### Fix
+
+* improve text hint (c414541e3c82)
+
 ## v0.6.0
 
 ### Feature
