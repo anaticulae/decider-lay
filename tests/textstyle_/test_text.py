@@ -133,4 +133,5 @@ def test_textstyle_master110_page29(testdir, monkeypatch):
     )
     # select page 29
     findings = protocol.select_pages(findings, 29)
-    assert len(findings) == 3  # may change in the future
+    # invalid formula detection produces math style error
+    assert len(findings) == 10  # may change in the future
