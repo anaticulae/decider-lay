@@ -12,7 +12,7 @@ import iamraw
 import protocol
 import utila
 
-SKIP = {
+VALID_AREA = {
     None,
     iamraw.PageContentType.BLOCKQUOTE,
     iamraw.PageContentType.TEXT,
@@ -32,7 +32,7 @@ def check_7770_text_hole_simple(linter: callable, driver):
         pagenumber, pagecontent = page.page, page.content
         for linenumber, line in pagecontent:
             typ = skipper(pagenumber, linenumber)
-            if typ not in SKIP:
+            if typ not in VALID_AREA:
                 # skip hole checker in captions and formula
                 continue
             for space in line:
