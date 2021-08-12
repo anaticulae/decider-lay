@@ -25,14 +25,14 @@ RESOURCES = [
     (power.MASTER116_PDF, '0:50,75:115'),
     (power.DISS266_PDF, '0:90'),
     (power.DISS170_PDF, '30:70'),
-    (power.BACHELOR090_PDF, ':'),
-    (power.BACHELOR076_PDF, ':'),
-    (power.MASTER072_PDF, ':'),
-    (power.BACHELOR063_PDF, ':'),
+    power.BACHELOR090_PDF,
+    power.BACHELOR076_PDF,
+    power.MASTER072_PDF,
+    power.BACHELOR063_PDF,
     (power.MASTER098_PDF, '0:10,43:65,88:97'),
     (power.MASTER110_PDF, '0:70'),
-    (power.HOME025_PDF, ':'),
-    (power.BACHELOR056_PDF, ':'),
+    power.HOME025_PDF,
+    power.BACHELOR056_PDF,
     (power.MASTER075_PDF, '0:25'),
     (power.MASTER155_PDF, '0:25'),
     (power.TECH024_PDF, '0:15'),
@@ -40,8 +40,8 @@ RESOURCES = [
     (power.MASTER078_PDF, '0:10'),
     (power.MASTER091B_PDF, '0:20'),
     (power.BACHELOR051_PDF, '25:40'),
-    (power.BOOK007_PDF, ':'),
-    (power.DOCU07_PDF, ':'),
+    power.BOOK007_PDF,
+    power.DOCU007_PDF,
 ]
 
 
@@ -58,6 +58,7 @@ def extract(resources):
         full=True,
         worker=WORKER,
         base=power.REPOSITORY,
+        pages=':',
     )
 
 
