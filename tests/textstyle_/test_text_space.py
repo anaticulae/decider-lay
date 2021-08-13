@@ -27,10 +27,11 @@ def test_textspace_bachelor56page9(testdir, monkeypatch):
         )
     findings = serializeraw.load_findings(
         decider_textstyle.path.text(testdir.tmpdir),
-        msgids=7770,
+        msgids=(7770, 7771),
+        pages=(9,),
     )
-    findings = protocol.select_pages(findings, 9)
-    assert len(findings) == 5  # TODO: NOT VALIDATED
+    # single merged line
+    assert len(findings) == 1  # TODO: VALIDATED
 
 
 def test_textspace_master75page23(testdir, monkeypatch):
@@ -61,3 +62,19 @@ def test_textspace_diss170page58_skip_text_hole(testdir, monkeypatch):
     )
     findings = protocol.select(findings, pages=58, msgid=7770)
     assert not findings
+
+
+def test_multiple_textspace_master91b(testdir, monkeypatch):
+    source = power.link(power.MASTER091B_PDF)
+    tests.textstyle_.run(
+        f'-i {source} --text --pages=14:17',
+        monkeypatch=monkeypatch,
+    )
+    findings = serializeraw.load_findings(
+        decider_textstyle.path.text(testdir.tmpdir),
+        msgids={7770, 7771},
+    )
+    # merge multiple 7770 in a line into a single 7771
+    assert not protocol.select(findings, pages=16, msgid=7770)
+    findings = protocol.select(findings, pages=16, msgid=7771)
+    assert len(findings) == 1  # VALIDATED
