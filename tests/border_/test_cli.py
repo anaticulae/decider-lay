@@ -33,7 +33,7 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(power.link(power.DOCU35_PDF), [4, 4], id='twine'),
+    pytest.param(power.link(power.DOCU035_PDF), [4, 4], id='twine'),
     pytest.param(power.link(power.MASTER078_PDF), [6, 8], id='master78'),
 ])
 @utilatest.longrun

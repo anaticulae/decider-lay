@@ -20,9 +20,8 @@ import decider_border.features.distance
     (5, 3),
 ])
 def test_border_distances_linting(page, expected):
-    area = groupme.path.area(power.link(power.DOCU07_PDF))
-    distance = groupme.path.distance(power.link(power.DOCU07_PDF))
-
+    area = groupme.path.area(power.link(power.DOCU007_PDF))
+    distance = groupme.path.distance(power.link(power.DOCU007_PDF))
     dumped_findings = decider_border.features.distance.work(
         area,
         distance,
