@@ -20,8 +20,10 @@ import tests.textstyle_
 NO_STYLE = iamraw.DocTextStyle()
 
 
-def decide_text_style(source, pages, style, testdir, monkeypatch):
-    tests.textstyle_.write_docstyle(style, testdir.tmpdir)
+def decide_text_style(source, pages, testdir, monkeypatch, style=None):
+    source = power.link(source)
+    if style:
+        tests.textstyle_.write_docstyle(style, testdir.tmpdir)
     tests.textstyle_.run(
         f'--text -i {testdir.tmpdir} -i {source} --pages={pages}',
         monkeypatch=monkeypatch,
@@ -34,14 +36,13 @@ def decide_text_style(source, pages, style, testdir, monkeypatch):
 @utilatest.nightly
 def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
     style = iamraw.DocTextStyle(text_size=12.0)
-    source = power.link(power.MASTER072_PDF)
     pages = '2:20'
     findings = decide_text_style(
-        source,
+        power.MASTER072_PDF,
         pages,
-        style,
         testdir,
         monkeypatch,
+        style,
     )
     # no text family error, cause only whitespace error is detected
     assert not protocol.count_findings(findings, 7551)
@@ -53,14 +54,13 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
 def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
     # Hint: adjust text_family after text parser change
     style = iamraw.DocTextStyle(text_family=-1702503278)
-    source = power.link(power.MASTER072_PDF)
     pages = '2:10'
     findings = decide_text_style(
-        source,
+        power.MASTER072_PDF,
         pages,
-        style,
         testdir,
         monkeypatch,
+        style,
     )
     # not correct, but indicates that algo changed
     assert protocol.count_findings(findings, 7551) == 0
@@ -68,14 +68,13 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
 
 @utilatest.longrun
 def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
-    source = power.link(power.BACHELOR076_PDF)
     pages = '2:10'
     findings = decide_text_style(
-        source,
+        power.BACHELOR076_PDF,
         pages,
-        NO_STYLE,
         testdir,
         monkeypatch,
+        NO_STYLE,
     )
     # five words marked bold
     assert protocol.count_findings(findings, msgid=7555) == 5
