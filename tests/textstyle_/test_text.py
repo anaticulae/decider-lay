@@ -20,7 +20,14 @@ import tests.textstyle_
 NO_STYLE = iamraw.DocTextStyle()
 
 
-def decide_text_style(source, pages, testdir, monkeypatch, style=None):
+def decide_text_style(
+    source,
+    pages,
+    testdir,
+    monkeypatch,
+    style=None,
+    msgids=None,
+):
     source = power.link(source)
     if style:
         tests.textstyle_.write_docstyle(style, testdir.tmpdir)
@@ -29,7 +36,7 @@ def decide_text_style(source, pages, testdir, monkeypatch, style=None):
         monkeypatch=monkeypatch,
     )
     path = decider_textstyle.path.text(testdir.tmpdir)
-    findings = serializeraw.load_findings(path)
+    findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 
@@ -85,14 +92,12 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
 def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
     """Merge more than one line with the same finding into a single
     finding."""
-    source = power.link(power.MASTER072_PDF)
-    tests.textstyle_.run(
-        f'-i {source} --text --pages=18:22',
-        monkeypatch=monkeypatch,
-    )
-
-    findings = serializeraw.load_findings(
-        decider_textstyle.path.text(testdir.tmpdir),
+    pages = '18:22'
+    findings = decide_text_style(
+        power.MASTER072_PDF,
+        pages,
+        testdir,
+        monkeypatch,
         msgids=7550,
     )
     assert len(findings) == 1, len(findings)
@@ -103,14 +108,13 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
     error. This was an error cause figure was not extracted correctly
     and therefore magic does not detect these region as figure
     region."""
-    source = power.link(power.BACHELOR051_PDF)
     # 28: is required, cause we require the first headline
-    tests.textstyle_.run(
-        f'-i {source} --text --pages=28:31',
-        monkeypatch=monkeypatch,
-    )
-    findings = serializeraw.load_findings(
-        decider_textstyle.path.text(testdir.tmpdir),
+    pages = '28:31'
+    findings = decide_text_style(
+        power.BACHELOR051_PDF,
+        pages,
+        testdir,
+        monkeypatch,
         msgids=7550,
     )
     # select page 30
@@ -121,13 +125,12 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
 def test_textstyle_master110_page29(testdir, monkeypatch):
     """Investigate text style errors, especially in connection with
     formulas."""
-    source = power.link(power.MASTER110_PDF)
-    tests.textstyle_.run(
-        f'-i {source} --pages=20:30 --text',
-        monkeypatch=monkeypatch,
-    )
-    findings = serializeraw.load_findings(
-        decider_textstyle.path.text(testdir.tmpdir),
+    pages = '20:30'
+    findings = decide_text_style(
+        power.MASTER110_PDF,
+        pages,
+        testdir,
+        monkeypatch,
         msgids={7550, 7551},
     )
     # select page 29
