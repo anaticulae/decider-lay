@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.8.0
+
+### Feature
+
+* skip too many text linting (7168a9bb2661)
+* merge multiple space holes into a single one (19cda201a213)
+
 ## v0.7.0
 
 ### Feature
