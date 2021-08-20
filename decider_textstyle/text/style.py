@@ -11,6 +11,8 @@ import iamraw
 import protocol
 import utila
 
+MORE_THAN = 10  # TODO: HOLY VALUE
+
 SOLUTION_7550 = """\
 Schriftgröße des Texts weicht ab
 
@@ -19,7 +21,7 @@ der erwarteten Schriftgröße **{{expected}}**.
 """
 
 
-@protocol.disable_perpage(morethan=10)  # TODO: HOLY VALUE
+@protocol.disable_perpage(morethan=MORE_THAN)
 def check_7550_text_size(linter: callable, driver):
     if not driver.style.text_size:
         return
@@ -45,7 +47,7 @@ der erwarteten Schriftart **{{expected}}** ab.
 """
 
 
-@protocol.disable_perpage(morethan=10)  # TODO: HOLY VALUE
+@protocol.disable_perpage(morethan=MORE_THAN)
 def check_7551_text_family(linter: callable, driver):
     if not driver.style.text_family:
         utila.error('7551: no text family given - driver')
@@ -93,6 +95,7 @@ Grauwert des Texts und stören den Lesefluss. Es wird empfohlen \
 """
 
 
+@protocol.disable_perpage(morethan=MORE_THAN)
 def check_7555_text_bold(linter: callable, driver):
     chunks = driver.text_chunks
     for page, line, item in chunks:
