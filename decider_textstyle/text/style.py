@@ -73,6 +73,11 @@ def check_7551_text_family(linter: callable, driver):
                 # TODO: INTRODUCE FLAG TO LINT WHITESPACE ALSO
                 # only white spaces
                 continue
+            if 'math' in expected.lower():
+                # TODO: SHRINK THIS SKIP TO FORMULAS AFTER IMPROVING
+                # FORMULA COLLECTOR
+                # math fonts seams to be always correct
+                continue
             location = iamraw.RangedLocation(
                 page=page,
                 line=line,
