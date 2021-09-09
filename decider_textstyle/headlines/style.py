@@ -31,14 +31,14 @@ Die Schriftart **{{current}}** der $headline „{{title}}“ weicht von der \
 erwarteten Schriftart **{{expected}}** ab.
 """)
 
-FONT_DISTANCE_BEFORE_ERROR = string.Template("""\
+FONT_DIST_BEFORE_ERROR = string.Template("""\
 $headline falsch formatiert
 
 Der Abstand **{{current}}** vor der $headline „{{title}}“ weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
-FONT_DISTANCE_AFTER_ERROR = string.Template("""\
+FONT_DIST_AFTER_ERROR = string.Template("""\
 $headline falsch formatiert
 
 Der Abstand **{{current}}**  nach der $headline „{{title}}“ weicht vom \
@@ -69,7 +69,6 @@ def check_7500_check_h1_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
     if not driver.style.h1_size:
         return
-
     validate_headline_size(
         linter,
         driver.navigators,
@@ -85,7 +84,6 @@ SOLUTION_7501 = FONT_FAMILY_ERROR.substitute(headline='Hauptüberschrift')
 def check_7501_check_h1_font_family(linter: callable, driver):
     if not driver.style.h1_family:
         return
-
     validate_headlines_family(
         linter,
         driver.navigators,
@@ -96,13 +94,12 @@ def check_7501_check_h1_font_family(linter: callable, driver):
     )
 
 
-SOLUTION_7502 = FONT_DISTANCE_BEFORE_ERROR.substitute(headline='Hauptüberschrift')  # yapf:disable
+SOLUTION_7502 = FONT_DIST_BEFORE_ERROR.substitute(headline='Hauptüberschrift')
 
 
 def check_7502_check_h1_distance_before(linter: callable, driver):
     if not driver.style.h1_before:
         return
-
     validate_headline_distance(
         linter,
         driver.navigators,
@@ -113,13 +110,12 @@ def check_7502_check_h1_distance_before(linter: callable, driver):
     )
 
 
-SOLUTION_7503 = FONT_DISTANCE_AFTER_ERROR.substitute(headline='Hauptüberschrift')  # yapf:disable
+SOLUTION_7503 = FONT_DIST_AFTER_ERROR.substitute(headline='Hauptüberschrift')
 
 
 def check_7503_check_h1_distance_after(linter: callable, driver):
     if not driver.style.h1_after:
         return
-
     validate_headline_distance(
         linter,
         driver.navigators,
@@ -139,7 +135,6 @@ def check_7510_check_h2_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECTLY
     if not driver.style.h2_size:
         return
-
     validate_headline_size(
         linter,
         driver.navigators,
@@ -155,7 +150,6 @@ SOLUTION_7511 = FONT_FAMILY_ERROR.substitute(headline='Teilüberschrift')
 def check_7511_check_h2_font_family(linter: callable, driver):
     if not driver.style.h2_family:
         return
-
     validate_headlines_family(
         linter,
         driver.navigators,
@@ -166,13 +160,12 @@ def check_7511_check_h2_font_family(linter: callable, driver):
     )
 
 
-SOLUTION_7512 = FONT_DISTANCE_BEFORE_ERROR.substitute(headline='Teilüberschrift')  # yapf:disable
+SOLUTION_7512 = FONT_DIST_BEFORE_ERROR.substitute(headline='Teilüberschrift')
 
 
 def check_7512_check_h2_distance_before(linter: callable, driver):
     if not driver.style.h2_before:
         return
-
     validate_headline_distance(
         linter,
         driver.navigators,
@@ -183,13 +176,12 @@ def check_7512_check_h2_distance_before(linter: callable, driver):
     )
 
 
-SOLUTION_7513 = FONT_DISTANCE_AFTER_ERROR.substitute(headline='Teilüberschrift')
+SOLUTION_7513 = FONT_DIST_AFTER_ERROR.substitute(headline='Teilüberschrift')
 
 
 def check_7513_check_h2_distance_after(linter: callable, driver):
     if not driver.style.h2_after:
         return
-
     validate_headline_distance(
         linter,
         driver.navigators,
@@ -209,7 +201,6 @@ def check_7520_check_h3_font_size(linter: callable, driver):
     # TODO: HANDLE HIGH NOTES CORRECLTY
     if not driver.style.h3_size:
         return
-
     validate_headline_size(
         linter,
         driver.navigators,
@@ -225,7 +216,6 @@ SOLUTION_7521 = FONT_FAMILY_ERROR.substitute(headline='Unterüberschrift')
 def check_7521_check_h3_font_family(linter: callable, driver):
     if not driver.style.h3_family:
         return
-
     validate_headlines_family(
         linter,
         driver.navigators,
@@ -236,13 +226,12 @@ def check_7521_check_h3_font_family(linter: callable, driver):
     )
 
 
-SOLUTION_7522 = FONT_DISTANCE_BEFORE_ERROR.substitute(headline='Unterüberschrift')  # yapf:disable
+SOLUTION_7522 = FONT_DIST_BEFORE_ERROR.substitute(headline='Unterüberschrift')
 
 
 def check_7522_check_h3_distance_before(linter: callable, driver):
     if not driver.style.h3_before:
         return
-
     validate_headline_distance(
         linter,
         driver.navigators,
@@ -253,13 +242,12 @@ def check_7522_check_h3_distance_before(linter: callable, driver):
     )
 
 
-SOLUTION_7523 = FONT_DISTANCE_AFTER_ERROR.substitute(headline='Unterüberschrift')  # yapf:disable
+SOLUTION_7523 = FONT_DIST_AFTER_ERROR.substitute(headline='Unterüberschrift')
 
 
 def check_7523_check_h3_distance_after(linter: callable, driver):
     if not driver.style.h3_after:
         return
-
     validate_headline_distance(
         linter,
         driver.navigators,
@@ -332,22 +320,18 @@ def validate_headline_size(
         containers_ = decider_textstyle.headlines.utils.containers(
             headline.container)
         navigator = utila.select_page(navigators, headline.page)
-
         try:
             lines_selected = [navigator[index] for index in containers_]
         except IndexError:
             msg = f'headline size: {containers_} out of bounds on page: {navigator.page}'
             utila.error(msg)
             continue
-
         textsizes_ = decider_textstyle.headlines.utils.container_textsizes(
             lines_selected)
-
         maxdiff = MAX_HEADLINE_DIFF_ABS(expected_size)
         if all((utila.near(item, expected_size, diff=maxdiff)
                 for item in textsizes_)):
             continue
-
         # font size diff
         location = iamraw.RangedLocation(
             page=headline.page,
@@ -372,12 +356,10 @@ def validate_headlines_family(
 ):
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
-
     if not fontstore[expected_family]:
         utila.error(f'no expected headline family: {expected_family}')
         return
     expected_family = fontstore[expected_family].name
-
     for headline in headlines:
         finding = validate_headline_family(
             headline,
@@ -403,14 +385,12 @@ def validate_headline_family(headline, navigators, fontstore, expected_family): 
     containers_ = decider_textstyle.headlines.utils.containers(
         headline.container)
     navigator = utila.select_page(navigators, headline.page)
-
     try:
         lines_selected = [navigator[index] for index in containers_]
     except IndexError:
         msg = f'headline family: {containers_} out of bounds on page: {navigator.page}'
         utila.error(msg)
         return None
-
     textfamily_ = []
     skip_whitespaces = WHITESPACE_LINTING is False
     analyzed = decider_textstyle.headlines.utils.container_textfamily(
@@ -423,11 +403,9 @@ def validate_headline_family(headline, navigators, fontstore, expected_family): 
             textfamily_.append(headline_family.name)
         else:
             utila.error(f'headline: font not found {item}')
-
     matched = [item == expected_family for item in textfamily_]
     if all(matched):
         return None
-
     # select invalid text families
     positions = [
         position for position, valid in zip(analyzed[1], matched) if not valid
@@ -487,7 +465,6 @@ def validate_headline_distance(  # pylint:disable=R1260
                     rel_tol=MAX_HEADLINE_DIFF_REL,
             ):
                 continue
-
         # distance diff
         location = iamraw.RangedLocation(
             page=headline.page,
