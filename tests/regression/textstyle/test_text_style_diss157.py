@@ -8,12 +8,16 @@
 # =============================================================================
 
 import power
+import pytest
 import serializeraw
 
 import decider_textstyle
 import tests.textstyle_
 
 
+@pytest.mark.xfail(
+    reason='improve algo leads to fewer findings which are not disabled anymore.'
+)
 def test_textstyle_diss157_disable_huge_finding_count(testdir, monkeypatch):
     source = power.link(power.DISS157_PDF)
     cmd = f'-i {source}  --text --pages=70:80'
