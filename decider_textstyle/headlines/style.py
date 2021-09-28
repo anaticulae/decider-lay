@@ -41,7 +41,7 @@ erwarteten Abstand **{{expected}}** ab.
 FONT_DIST_AFTER_ERROR = string.Template("""\
 $headline falsch formatiert
 
-Der Abstand **{{current}}**  nach der $headline „{{title}}“ weicht vom \
+Der Abstand **{{current}}** nach der $headline „{{title}}“ weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
