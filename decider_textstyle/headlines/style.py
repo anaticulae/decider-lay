@@ -46,7 +46,7 @@ erwarteten Abstand **{{expected}}** ab.
 """)
 
 MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
-MAX_HEADLINE_DIFF_ABS = configo.HolyTable(  # pylint:disable=E1101
+MAX_HEADLINE_DIFF_ABS = configo.HolyTable(
     items=[
         (8, 0.5),
         (12, 1.0),
@@ -55,7 +55,6 @@ MAX_HEADLINE_DIFF_ABS = configo.HolyTable(  # pylint:disable=E1101
         (50, 5),
     ],
     strategy=utila.Strategy.LINEARISE,
-    right_outranges_none=False,
 )  # TODO: HOLY VALUE
 
 WHITESPACE_LINTING = False  # HOLY VALUE
@@ -392,7 +391,7 @@ def validate_headline_family(headline, navigators, fontstore, expected_family): 
         utila.error(msg)
         return None
     textfamily_ = []
-    skip_whitespaces = WHITESPACE_LINTING is False
+    skip_whitespaces = not WHITESPACE_LINTING
     analyzed = decider_textstyle.headlines.utils.container_textfamily(
         lines_selected,
         skip_whitespaces=skip_whitespaces,
@@ -441,7 +440,7 @@ def validate_headline_distance(  # pylint:disable=R1260
                 continue
             if before is None:
                 continue
-            if utila.pnear(  # pylint:disable=E1101
+            if utila.pnear(
                     expected_distance,
                     before,
                     abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),
@@ -458,7 +457,7 @@ def validate_headline_distance(  # pylint:disable=R1260
                 continue
             if after is None:
                 continue
-            if utila.pnear(  # pylint:disable=E1101
+            if utila.pnear(
                     expected_distance,
                     after,
                     abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),

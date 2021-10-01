@@ -43,7 +43,7 @@ def work(
     if not driver.navigators:  # pylint:disable=E1101
         utila.error('no navigators given')
 
-    if not driver.navigators or not driver.headlines:
+    if not driver.navigators or not driver.headlines:  # pylint:disable=E1101
         utila.error('could not run --headlines linter')
         return protocol.RESULT_EMPTY
 

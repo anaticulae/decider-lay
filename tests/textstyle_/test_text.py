@@ -70,7 +70,7 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
         style,
     )
     # not correct, but indicates that algo changed
-    assert protocol.count_findings(findings, 7551) == 0
+    assert not protocol.count_findings(findings, 7551)
 
 
 @utilatest.longrun

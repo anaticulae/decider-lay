@@ -37,7 +37,7 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
     for headline in headlines:
         start = decider_textstyle.headlines.utils.container_start(
             headline.container)
-        if start == 0:
+        if start == 0:  # pylint:disable=C2001
             # chapter starts at page begin
             # TODO: CHECK FOR HEADER OR PAGE NUMBER BEFORE HEADLINE? MAY
             # BE NOT ZERO?
