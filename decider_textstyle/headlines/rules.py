@@ -45,12 +45,12 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
         if headline.decoration is not None:
             # Chapter-X-Pattern is detected before headline start
             continue
-        containers_ = decider_textstyle.headlines.utils.containers(
+        containero = decider_textstyle.headlines.utils.containers(
             headline.container)
         location = iamraw.RangedLocation(
             page=headline.page,
-            line=containers_[0],
-            line_end=containers_[-1],
+            line=containero[0],
+            line_end=containero[-1],
         )
         linter(
             location=location,

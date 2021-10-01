@@ -316,13 +316,13 @@ def validate_headline_size(
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
-        containers_ = decider_textstyle.headlines.utils.containers(
+        containero = decider_textstyle.headlines.utils.containers(
             headline.container)
         navigator = utila.select_page(navigators, headline.page)
         try:
-            lines_selected = [navigator[index] for index in containers_]
+            lines_selected = [navigator[index] for index in containero]
         except IndexError:
-            msg = f'headline size: {containers_} out of bounds on page: {navigator.page}'
+            msg = f'headline size: {containero} out of bounds on page: {navigator.page}'
             utila.error(msg)
             continue
         textsizes_ = decider_textstyle.headlines.utils.container_textsizes(
@@ -334,8 +334,8 @@ def validate_headline_size(
         # font size diff
         location = iamraw.RangedLocation(
             page=headline.page,
-            line=containers_[0],
-            line_end=containers_[-1],
+            line=containero[0],
+            line_end=containero[-1],
         )
         linter(
             title=headline.title,
@@ -381,13 +381,13 @@ def validate_headlines_family(
 
 
 def validate_headline_family(headline, navigators, fontstore, expected_family):  # pylint:disable=R0914
-    containers_ = decider_textstyle.headlines.utils.containers(
+    containero = decider_textstyle.headlines.utils.containers(
         headline.container)
     navigator = utila.select_page(navigators, headline.page)
     try:
-        lines_selected = [navigator[index] for index in containers_]
+        lines_selected = [navigator[index] for index in containero]
     except IndexError:
-        msg = f'headline family: {containers_} out of bounds on page: {navigator.page}'
+        msg = f'headline family: {containero} out of bounds on page: {navigator.page}'
         utila.error(msg)
         return None
     textfamily_ = []
@@ -426,16 +426,16 @@ def validate_headline_distance(  # pylint:disable=R1260
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
-        containers_ = decider_textstyle.headlines.utils.containers(
+        containero = decider_textstyle.headlines.utils.containers(
             headline.container)
         navigator = utila.select_page(navigators, headline.page)
         distances = doctextstyle.parser.textdistances(navigator)
         if check_before:
             # TODO: SOLVE THIS ISSUE
             try:
-                before = distances[containers_[0]][0]
+                before = distances[containero[0]][0]
             except IndexError:
-                utila.error(f'validate headline distance: {containers_} '
+                utila.error(f'validate headline distance: {containero} '
                             f'before out of bounds {len(distances)}')
                 continue
             if before is None:
@@ -450,9 +450,9 @@ def validate_headline_distance(  # pylint:disable=R1260
         else:
             # TODO: SOLVE THIS ISSUE
             try:
-                after = distances[containers_[-1]][1]
+                after = distances[containero[-1]][1]
             except IndexError:
-                utila.error(f'validate headline distance: {containers_} '
+                utila.error(f'validate headline distance: {containero} '
                             f'after out of bounds {len(distances)}')
                 continue
             if after is None:
@@ -467,8 +467,8 @@ def validate_headline_distance(  # pylint:disable=R1260
         # distance diff
         location = iamraw.RangedLocation(
             page=headline.page,
-            line=containers_[0],
-            line_end=containers_[-1],
+            line=containero[0],
+            line_end=containero[-1],
         )
         linter(
             title=headline.title,

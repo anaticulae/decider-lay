@@ -31,13 +31,13 @@ def check_7560_split_headline(linter: callable, driver):
     headlines = utila.flatten(driver.headlines)
     navigators = driver.navigators
     for headline in headlines:
-        containers_ = decider_textstyle.headlines.utils.containers(
+        containero = decider_textstyle.headlines.utils.containers(
             headline.container)
         navigator = utila.select_page(navigators, headline.page)
         location = iamraw.RangedLocation(
             page=headline.page,
-            line=containers_[0],
-            line_end=containers_[-1],
+            line=containero[0],
+            line_end=containero[-1],
         )
         if location.line == location.line_end:
             # single headline

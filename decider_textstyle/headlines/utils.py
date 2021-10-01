@@ -73,12 +73,12 @@ def textfamily(
 
 
 def headline_location(headline, chars: list = None) -> iamraw.RangedLocation:
-    containers_ = containers(headline.container)
+    containero = containers(headline.container)
     # TODO: REPLACE TOKEN WITH CHAR
     location = iamraw.RangedLocation(
         page=headline.page,
-        line=containers_[0],
-        line_end=containers_[-1],
+        line=containero[0],
+        line_end=containero[-1],
     )
     if chars:
         location.token = chars[0][0]
