@@ -447,6 +447,10 @@ def validate_headline_distance(  # pylint:disable=R1260
                     rel_tol=MAX_HEADLINE_DIFF_REL,
             ):
                 continue
+            if before > 100.0:
+                utila.error(f'distance to high: {before}, use table etc.')
+                # TODO: USE FIGURES, TABLES ETC.
+                continue
         else:
             # TODO: SOLVE THIS ISSUE
             try:
@@ -463,6 +467,10 @@ def validate_headline_distance(  # pylint:disable=R1260
                     abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),
                     rel_tol=MAX_HEADLINE_DIFF_REL,
             ):
+                continue
+            if after > 100.0:
+                utila.error(f'distance to high: {after}, use table etc.')
+                # TODO: USE FIGURES, TABLES ETC.
                 continue
         # distance diff
         location = iamraw.RangedLocation(
