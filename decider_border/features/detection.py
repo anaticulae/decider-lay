@@ -42,14 +42,11 @@ def work(
     pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
-
+    # create driver
     driver = create_driver(border_boxes, border_pages, border_leftright, pages)
-
-    linter = protocol.from_module(__name__)
-    linter.run(driver=driver)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
+    # evaluate lintings
+    user, developer = protocol.run(modulename=__name__, driver=driver)
+    # dump hits
     dumped = serializeraw.dump_hits(driver.hits)
     return dumped, user, developer
 
