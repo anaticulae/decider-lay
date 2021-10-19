@@ -87,7 +87,7 @@ def check_3030_text_before_to_near(linter, item, bound, page):  # pylint:disable
         linter(
             location=location,
             distance=item.before,
-            min_distance=DISTANCE_AFTER_MIN.value,
+            min_distance=DISTANCE_AFTER_MIN,
         )
 
 
@@ -114,5 +114,5 @@ def check_3031_text_after_to_near(linter, item, bound, page):  # pylint:disable=
         linter(
             location=location,
             distance=item.after,
-            min_distance=DISTANCE_AFTER_MIN.value,
+            min_distance=DISTANCE_AFTER_MIN,
         )
