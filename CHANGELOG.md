@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.9.0
+
+### Feature
+
+* add cloud lookup (9a055e3065e5)
+* replace with real holy values (79a980755c39)
+* do not lint math text as wrong font family (cebbc4b68aaf)
+
+### Fix
+
+* skip very huge distance (fec76936d6b9)
+* remove white space error (a5c35fb51db8)
+
 ## v0.8.0
 
 ### Feature
