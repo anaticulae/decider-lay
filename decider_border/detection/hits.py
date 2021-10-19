@@ -9,14 +9,19 @@
 
 import contextlib
 
+import configo
 import iamraw
 import utila
 
-# TODO: HOLY VALUE, ADJUST THIS HOLY VALUES
-BORDER_LEFT = 25
-BORDER_RIGHT = 25
-BORDER_TOP = 25
-BORDER_BOTTOM = 25
+BORDER_LEFT = configo.HV_FLOAT_PLUS(default=25.0)
+
+BORDER_RIGHT = configo.HV_FLOAT_PLUS(default=25.0)
+
+BORDER_TOP = configo.HV_FLOAT_PLUS(default=25.0)
+
+BORDER_BOTTOM = configo.HV_FLOAT_PLUS(default=25.0)
+
+CONTENTBOX_SIZE_MAX = configo.HV_FLOAT_PLUS(default=50.0)
 
 
 class BorderExpected:
@@ -98,12 +103,17 @@ def hits_unique(
     return result
 
 
+HITS_MATCH_DIFF_MAX = configo.HV_FLOAT_PLUS(default=10.0)
+
+
 def hits_match(
-        bounding: tuple,
-        hits: set,
-        maxdiff: float = 10.0,  # TODO: HOLY VALUE
+    bounding: tuple,
+    hits: set,
+    maxdiff: float = HITS_MATCH_DIFF_MAX,
 ) -> bool:
-    return any(utila.nears(bounding, item, diff=maxdiff) for item in hits)
+    if any(utila.nears(bounding, item, diff=maxdiff.value) for item in hits):
+        return True
+    return False
 
 
 def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
@@ -127,14 +137,23 @@ def contentbox_inside(bounding, contentbox, pagesize) -> bool:
         return True
     if covers_completepage(bounding, pagesize):
         return True
-    if utila.rectangle_size(rounded_bounding) <= 50:  # TODO: HOLY VALUE
+    if utila.rectangle_size(rounded_bounding) <= CONTENTBOX_SIZE_MAX:
         # white space pdf printer errors
         # TODO: USE THIS INFORMATION FOR EXPERT LINTING
         return True
     return False
 
 
+COMPLETEPAGE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=5.0)
+
+
 def covers_completepage(bounding: tuple, page) -> bool:
     """Bounding covers the complete page."""
     expected = (0, 0, page.width, page.height)
-    return utila.nears(bounding, expected, diff=5.0)  # TODO: HOLY VALUE
+    if utila.nears(
+            bounding,
+            expected,
+            diff=CONTENTBOX_SIZE_MAX.value,
+    ):
+        return True
+    return False

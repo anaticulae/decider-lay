@@ -45,8 +45,9 @@ Der Abstand **{{current}}** nach der $headline „{{title}}“ weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
-MAX_HEADLINE_DIFF_REL = configo.HV_PERCENT_PLUS(10).value
-MAX_HEADLINE_DIFF_ABS = configo.HolyTable(
+HEADLINE_DIFF_REL_MAX = configo.HV_PERCENT_PLUS(default=10)
+
+HEADLINE_DIFF_ABS_MAX = configo.HolyTable(
     items=[
         (8, 0.5),
         (12, 1.0),
@@ -55,7 +56,7 @@ MAX_HEADLINE_DIFF_ABS = configo.HolyTable(
         (50, 5),
     ],
     strategy=utila.Strategy.LINEARISE,
-)  # TODO: HOLY VALUE
+)
 
 WHITESPACE_LINTING = False  # HOLY VALUE
 
@@ -257,8 +258,9 @@ def check_7523_check_h3_distance_after(linter: callable, driver):
     )
 
 
-MAX_H1_FONT_SIZE = configo.HV_INT_PLUS(48.0).value  # TODO: HOLY VALUE
-MAX_H2_FONT_SIZE = configo.HV_INT_PLUS(30.0).value  # TODO: HOLY VALUE
+H1_FONT_SIZE_MAX = configo.HV_FLOAT_PLUS(default=48.0)
+
+H2_FONT_SIZE_MAX = configo.HV_FLOAT_PLUS(default=30.0)
 
 SOLUTION_7535 = """\
 Erwartete Schriftgröße der Kapitel zu groß
@@ -274,12 +276,12 @@ def check_7535_headline_h1_too_huge(linter: callable, driver):
     style: iamraw.DocTextStyle = driver.style
     if style.h1_size is None:
         return
-    if style.h1_size <= MAX_H1_FONT_SIZE:
+    if style.h1_size <= H1_FONT_SIZE_MAX:
         return
     linter(
         location=protocol.OVERVIEW,
         current=style.h1_size,
-        max_font_size=MAX_H1_FONT_SIZE,
+        max_font_size=H1_FONT_SIZE_MAX,
     )
 
 
@@ -297,12 +299,12 @@ def check_7536_headline_h2_too_huge(linter: callable, driver):
     style: iamraw.DocTextStyle = driver.style
     if style.h2_size is None:
         return
-    if style.h2_size <= MAX_H2_FONT_SIZE:
+    if style.h2_size <= H2_FONT_SIZE_MAX:
         return
     linter(
         location=protocol.OVERVIEW,
         current=style.h2_size,
-        max_font_size=MAX_H2_FONT_SIZE,
+        max_font_size=H2_FONT_SIZE_MAX,
     )
 
 
@@ -327,7 +329,7 @@ def validate_headline_size(
             continue
         textsizes_ = decider_textstyle.headlines.utils.container_textsizes(
             lines_selected)
-        maxdiff = MAX_HEADLINE_DIFF_ABS(expected_size)
+        maxdiff = HEADLINE_DIFF_ABS_MAX(expected_size)
         if all((utila.near(item, expected_size, diff=maxdiff)
                 for item in textsizes_)):
             continue
@@ -443,8 +445,8 @@ def validate_headline_distance(  # pylint:disable=R1260
             if utila.pnear(
                     expected_distance,
                     before,
-                    abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),
-                    rel_tol=MAX_HEADLINE_DIFF_REL,
+                    abs_tol=HEADLINE_DIFF_ABS_MAX(expected_distance),
+                    rel_tol=HEADLINE_DIFF_REL_MAX,
             ):
                 continue
             if before > 100.0:
@@ -464,8 +466,8 @@ def validate_headline_distance(  # pylint:disable=R1260
             if utila.pnear(
                     expected_distance,
                     after,
-                    abs_tol=MAX_HEADLINE_DIFF_ABS(expected_distance),
-                    rel_tol=MAX_HEADLINE_DIFF_REL,
+                    abs_tol=HEADLINE_DIFF_ABS_MAX(expected_distance),
+                    rel_tol=HEADLINE_DIFF_REL_MAX,
             ):
                 continue
             if after > 100.0:

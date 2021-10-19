@@ -13,8 +13,7 @@ import utila
 
 import decider_textstyle.headlines.utils
 
-# TODO: HOLY VALUE
-HEADLINE_MIN_WIDTH_LENGTH = configo.HV_PERCENT_PLUS(70).value
+HEADLINE_WIDTH_LENGTH_MIN = configo.HV_PERCENT_PLUS(default=70)
 
 SOLUTION_7560 = """\
 Korrigiere Überschrift
@@ -43,7 +42,7 @@ def check_7560_split_headline(linter: callable, driver):
             # single headline
             continue
         # TODO: SUPPORT ROTATED PAGES
-        min_pagewidth = driver.style.page_width * HEADLINE_MIN_WIDTH_LENGTH
+        min_pagewidth = driver.style.page_width * HEADLINE_WIDTH_LENGTH_MIN
         text = navigator[location.line:location.line_end]
         width = [item.bounding[2] - item.bounding[0] for item in text]
         width = [item for item in width if item < min_pagewidth]

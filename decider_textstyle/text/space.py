@@ -20,6 +20,8 @@ VALID_AREA = {
     iamraw.PageContentType.TEXT,
 }
 
+MORETHAN = configo.HV_INT_PLUS(default=10)
+
 SOLUTION_7770 = """\
 Loch im Textbild erhalten
 
@@ -27,7 +29,7 @@ Fügen Sie Trennungen ein um das Schriftbild zu verbessern.
 """
 
 
-@protocol.disable_perpage(morethan=10)  # TODO HOLY VALUE
+@protocol.disable_perpage(morethan=MORETHAN)
 def check_7770_text_hole_simple(linter: callable, driver):
     skipper = driver.magiccontent_oneline
     for page in driver.wordspaces:

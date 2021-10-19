@@ -7,11 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import iamraw
 import protocol
 import utila
 
-MORE_THAN = 10  # TODO: HOLY VALUE
+MORE_THAN = configo.HV_INT_PLUS(default=10)
 
 SOLUTION_7550 = """\
 Schriftgröße des Texts weicht ab

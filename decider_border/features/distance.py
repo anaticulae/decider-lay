@@ -26,8 +26,8 @@ import iamraw
 import protocol
 import utila
 
-MIN_DISTANCE_BEFORE = configo.HV_FLOAT_PLUS(10.0)
-MIN_DISTANCE_AFTER = configo.HV_FLOAT_PLUS(10.0)
+DISTANCE_BEFORE_MN = configo.HV_FLOAT_PLUS(default=10.0)
+DISTANCE_AFTER_MIN = configo.HV_FLOAT_PLUS(default=10.0)
 
 
 def work(
@@ -83,11 +83,11 @@ def check_3030_text_before_to_near(linter, item, bound, page):  # pylint:disable
     if item.before is None:
         # page starts with object, no text before object
         return
-    if math.fabs(item.before) <= MIN_DISTANCE_BEFORE:
+    if math.fabs(item.before) <= DISTANCE_BEFORE_MN:
         linter(
             location=location,
             distance=item.before,
-            min_distance=MIN_DISTANCE_AFTER.value,
+            min_distance=DISTANCE_AFTER_MIN.value,
         )
 
 
@@ -110,9 +110,9 @@ def check_3031_text_after_to_near(linter, item, bound, page):  # pylint:disable=
     if item.after is None:
         # page ends with object, no text after object
         return
-    if math.fabs(item.after) <= MIN_DISTANCE_AFTER:
+    if math.fabs(item.after) <= DISTANCE_AFTER_MIN:
         linter(
             location=location,
             distance=item.after,
-            min_distance=MIN_DISTANCE_AFTER.value,
+            min_distance=DISTANCE_AFTER_MIN.value,
         )
