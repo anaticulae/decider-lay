@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import configo
 import utila
 
 SOLUTION_7580 = """\
@@ -30,15 +31,21 @@ unterscheidet sich vom idealen Zeilenabstand von 100-150%.
 """
 
 # text distance between 100 and 150 percent is a good choice
-TEXT_DISTANCE_VALID = (1.0, 1.5)  # TODO: HOLY VALUE
+TEXT_DISTANCE_VALID_MIN = configo.HV_PERCENT_PLUS(default=100.0)
+
+TEXT_DISTANCE_VALID_MAX = configo.HV_PERCENT_PLUS(default=150.0)
 
 
 def check_7581_general_text_distance(linter: callable, driver):
     textsize = driver.textstyle.text_size
     current_distance = driver.textstyle.text_distance
     percent = current_distance / textsize
-    if not utila.isoutside(percent, *TEXT_DISTANCE_VALID):
-        # TODO: REPLACE WITH INSIDE
+    inside = utila.isinside(
+        value=percent,
+        left=TEXT_DISTANCE_VALID_MIN,
+        right=TEXT_DISTANCE_VALID_MAX,
+    )
+    if inside:
         return
     percent = utila.roundme(percent * 100.0)
     linter(distance=current_distance, percent=percent)

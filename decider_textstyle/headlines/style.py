@@ -10,6 +10,7 @@
 import string
 
 import configo
+import configo.holyvalue.access
 import doctextstyle.parser
 import iamraw
 import protocol
@@ -58,9 +59,9 @@ HEADLINE_DIFF_ABS_MAX = configo.HolyTable(
     strategy=utila.Strategy.LINEARISE,
 )
 
-WHITESPACE_LINTING = False  # HOLY VALUE
+WHITESPACE_LINTING = configo.holyvalue.access.HV_BOOL(default=False)
 
-LEVEL_1 = 1  # TODO: HOLY VALUE
+LEVEL_1 = 1
 
 SOLUTION_7500 = FONT_SIZE_ERROR.substitute(headline='Hauptüberschrift')
 
@@ -126,7 +127,7 @@ def check_7503_check_h1_distance_after(linter: callable, driver):
     )
 
 
-LEVEL_2 = 2  # TODO: HOLY VALUE
+LEVEL_2 = 2
 
 SOLUTION_7510 = FONT_SIZE_ERROR.substitute(headline='Teilüberschrift')
 
@@ -192,7 +193,7 @@ def check_7513_check_h2_distance_after(linter: callable, driver):
     )
 
 
-LEVEL_3 = 3  # TODO: HOLY VALUE
+LEVEL_3 = 3
 
 SOLUTION_7520 = FONT_SIZE_ERROR.substitute(headline='Unterüberschrift')
 
