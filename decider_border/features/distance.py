@@ -32,11 +32,11 @@ DISTANCE_AFTER_MIN = configo.HV_FLOAT_PLUS(default=10.0)
 
 def work(
     area: str,
-    distances: str,
+    xdistances: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
     area = groupme.feature.area.load_area(area, pages=pages)
-    distances = groupme.feature.distance.load_distance(distances, pages=pages)
+    distances = groupme.feature.distance.load_distance(xdistances, pages=pages)
 
     linter = protocol.from_module(__name__)
     linting(area, distances, linter)

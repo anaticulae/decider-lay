@@ -17,8 +17,8 @@ import decider_textstyle.text.style
 
 def work(  # pylint:disable=R0913,R0914
     textstyle: str,
-    headlines: str,
-    text: str,
+    headliner: str,
+    textx: str,
     textpositions: str,
     sizeandborders: str,
     headerfooter: str,
@@ -30,8 +30,8 @@ def work(  # pylint:disable=R0913,R0914
 ) -> protocol.ResultType:
     driver = decider_textstyle.text.data.load_driver(
         textstyle,
-        headlines,
-        text,
+        headliner,
+        textx,
         textpositions,
         sizeandborders,
         headerfooter,

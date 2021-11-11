@@ -18,8 +18,8 @@ import decider_textstyle.headlines.style
 
 def work(
     textstyle: str,
-    headlines: str,
-    text: str,
+    headliner: str,
+    textx: str,
     textpositions: str,
     fontheader: str,
     fontcontent: str,
@@ -29,10 +29,10 @@ def work(
 ) -> protocol.ResultType:
     driver = decider_textstyle.headlines.data.load_driver(
         textstyle,
-        headlines,
+        headliner,
         fontheader,
         fontcontent,
-        text,
+        textx,
         textpositions,
         sizeandborders,
         headerfooter,
