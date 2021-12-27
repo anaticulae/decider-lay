@@ -106,7 +106,7 @@ def check_3031_text_after_to_near(linter, driver):
         for item, bounding in zip(page.content, bounds):
             location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,
-                page=page,
+                page=page.page,
             )
             if item.after is None:
                 # page ends with object, no text after object
