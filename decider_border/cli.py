@@ -12,7 +12,6 @@ import utila
 
 import decider_border
 
-FEATURE_NAME = 'detection'
 DESCRIPTION = """\
 The border_decider detects overlapping content to different extracted
 border. There are four types of border.
@@ -34,7 +33,7 @@ WORKPLAN = [
         ('user', 'developer'),
     ),
     utila.create_step(
-        FEATURE_NAME,
+        'detection',
         [
             utila.ResultFile('rawmaker', 'border_boundingboxes'),
             utila.ResultFile('rawmaker', 'border_pages'),

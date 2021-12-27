@@ -10,14 +10,13 @@
 import utila
 
 import decider_border
-import decider_border.cli
 
 
 def border_user(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,
         decider_border.PROCESS,
-        f'{decider_border.cli.FEATURE_NAME}_user',
+        'detection_user',
         prefix,
     )
 
@@ -26,6 +25,6 @@ def decider_border_hits(path: str, prefix: str = '') -> str:
     return utila.pathconnector(
         path,
         decider_border.PROCESS,
-        f'{decider_border.cli.FEATURE_NAME}_hits',
+        'detection_hits',
         prefix,
     )
