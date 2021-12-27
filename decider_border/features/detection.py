@@ -34,6 +34,8 @@ import decider_border.detection.hits
 
 MULTIPLE_BOUNDING_ERROR_COUNT = configo.HV_INT_PLUS(default=10)
 
+PAGENUMBER_ERROR_MIN = configo.HV_INT_PLUS(default=5)
+
 
 def work(
     border_boxes: str,
@@ -109,6 +111,9 @@ Seitenrad ragt.
 def check_2020_content_inside_box(linter, driver):
     """Ensure that content fits in detected content box."""
     hits: iamraw.PageContentHits = driver.hits
+    if len(driver.hits_pagenumbers) < PAGENUMBER_ERROR_MIN:
+        hits.extend(driver.hits_pagenumbers)
+
     # determine multi page hits
     repeating = decider_border.detection.hits.boxes_repeating(hits)
     # remove multi page hits
@@ -155,3 +160,19 @@ def check_2025_multiple_bounding_error(linter, driver):
             page=page.page,
             location=location,
         )
+
+
+SOLUTION_2026 = """\
+Seitenzahl beschreibt den Seitenrand
+
+{{number}} Seitenzahlen beschreiben den Seitenrand.
+"""
+
+
+def check_2026_pagenumber_bounding(linter, driver):
+    if len(driver.hits_pagenumbers) < PAGENUMBER_ERROR_MIN:
+        return
+    linter(
+        number=len(driver.hits_pagenumbers),
+        page=protocol.OVERVIEW,
+    )

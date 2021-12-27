@@ -62,7 +62,7 @@ def boxes_outside_border(
                     first=pagenumber_bounding,
                     second=bounding,
             ):
-                hits_pagenumbers.append(bounding)
+                hits_pagenumbers.append((page.page, bounding))
                 continue
             hits.append((index, bounding))
         result.append(
