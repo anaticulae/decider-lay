@@ -40,20 +40,29 @@ def boxes_outside_border(
     boxes,
     pagesizes: dict,
     expected: BorderExpected,
+    pagenumbers: dict,
     tol=None,
 ) -> iamraw.PageContentHits:
     """Determine `boxes` which are outside out of `border`."""
     result = []
+    hits_pagenumbers = []
     # x0 y0 x1 y1
     for page in boxes:
         pagesize = pagesizes[page.page]
         borderbox = expected(page.page)
         if not borderbox:
             continue
+        pagenumber_bounding = pagenumbers.get(page.page, None)
         contentbox = contentbox_valid(borderbox, pagesize, tol=tol)
         hits = []
         for index, bounding in page.boundings:
             if contentbox_inside(bounding, contentbox, pagesize):
+                continue
+            if pagenumber_bounding and utila.rectangle_inside(
+                    first=pagenumber_bounding,
+                    second=bounding,
+            ):
+                hits_pagenumbers.append(bounding)
                 continue
             hits.append((index, bounding))
         result.append(
@@ -62,7 +71,7 @@ def boxes_outside_border(
                 hits=hits,
                 page=page.page,
             ))
-    return result
+    return result, hits_pagenumbers
 
 
 def boxes_repeating(

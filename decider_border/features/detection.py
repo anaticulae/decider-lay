@@ -39,11 +39,18 @@ def work(
     border_boxes: str,
     border_pages: str,
     border_leftright: str,
+    pagenumbers: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str, str]:
     utila.call('work: border detection')
     # create driver
-    driver = create_driver(border_boxes, border_pages, border_leftright, pages)
+    driver = create_driver(
+        border_boxes,
+        border_pages,
+        border_leftright,
+        pagenumbers,
+        pages,
+    )
     # evaluate lintings
     user, developer = protocol.run(modulename=__name__, driver=driver)
     # dump hits
@@ -51,23 +58,41 @@ def work(
     return dumped, user, developer
 
 
-def create_driver(border_boxes, border_pages, border_leftright, pages):
+def create_driver(
+    border_boxes,
+    border_pages,
+    border_leftright,
+    pagenumbers,
+    pages,
+):
     boxes = serializeraw.load_boundingboxes(border_boxes, pages=pages)
     border_pages = serializeraw.load_pageborders(border_pages, pages=pages)
-
-    page_sizes = {item.page: item.size for item in border_pages}
+    pagesizes = {item.page: item.size for item in border_pages}
     border_leftright = serializeraw.load_leftright_border(border_leftright)
     expected = decider_border.detection.hits.BorderExpected(border_leftright)
-
-    hits = decider_border.detection.hits.boxes_outside_border(
+    pagenumbers = load_pagenumbers(pagenumbers, pages=pages)
+    # run detector
+    hits, hits_pagenumbers = decider_border.detection.hits.boxes_outside_border(
         boxes,
-        page_sizes,
+        pagesizes,
         expected,
+        pagenumbers=pagenumbers,
     )
     utila.debug(hits)
+    result = protocol.driver(
+        hits=hits,
+        hits_pagenumbers=hits_pagenumbers,
+    )
+    return result
 
-    data = protocol.driver(hits=hits)
-    return data
+
+def load_pagenumbers(pagenumbers, pages: tuple = None) -> dict:
+    # bounding boxes of detected pagenumbers
+    pagenumbers = serializeraw.load_pagenumbers(pagenumbers, pages=pages)
+    if isinstance(pagenumbers, tuple):
+        pagenumbers = pagenumbers[0] + pagenumbers[1]
+    result = {page.pdfpage: tuple(page.bounding) for page in pagenumbers}
+    return result
 
 
 # TODO: ADD DIFFERENT BORDER CHECKER LINTER FOR DIFFRENT AREAS, footenote,

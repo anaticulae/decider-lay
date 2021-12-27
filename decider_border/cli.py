@@ -38,6 +38,7 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'border_boundingboxes'),
             utila.ResultFile('rawmaker', 'border_pages'),
             utila.ResultFile('groupme', 'border_leftright'),
+            utila.ResultFile('groupme', 'pagenumbers_pagenumbers'),
         ],
         ('hits', 'user', 'developer'),
     )
