@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.10.1
+
+### Fix
+
+* fix accessing page number (e69c23a5d538)
+
 ## v0.10.0
 
 ### Feature
