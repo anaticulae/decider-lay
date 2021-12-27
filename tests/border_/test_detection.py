@@ -46,3 +46,10 @@ def test_decider_border_merge_pagewarning(testdir, monkeypatch):
     )
     # ensure that single page bounding error is raised
     assert len(findings) == 1
+
+
+def test_decider_pagenumber_hits(testdir, monkeypatch):
+    source = power.link(power.DISS172_PDF)
+    tests.border_.run(f'-i {source} --detection', monkeypatch=monkeypatch)
+    findings = protocol.findings_from_path(testdir.tmpdir, msgid=2026)
+    assert len(findings) == 1
