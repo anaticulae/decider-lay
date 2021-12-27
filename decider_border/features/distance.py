@@ -16,7 +16,6 @@ textual ojects(table, images, diagrams).
 # TODO: EXTEND MESSAGE WITH TABELLE, BILD, FORMEL etc.
 """
 
-import functools
 import math
 import typing
 
@@ -36,29 +35,23 @@ def work(
     xdistances: str,
     pages: tuple = None,
 ) -> typing.Tuple[str, str]:
-    area = groupme.feature.area.load_area(area, pages=pages)
-    distances = groupme.feature.distance.load_distance(xdistances, pages=pages)
-
-    linter = protocol.from_module(__name__)
-    linting(area, distances, linter)
-
-    result = linter.result(unique=True)
-    user, developer = protocol.dump_result(result)
+    driver = create_driver(
+        area=area,
+        distances=xdistances,
+        pages=pages,
+    )
+    user, developer = protocol.run(modulename=__name__, driver=driver)
     return user, developer
 
 
-def linting(areas, distances, linter: protocol.Linter):
-    checkers = protocol.parse_checkers(__name__)
-    for checker in checkers:
-        for page in distances:
-            area = utila.select_page(areas, page.page)
-            bounds = utila.flatten(list(area.border.values()))
-            call = functools.partial(
-                linter.add_finding,
-                msgid=checker.msgid,
-            )
-            for item, bound in zip(page.content, bounds):
-                checker(call, item, bound, page=page.page)
+def create_driver(area, distances, pages):
+    area = groupme.feature.area.load_area(area, pages=pages)
+    distances = groupme.feature.distance.load_distance(distances, pages=pages)
+    result = protocol.driver(
+        area=area,
+        distances=distances,
+    )
+    return result
 
 
 SOLUTION_3030 = """\
@@ -75,22 +68,25 @@ Mindestabstand: {{min_distance}}
 """
 
 
-def check_3030_text_before_to_near(linter, item, bounding, page):
-    assert isinstance(page, int), type(page)
-    location = iamraw.BoundingLocation.fromtuple(
-        bounding=bounding,
-        page=page,
-    )
-    if item.before is None:
-        # page starts with object, no text before object
-        return
-    if math.fabs(item.before) > DISTANCE_BEFORE_MN:
-        return
-    linter(
-        location=location,
-        distance=item.before,
-        min_distance=DISTANCE_AFTER_MIN,
-    )
+def check_3030_text_before_to_near(linter, driver):
+    for page in driver.distances:
+        area = utila.select_page(driver.area, page.page)
+        bounds = utila.flatten(list(area.border.values()))
+        for item, bounding in zip(page.content, bounds):
+            location = iamraw.BoundingLocation.fromtuple(
+                bounding=bounding,
+                page=page.page,
+            )
+            if item.before is None:
+                # page starts with object, no text before object
+                continue
+            if math.fabs(item.before) > DISTANCE_BEFORE_MN:
+                continue
+            linter(
+                location=location,
+                distance=item.before,
+                min_distance=DISTANCE_AFTER_MIN,
+            )
 
 
 SOLUTION_3031 = """\
@@ -103,19 +99,22 @@ Mindestabstand: {{min_distance}}
 """
 
 
-def check_3031_text_after_to_near(linter, item, bounding, page):
-    assert isinstance(page, int), type(page)
-    location = iamraw.BoundingLocation.fromtuple(
-        bounding=bounding,
-        page=page,
-    )
-    if item.after is None:
-        # page ends with object, no text after object
-        return
-    if math.fabs(item.after) > DISTANCE_AFTER_MIN:
-        return
-    linter(
-        location=location,
-        distance=item.after,
-        min_distance=DISTANCE_AFTER_MIN,
-    )
+def check_3031_text_after_to_near(linter, driver):
+    for page in driver.distances:
+        area = utila.select_page(driver.area, page.page)
+        bounds = utila.flatten(list(area.border.values()))
+        for item, bounding in zip(page.content, bounds):
+            location = iamraw.BoundingLocation.fromtuple(
+                bounding=bounding,
+                page=page,
+            )
+            if item.after is None:
+                # page ends with object, no text after object
+                continue
+            if math.fabs(item.after) > DISTANCE_AFTER_MIN:
+                continue
+            linter(
+                location=location,
+                distance=item.after,
+                min_distance=DISTANCE_AFTER_MIN,
+            )
