@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.10.0
+
+### Feature
+
+* inform user about page number hits (a4d391daa8ee)
+* do not detect page number hits as bounding hits (96dcd6f7888d)
+
 ## v0.9.2
 
 ## v0.9.1
