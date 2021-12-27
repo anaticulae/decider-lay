@@ -34,7 +34,6 @@ def check_7550_text_size(linter: callable, driver):
         textsize = item.style.textsize()
         if textsize == expected:
             continue
-
         location = iamraw.RangedLocation(page=page, line=line)
         # TODO: CHECK FOR SINGLE CHAR OR WORDS TO BIG, BUT EXCLUDE HIGHNOTES
         linter(location=location, expected=expected, current=textsize)

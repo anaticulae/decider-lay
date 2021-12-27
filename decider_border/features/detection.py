@@ -32,7 +32,7 @@ import utila
 
 import decider_border.detection.hits
 
-MULTIPLE_BOUNDING_ERROR_COUNT = configo.HV_INT_PLUS(10)
+MULTIPLE_BOUNDING_ERROR_COUNT = configo.HV_INT_PLUS(default=10)
 
 
 def work(

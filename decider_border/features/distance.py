@@ -27,6 +27,7 @@ import protocol
 import utila
 
 DISTANCE_BEFORE_MN = configo.HV_FLOAT_PLUS(default=10.0)
+
 DISTANCE_AFTER_MIN = configo.HV_FLOAT_PLUS(default=10.0)
 
 
