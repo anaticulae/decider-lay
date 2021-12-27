@@ -75,21 +75,22 @@ Mindestabstand: {{min_distance}}
 """
 
 
-def check_3030_text_before_to_near(linter, item, bound, page):  # pylint:disable=W0613
+def check_3030_text_before_to_near(linter, item, bounding, page):
     assert isinstance(page, int), type(page)
     location = iamraw.BoundingLocation.fromtuple(
-        bounding=bound,
+        bounding=bounding,
         page=page,
     )
     if item.before is None:
         # page starts with object, no text before object
         return
-    if math.fabs(item.before) <= DISTANCE_BEFORE_MN:
-        linter(
-            location=location,
-            distance=item.before,
-            min_distance=DISTANCE_AFTER_MIN,
-        )
+    if math.fabs(item.before) > DISTANCE_BEFORE_MN:
+        return
+    linter(
+        location=location,
+        distance=item.before,
+        min_distance=DISTANCE_AFTER_MIN,
+    )
 
 
 SOLUTION_3031 = """\
@@ -102,18 +103,19 @@ Mindestabstand: {{min_distance}}
 """
 
 
-def check_3031_text_after_to_near(linter, item, bound, page):  # pylint:disable=W0613
+def check_3031_text_after_to_near(linter, item, bounding, page):
     assert isinstance(page, int), type(page)
     location = iamraw.BoundingLocation.fromtuple(
-        bounding=bound,
+        bounding=bounding,
         page=page,
     )
     if item.after is None:
         # page ends with object, no text after object
         return
-    if math.fabs(item.after) <= DISTANCE_AFTER_MIN:
-        linter(
-            location=location,
-            distance=item.after,
-            min_distance=DISTANCE_AFTER_MIN,
-        )
+    if math.fabs(item.after) > DISTANCE_AFTER_MIN:
+        return
+    linter(
+        location=location,
+        distance=item.after,
+        min_distance=DISTANCE_AFTER_MIN,
+    )
