@@ -174,5 +174,5 @@ def check_2026_pagenumber_bounding(linter, driver):
         return
     linter(
         number=len(driver.hits_pagenumbers),
-        page=protocol.OVERVIEW,
+        location=protocol.OVERVIEW,
     )
