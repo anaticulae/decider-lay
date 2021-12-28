@@ -18,9 +18,12 @@ import tests.textstyle_
 @utilatest.longrun
 def test_font_family_bachelor90_page13(testdir, monkeypatch):
     """This is a regression test for false detected level 2 headline
-    style judging. Before this patch, there was a mix of loading oneline
-    text with normal font header. Therefore the style current headline
-    style was judged wrongly."""
+    style judging.
+
+    Before this patch, there was a mix of loading oneline text with
+    normal font header. Therefore the style current headline style was
+    judged wrongly.
+    """
     source = power.link(power.BACHELOR090_PDF)
     cmd = f'-i {source}  --headlines --pages=13'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)

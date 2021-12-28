@@ -16,10 +16,12 @@ import tests.textstyle_
 
 
 def test_headline_font_family_validation_page6(testdir, monkeypatch):
-    """The headline text is formatted in Times New Roman. The whitespace
-    between text and number is formatted in Arial. In normal mode, this
-    is not a problem and we skip this. Therefore no linting must
-    occur."""
+    """The headline text is formatted in Times New Roman.
+
+    The whitespace between text and number is formatted in Arial. In
+    normal mode, this is not a problem and we skip this. Therefore no
+    linting must occur.
+    """
     source = power.link(power.MASTER098_PDF)
     cmd = f'-i {source}  --headlines --pages=6'
     tests.textstyle_.run(cmd, monkeypatch=monkeypatch)

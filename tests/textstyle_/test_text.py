@@ -90,8 +90,7 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
 @pytest.mark.xfail(reason='long time broken, don\'t know why')
 @utilatest.nightly
 def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
-    """Merge more than one line with the same finding into a single
-    finding."""
+    """Merge more than one line with the same finding into a single finding."""
     pages = '18:22'
     findings = decide_text_style(
         power.MASTER072_PDF,
@@ -104,10 +103,11 @@ def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
 
 
 def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
-    """Regression test that figure text is not detected as text style
-    error. This was an error cause figure was not extracted correctly
-    and therefore magic does not detect these region as figure
-    region."""
+    """Regression test that figure text is not detected as text style error.
+
+    This was an error cause figure was not extracted correctly and
+    therefore magic does not detect these region as figure region.
+    """
     # 28: is required, cause we require the first headline
     pages = '28:31'
     findings = decide_text_style(
@@ -124,8 +124,7 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='bad formula parser')
 def test_textstyle_master110_page29(testdir, monkeypatch):
-    """Investigate text style errors, especially in connection with
-    formulas."""
+    """Investigate text style errors, especially in connection with formulas."""
     pages = '20:30'
     findings = decide_text_style(
         power.MASTER110_PDF,
