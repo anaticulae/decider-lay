@@ -11,7 +11,6 @@ import os
 
 import protocol
 import serializeraw
-import textflow.serialize
 import utila
 
 import decider_textstyle
@@ -62,7 +61,7 @@ def load_driver(  # pylint:disable=R0913,R0914
         utila.error('no navigators given')
 
     if navigators and headlines:
-        wordspaces = textflow.serialize.load_wordspaces(wordspaces, pages=pages)
+        wordspaces = serializeraw.load_wordspaces(wordspaces, pages=pages)
         # TODO: DO WE REALY REQUIRE HEADLINES?
         chunks = decider_textstyle.utils.text_chunks(
             headlines,
