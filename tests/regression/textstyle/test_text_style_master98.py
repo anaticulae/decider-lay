@@ -9,11 +9,13 @@
 
 import power
 import serializeraw
+import utilatest
 
 import decider_textstyle
 import tests.textstyle_
 
 
+@utilatest.requires(power.MASTER098_PDF)
 def test_textsize_in_table_page55(testdir, monkeypatch):
     """Verify that normal text size check does not run in table data."""
     # TODO: ADD TABLE CONTENT STYLE CHECKER

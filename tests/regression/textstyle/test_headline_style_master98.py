@@ -9,12 +9,14 @@
 
 import power
 import serializeraw
+import utilatest
 
 import decider_textstyle.headlines.style
 import decider_textstyle.path
 import tests.textstyle_
 
 
+@utilatest.requires(power.MASTER098_PDF)
 def test_headline_font_family_validation_page6(testdir, monkeypatch):
     """The headline text is formatted in Times New Roman.
 
@@ -41,6 +43,7 @@ def test_headline_font_family_validation_page6(testdir, monkeypatch):
     assert len(loaded) == 1
 
 
+@utilatest.requires(power.MASTER098_PDF)
 def test_headline_font_family_char_marker(testdir, monkeypatch):
     """Ensure that linting is marked to wrong character and not to the
     whole line."""

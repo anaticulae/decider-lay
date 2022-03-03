@@ -16,6 +16,7 @@ import tests.textstyle_
 
 
 @utilatest.longrun
+@utilatest.requires(power.MASTER116_PDF)
 def test_textstyle_formula_master116_page22(testdir, monkeypatch):
     """Ensure that formulas are not treated as font size errors."""
     source = power.link(power.MASTER116_PDF)

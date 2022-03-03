@@ -10,10 +10,12 @@
 import power
 import protocol
 import utila
+import utilatest
 
 import tests.border_
 
 
+@utilatest.requires(power.BACHELOR056_PDF)
 def test_border_repeating_element(testdir, monkeypatch):
     """Verify that duplicated hits on page border are valid.
 
@@ -28,6 +30,7 @@ def test_border_repeating_element(testdir, monkeypatch):
     assert len(findings) == 8  # TODO: NOT VALIDATED
 
 
+@utilatest.requires(power.MASTER155_PDF)
 def test_decider_border_merge_pagewarning(testdir, monkeypatch):
     """Merge more than 10 bounding lintings into a single page linting."""
     source = power.link(power.MASTER155_PDF)
@@ -48,6 +51,7 @@ def test_decider_border_merge_pagewarning(testdir, monkeypatch):
     assert len(findings) == 1
 
 
+@utilatest.requires(power.DISS172_PDF)
 def test_decider_pagenumber_hits(testdir, monkeypatch):
     source = power.link(power.DISS172_PDF)
     tests.border_.run(f'-i {source} --detection', monkeypatch=monkeypatch)

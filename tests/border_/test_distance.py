@@ -11,6 +11,7 @@ import groupme.path
 import power
 import pytest
 import serializeraw
+import utilatest
 
 import decider_border.features.distance
 
@@ -19,9 +20,11 @@ import decider_border.features.distance
     pytest.param(0, 0),
     pytest.param(5, 3, id='5_3', marks=pytest.mark.xfail(reason='???')),
 ])
+@utilatest.requires(power.DOCU007_PDF)
 def test_border_distances_linting(page, expected):
-    area = groupme.path.area(power.link(power.DOCU007_PDF))
-    distance = groupme.path.distance(power.link(power.DOCU007_PDF))
+    source = power.link(power.DOCU007_PDF)
+    area = groupme.path.area(source)
+    distance = groupme.path.distance(source)
     dumped_findings = decider_border.features.distance.work(
         area,
         distance,

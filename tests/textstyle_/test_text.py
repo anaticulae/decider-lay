@@ -28,6 +28,7 @@ def decide_text_style(
     style=None,
     msgids=None,
 ):
+    utilatest.fixture_requires(source)
     source = power.link(source)
     if style:
         tests.textstyle_.write_docstyle(style, testdir.tmpdir)

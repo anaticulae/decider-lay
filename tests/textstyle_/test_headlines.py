@@ -39,6 +39,8 @@ NO_STYLE = iamraw.DocTextStyle()
 
 
 def decide_headline_style(source, pages, style, testdir, monkeypatch):
+    utilatest.fixture_requires(source)
+    source = power.link(source)
     tests.textstyle_.write_docstyle(style, testdir.tmpdir)
     tests.textstyle_.run(
         f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
@@ -52,7 +54,7 @@ def decide_headline_style(source, pages, style, testdir, monkeypatch):
 @pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.nightly
 def test_decider_headlines_master72_2_20_fontsize(testdir, monkeypatch):
-    source = power.link(power.MASTER072_PDF)
+    source = power.MASTER072_PDF
     pages = '2:20'
     findings = decide_headline_style(
         source,
@@ -71,7 +73,7 @@ def test_decider_headlines_master72_2_20_fontsize(testdir, monkeypatch):
 @pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.nightly
 def test_decider_headlines_master72_all(testdir, monkeypatch):
-    source = power.link(power.MASTER072_PDF)
+    source = power.MASTER072_PDF
     pages = '3:65'
     findings = decide_headline_style(
         source,
@@ -87,7 +89,7 @@ def test_decider_headlines_master72_all(testdir, monkeypatch):
 @utilatest.longrun
 def test_decider_headlines_bachelor76(testdir, monkeypatch):
     # TODO: EXTEND THIS TESTS, specify expected findings
-    source = power.link(power.BACHELOR076_PDF)
+    source = power.BACHELOR076_PDF
     pages = '4:67'
     findings = decide_headline_style(
         source,
@@ -104,7 +106,7 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
 
 @utilatest.longrun
 def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
-    source = power.link(power.BACHELOR076_PDF)
+    source = power.BACHELOR076_PDF
     pages = '0:42'
     findings = decide_headline_style(
         source,
@@ -119,7 +121,7 @@ def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
 
 @utilatest.longrun
 def test_chapter_on_new_page_with_decoration(testdir, monkeypatch):
-    source = power.link(power.MASTER110_PDF)
+    source = power.MASTER110_PDF
     pages = '18:20'
     findings = decide_headline_style(
         source,
@@ -132,10 +134,11 @@ def test_chapter_on_new_page_with_decoration(testdir, monkeypatch):
     assert not new_chapter_page_start_error
 
 
+@utilatest.requires(power.BACHELOR063_PDF)
 def test_headlines_bachelor63_page17(testdir, monkeypatch):
     """Do not parse font size error for white spaces in first level
     headlines. Regression test after fixing docstyle extractor."""
-    source = power.link(power.BACHELOR063_PDF)
+    source = power.BACHELOR063_PDF
     pages = 17
     tests.textstyle_.run(
         f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
@@ -147,8 +150,9 @@ def test_headlines_bachelor63_page17(testdir, monkeypatch):
 
 
 @utilatest.longrun
+@utilatest.requires(power.BACHELOR090_PDF)
 def test_headlines_bachelor90_page17_divide_headline(testdir, monkeypatch):
-    source = power.link(power.BACHELOR090_PDF)
+    source = power.BACHELOR090_PDF
     tests.textstyle_.run(
         f'--headlines -i {testdir.tmpdir} -i {source} --pages=17',
         monkeypatch=monkeypatch,
@@ -158,8 +162,9 @@ def test_headlines_bachelor90_page17_divide_headline(testdir, monkeypatch):
     assert findings
 
 
+@utilatest.requires(power.BACHELOR090_PDF)
 def test_headlines_bachelor90_all_divide_headline(testdir, monkeypatch):
-    source = power.link(power.BACHELOR090_PDF)
+    source = power.BACHELOR090_PDF
     tests.textstyle_.run(
         f'--headlines -i {testdir.tmpdir} -i {source}',
         monkeypatch=monkeypatch,

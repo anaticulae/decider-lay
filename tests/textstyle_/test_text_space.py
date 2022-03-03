@@ -10,12 +10,14 @@
 import power
 import protocol
 import serializeraw
+import utilatest
 
 import decider_textstyle
 import decider_textstyle.text.space
 import tests.textstyle_
 
 
+@utilatest.requires(power.BACHELOR056_PDF)
 def test_textspace_bachelor56page9(testdir, monkeypatch):
     source = power.link(power.BACHELOR056_PDF)
     with monkeypatch.context() as context:
@@ -34,6 +36,7 @@ def test_textspace_bachelor56page9(testdir, monkeypatch):
     assert len(findings) == 1  # TODO: VALIDATED
 
 
+@utilatest.requires(power.MASTER075_PDF)
 def test_textspace_master75page23(testdir, monkeypatch):
     """Regression test; do not detect any holes in figure captions."""
     source = power.link(power.MASTER075_PDF)
@@ -49,6 +52,7 @@ def test_textspace_master75page23(testdir, monkeypatch):
     assert not findings
 
 
+@utilatest.requires(power.MASTER075_PDF)
 def test_textspace_diss170page58_skip_text_hole(testdir, monkeypatch):
     """Regression test; do not detect any holes in table."""
     source = power.link(power.MASTER075_PDF)
@@ -64,6 +68,7 @@ def test_textspace_diss170page58_skip_text_hole(testdir, monkeypatch):
     assert not findings
 
 
+@utilatest.requires(power.MASTER091B_PDF)
 def test_multiple_textspace_master91b(testdir, monkeypatch):
     source = power.link(power.MASTER091B_PDF)
     tests.textstyle_.run(

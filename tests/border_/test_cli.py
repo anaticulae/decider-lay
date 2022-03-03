@@ -21,7 +21,7 @@ import tests.border_
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(power.link(power.TECH024_PDF), id='technical24'),
+    pytest.param(power.TECH024_PDF, id='tech024'),
 ])
 def test_border_cli_decider_simple(source, testdir, monkeypatch):
     root = testdir.tmpdir
@@ -33,8 +33,8 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(power.link(power.DOCU035_PDF), [4, 4], id='twine'),
-    pytest.param(power.link(power.MASTER078_PDF), [6, 8], id='master78'),
+    pytest.param(power.DOCU035_PDF, [4, 4], id='docu035'),
+    pytest.param(power.MASTER078_PDF, [6, 8], id='master078'),
 ])
 @utilatest.longrun
 def test_border_cli_decider_list(
@@ -75,11 +75,7 @@ def validate_leftright(hits):
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(
-        power.link(power.BOOK007_PDF),
-        validate_leftright,
-        id='leftright',
-    ),
+    pytest.param(power.BOOK007_PDF, validate_leftright, id='book007'),
 ])
 @utilatest.longrun
 def test_border_cli_decider_complex_validation(
@@ -110,7 +106,7 @@ def patch_zero_border_tolerance(monkeypatch):
 
 def test_border_included_pdf_page_as_image(testdir, monkeypatch):
     """Do not detect included pdf pages as bounding error."""
-    source = power.link(power.MASTER116_PDF)
+    source = power.MASTER116_PDF
     root = testdir.tmpdir
     extracted = tests.border_.extract_border_hits(
         root,
@@ -124,7 +120,7 @@ def test_border_included_pdf_page_as_image(testdir, monkeypatch):
 
 def test_border_whitespace_only(testdir, monkeypatch):
     """Do not detect included pdf pages as bounding error."""
-    source = power.link(power.BACHELOR076_PDF)
+    source = power.BACHELOR076_PDF
     root = testdir.tmpdir
     extracted = tests.border_.extract_border_hits(
         root,

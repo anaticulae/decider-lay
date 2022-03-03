@@ -15,6 +15,7 @@ import tests.border_
 
 
 @pytest.mark.usefixtures('testdir')
+@utilatest.requires(power.DISS266_PDF)
 def test_decider_border_diss266(monkeypatch, capsys):
     """We have only one rotated page. Therefore we have no expected page
     size and have to skip this."""

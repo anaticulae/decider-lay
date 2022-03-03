@@ -9,11 +9,13 @@
 
 import power
 import serializeraw
+import utilatest
 
 import decider_textstyle
 import tests.textstyle_
 
 
+@utilatest.requires(power.HOME025_PDF)
 def test_headline_size_validation_page4(testdir, monkeypatch):
     """Verify that extracted headline container line to text line.
 

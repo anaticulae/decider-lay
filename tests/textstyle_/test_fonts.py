@@ -9,12 +9,14 @@
 
 import power
 import serializeraw
+import utilatest
 
 import decider_textstyle.path
 import tests.textstyle_
 
 
 def decide_text_fonts(source, testdir, monkeypatch, msgids: str = None):
+    utilatest.fixture_requires(source)
     tests.textstyle_.run(
         f'--fonts -i {testdir.tmpdir} -i {source}',
         monkeypatch=monkeypatch,
@@ -25,7 +27,7 @@ def decide_text_fonts(source, testdir, monkeypatch, msgids: str = None):
 
 
 def test_decider_fonts_diss266_text_distance_invalid(testdir, monkeypatch):
-    source = power.link(power.DISS266_PDF)
+    source = power.DISS266_PDF
     findings = decide_text_fonts(
         source,
         testdir,
@@ -36,7 +38,7 @@ def test_decider_fonts_diss266_text_distance_invalid(testdir, monkeypatch):
 
 
 def test_decider_fonts_master072_text_distance_valid(testdir, monkeypatch):
-    source = power.link(power.MASTER072_PDF)
+    source = power.MASTER072_PDF
     findings = decide_text_fonts(
         source,
         testdir,

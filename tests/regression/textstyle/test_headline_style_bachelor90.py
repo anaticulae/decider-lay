@@ -16,6 +16,7 @@ import tests.textstyle_
 
 
 @utilatest.longrun
+@utilatest.requires(power.BACHELOR090_PDF)
 def test_font_family_bachelor90_page13(testdir, monkeypatch):
     """This is a regression test for false detected level 2 headline
     style judging.
