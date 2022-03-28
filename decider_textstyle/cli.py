@@ -40,7 +40,7 @@ WORKPLAN = [
             utila.ResultFile('groupme', 'footer_footerheader'),
             utila.ResultFile('rawmaker', 'oneline_fonts_header'),
             utila.ResultFile('rawmaker', 'oneline_fonts_content'),
-            utila.ResultFile('textflow', 'wordspace_wordspace'),
+            utila.ResultFile('textflow', 'wordspace_wordspace', optional=True),
             utila.ResultFile('magic', 'oneline_content', optional=True),
         ],
         output=protocol.ResultDefault,

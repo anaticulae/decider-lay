@@ -31,6 +31,9 @@ Fügen Sie Trennungen ein um das Schriftbild zu verbessern.
 
 @protocol.disable_perpage(morethan=MORETHAN)
 def check_7770_text_hole_simple(linter: callable, driver):
+    if not driver.wordspaces:
+        utila.error('no wordspaces skip 7770')
+        return
     skipper = driver.magiccontent_oneline
     for page in driver.wordspaces:
         pagenumber, pagecontent = page.page, page.content

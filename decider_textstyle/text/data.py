@@ -61,7 +61,13 @@ def load_driver(  # pylint:disable=R0913,R0914
         utila.error('no navigators given')
 
     if navigators and headlines:
-        wordspaces = serializeraw.load_wordspaces(wordspaces, pages=pages)
+        if utila.exists(wordspaces):
+            wordspaces = serializeraw.load_wordspaces(
+                wordspaces,
+                pages=pages,
+            )
+        else:
+            wordspaces = None
         # TODO: DO WE REALY REQUIRE HEADLINES?
         chunks = decider_textstyle.utils.text_chunks(
             headlines,
