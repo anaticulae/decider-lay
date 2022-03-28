@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v0.10.2
+
+### Feature
+
+* make wordspaces 7770 optional depending on data availability (0791667762a3)
+
+### Fix
+
+* adjust message location (1f1dfebd624d)
+
+### Documentation
+
+* adjust modules path (f698754dd5d0)
+* Happy New Year! (1a99782945cd)
+
 ## v0.10.1
 
 ### Fix
