@@ -17,6 +17,7 @@ import tests.textstyle_
 
 def decide_text_fonts(source, testdir, monkeypatch, msgids: str = None):
     utilatest.fixture_requires(source)
+    source = power.link(source)
     tests.textstyle_.run(
         f'--fonts -i {testdir.tmpdir} -i {source}',
         monkeypatch=monkeypatch,
