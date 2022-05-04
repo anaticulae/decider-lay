@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.10.3
+
+### Feature
+
+* add toc style checker (219692170264)
+
 ## v0.10.2
 
 ### Feature
