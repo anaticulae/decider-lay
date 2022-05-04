@@ -22,3 +22,7 @@ def text(path: str, prefix: str = '') -> str:
 
 def fonts(path: str, prefix: str = '') -> str:
     return connect(path, decider_textstyle.PROCESS, 'fonts_user', prefix)
+
+
+def toc(path: str, prefix: str = '') -> str:
+    return connect(path, decider_textstyle.PROCESS, 'toc_user', prefix)

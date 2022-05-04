@@ -49,6 +49,7 @@ if __name__ == "__main__":
             'decider_textstyle.features',
             'decider_textstyle.headlines',
             'decider_textstyle.text',
+            'decider_textstyle.toc',
         ],
         entry_points={
             'console_scripts': [
