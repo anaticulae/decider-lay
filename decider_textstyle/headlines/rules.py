@@ -30,8 +30,10 @@ verwenden Sie einen **manuellen Seitenumbruch**.
 
 
 def check_7540_chapter_on_new_page(linter: callable, driver):
-    headlines = utila.flatten(driver.headlines)
-    headlines = [headline for headline in headlines if headline.level == 1]
+    headlines = [
+        headline for headline in utila.iflat(driver.headlines)
+        if headline.level == 1
+    ]
     for headline in headlines:
         start = utila.cstart(headline.container)
         if start == 0:  # pylint:disable=C2001
