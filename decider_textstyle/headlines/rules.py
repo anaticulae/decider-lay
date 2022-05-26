@@ -7,8 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import iamraw
 import utila
+
+import decider_textstyle.utils
 
 SOLUTION_7540 = """\
 Kapitel beginnt nicht auf neuer Seite
@@ -44,11 +45,13 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
         if headline.decoration is not None:
             # Chapter-X-Pattern is detected before headline start
             continue
-        containero = utila.crange(headline.container)
-        location = iamraw.RangedLocation(
+        navigator = utila.select_page(
+            driver.navigators,
             page=headline.page,
-            line=containero[0],
-            line_end=containero[-1],
+        )
+        location = decider_textstyle.utils.box_fromrange(
+            crange=headline.container,
+            navigator=navigator,
         )
         linter(
             location=location,
