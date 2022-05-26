@@ -11,8 +11,6 @@ import configo
 import iamraw
 import utila
 
-import decider_textstyle.headlines.utils
-
 HEADLINE_WIDTH_LENGTH_MIN = configo.HV_PERCENT_PLUS(default=70)
 
 SOLUTION_7560 = """\
@@ -30,8 +28,7 @@ def check_7560_split_headline(linter: callable, driver):
     headlines = utila.flatten(driver.headlines)
     navigators = driver.navigators
     for headline in headlines:
-        containero = decider_textstyle.headlines.utils.containers(
-            headline.container)
+        containero = utila.crange(headline.container)
         navigator = utila.select_page(navigators, headline.page)
         location = iamraw.RangedLocation(
             page=headline.page,

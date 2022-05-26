@@ -319,8 +319,7 @@ def validate_headline_size(
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
-        containero = decider_textstyle.headlines.utils.containers(
-            headline.container)
+        containero = utila.crange(headline.container)
         navigator = utila.select_page(navigators, headline.page)
         try:
             lines_selected = [navigator[index] for index in containero]
@@ -384,8 +383,7 @@ def validate_headlines_family(
 
 
 def validate_headline_family(headline, navigators, fontstore, expected_family):  # pylint:disable=R0914
-    containero = decider_textstyle.headlines.utils.containers(
-        headline.container)
+    containero = utila.crange(headline.container)
     navigator = utila.select_page(navigators, headline.page)
     try:
         lines_selected = [navigator[index] for index in containero]
@@ -429,8 +427,7 @@ def validate_headline_distance(  # pylint:disable=R1260
     flats = utila.flatten(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
-        containero = decider_textstyle.headlines.utils.containers(
-            headline.container)
+        containero = utila.crange(headline.container)
         navigator = utila.select_page(navigators, headline.page)
         distances = doctextstyle.parser.textdistances(navigator)
         if check_before:

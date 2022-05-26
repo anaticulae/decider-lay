@@ -7,23 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import contextlib
-
 import iamraw
 import texmex
 import utila
-
-
-def container_start(item):
-    with contextlib.suppress(TypeError):
-        return item[0]
-    return item
-
-
-def containers(item) -> tuple:
-    with contextlib.suppress(TypeError):
-        return tuple(range(item[0], item[1] + 1))
-    return (item,)
 
 
 def container_textsizes(items):
@@ -73,7 +59,7 @@ def textfamily(
 
 
 def headline_location(headline, chars: list = None) -> iamraw.RangedLocation:
-    containero = containers(headline.container)
+    containero = utila.crange(headline.container)
     # TODO: REPLACE TOKEN WITH CHAR
     location = iamraw.RangedLocation(
         page=headline.page,

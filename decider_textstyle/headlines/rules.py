@@ -10,8 +10,6 @@
 import iamraw
 import utila
 
-import decider_textstyle.headlines.utils
-
 SOLUTION_7540 = """\
 Kapitel beginnt nicht auf neuer Seite
 
@@ -35,8 +33,7 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
     headlines = utila.flatten(driver.headlines)
     headlines = [headline for headline in headlines if headline.level == 1]
     for headline in headlines:
-        start = decider_textstyle.headlines.utils.container_start(
-            headline.container)
+        start = utila.cstart(headline.container)
         if start == 0:  # pylint:disable=C2001
             # chapter starts at page begin
             # TODO: CHECK FOR HEADER OR PAGE NUMBER BEFORE HEADLINE? MAY
@@ -45,8 +42,7 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
         if headline.decoration is not None:
             # Chapter-X-Pattern is detected before headline start
             continue
-        containero = decider_textstyle.headlines.utils.containers(
-            headline.container)
+        containero = utila.crange(headline.container)
         location = iamraw.RangedLocation(
             page=headline.page,
             line=containero[0],
