@@ -91,3 +91,15 @@ def box_fromrange(
         page=navigator.page,
     )
     return result
+
+
+def box_fromheadline(headline, navigators) -> iamraw.BoundingLocation:
+    navigator = utila.select_page(
+        navigators,
+        page=headline.page,
+    )
+    location = box_fromrange(
+        crange=headline.container,
+        navigator=navigator,
+    )
+    return location

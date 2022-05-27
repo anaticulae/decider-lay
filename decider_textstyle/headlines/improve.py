@@ -8,8 +8,9 @@
 # =============================================================================
 
 import configo
-import iamraw
 import utila
+
+import decider_textstyle.utils
 
 HEADLINE_WIDTH_LENGTH_MIN = configo.HV_PERCENT_PLUS(default=70)
 
@@ -26,26 +27,24 @@ def check_7560_split_headline(linter: callable, driver):
         utila.error('improve: require document style; skip')
         return
     headlines = utila.flatten(driver.headlines)
-    navigators = driver.navigators
     for headline in headlines:
         containero = utila.crange(headline.container)
-        navigator = utila.select_page(navigators, headline.page)
-        location = iamraw.RangedLocation(
-            page=headline.page,
-            line=containero[0],
-            line_end=containero[-1],
-        )
-        if location.line == location.line_end:
+        if len(containero) == 1:
             # single headline
             continue
+        navigator = utila.select_page(driver.navigators, headline.page)
         # TODO: SUPPORT ROTATED PAGES
         min_pagewidth = driver.style.page_width * HEADLINE_WIDTH_LENGTH_MIN
-        text = navigator[location.line:location.line_end]
-        width = [item.bounding[2] - item.bounding[0] for item in text]
+        text = navigator[containero[0]:containero[-1]]
+        width = [utila.rect_width(item.bounding) for item in text]
         width = [item for item in width if item < min_pagewidth]
         if not width:
             # no width length error
             continue
+        location = decider_textstyle.utils.box_fromheadline(
+            headline,
+            driver.navigators,
+        )
         linter(
             location=location,
             chapter=headline.title,
