@@ -79,7 +79,10 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
     return flat
 
 
-def box_fromrange(crange: tuple, navigator) -> iamraw.BoundingLocation:
+def box_fromrange(
+    crange: tuple,
+    navigator: texmex.NavigatorMixin,
+) -> iamraw.BoundingLocation:
     selected = [navigator[index] for index in utila.crange(crange)]
     boundings = [item.bounding for item in selected]
     rectangle = utila.rect_max(boundings)
