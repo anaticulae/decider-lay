@@ -51,7 +51,9 @@ def require_split(headline, navigators, style) -> bool:
         # single headline
         return False
     navigator = utila.select_page(navigators, headline.page)
-    # TODO: SUPPORT ROTATED PAGES
+    if navigator.rotated:
+        # TODO: SUPPORT ROTATED PAGES
+        return False
     pagewidth_min = style.page_width * HEADLINE_WIDTH_LENGTH_MIN
     text = navigator[containero[0]:containero[-1]]
     width = [utila.rect_width(item.bounding) for item in text]
