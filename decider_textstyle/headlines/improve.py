@@ -29,18 +29,11 @@ def check_7560_split_headline(linter: callable, driver):
         return
     headlines = utila.flatten(driver.headlines)
     for headline in headlines:
-        containero = utila.crange(headline.container)
-        if len(containero) == 1:
-            # single headline
-            continue
-        navigator = utila.select_page(driver.navigators, headline.page)
-        # TODO: SUPPORT ROTATED PAGES
-        min_pagewidth = driver.style.page_width * HEADLINE_WIDTH_LENGTH_MIN
-        text = navigator[containero[0]:containero[-1]]
-        width = [utila.rect_width(item.bounding) for item in text]
-        width = [item for item in width if item < min_pagewidth]
-        if not width:
-            # no width length error
+        if not require_split(
+                headline,
+                navigators=driver.navigators,
+                style=driver.style,
+        ):
             continue
         location = decider_textstyle.utils.box_fromheadline(
             headline,
@@ -50,3 +43,20 @@ def check_7560_split_headline(linter: callable, driver):
             location=location,
             chapter=headline.title,
         )
+
+
+def require_split(headline, navigators, style) -> bool:
+    containero = utila.crange(headline.container)
+    if len(containero) == 1:
+        # single headline
+        return False
+    navigator = utila.select_page(navigators, headline.page)
+    # TODO: SUPPORT ROTATED PAGES
+    pagewidth_min = style.page_width * HEADLINE_WIDTH_LENGTH_MIN
+    text = navigator[containero[0]:containero[-1]]
+    width = [utila.rect_width(item.bounding) for item in text]
+    width = [item for item in width if item < pagewidth_min]
+    if width:
+        return True
+    # no width length error
+    return False
