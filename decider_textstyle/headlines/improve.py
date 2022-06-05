@@ -8,6 +8,7 @@
 # =============================================================================
 
 import configo
+import protocol
 import utila
 
 import decider_textstyle.utils
@@ -24,7 +25,7 @@ Teilen Sie die Überschrift um ein besseres Layout zu erreichen.
 def check_7560_split_headline(linter: callable, driver):
     # TODO: CHANGE TYPE FROM ERROR TO STLYE HINT?
     if not driver.style:
-        utila.error('improve: require document style; skip')
+        protocol.skip_method('improve: require document style')
         return
     headlines = utila.flatten(driver.headlines)
     for headline in headlines:
