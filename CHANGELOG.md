@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v0.11.0
+
+### Feature
+
+* use bounding as rectangle result (677625aa857c)
+* add bounding to finding result (7a25490b7f80)
+
+### Fix
+
+* do not detect headline split on rotated page (ecf1f16f3a67)
+
+### Documentation
+
+* extend interface documentation (9af71b9726e3)
+
 ## v0.10.3
 
 ### Feature
