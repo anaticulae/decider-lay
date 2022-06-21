@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.11.1
+
+### Feature
+
+* use new headlines data (c376ed351040)
+
+### Fix
+
+* do not fail on crange error (390fa89d80a4)
+
 ## v0.11.0
 
 ### Feature
