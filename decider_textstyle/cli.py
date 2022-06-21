@@ -19,7 +19,7 @@ WORKPLAN = [
         'headlines',
         inputs=[
             utila.ResultFile('doctextstyle', 'textstyle'),
-            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('headlines', 'result_result'),
             utila.ResultFile('rawmaker', 'oneline_text_text'),
             utila.ResultFile('rawmaker', 'oneline_text_positions'),
             utila.ResultFile('rawmaker', 'oneline_fonts_header'),
@@ -33,7 +33,7 @@ WORKPLAN = [
         'text',
         inputs=[
             utila.ResultFile('doctextstyle', 'textstyle'),
-            utila.ResultFile('words', 'headlines_headlines'),
+            utila.ResultFile('headlines', 'result_result'),
             utila.ResultFile('rawmaker', 'oneline_text_text'),
             utila.ResultFile('rawmaker', 'oneline_text_positions'),
             utila.ResultFile('rawmaker', 'border_pages'),
