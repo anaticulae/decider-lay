@@ -83,7 +83,13 @@ def box_fromrange(
     crange: tuple,
     navigator: texmex.NavigatorMixin,
 ) -> iamraw.BoundingLocation:
-    selected = [navigator[index] for index in utila.crange(crange)]
+    try:
+        selected = [navigator[index] for index in utila.crange(crange)]
+    except IndexError:
+        selected = None
+    if not selected:
+        utila.error(f'crange errror: {crange} on page: {navigator.page}')
+        return iamraw.Location.from_page(page=navigator.page)
     boundings = [item.bounding for item in selected]
     rectangle = utila.rect_max(boundings)
     result = iamraw.BoundingLocation.fromtuple(
