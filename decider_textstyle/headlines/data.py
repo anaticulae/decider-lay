@@ -9,6 +9,7 @@
 
 import protocol
 import serializeraw
+import utila
 
 
 def load_driver(
@@ -24,7 +25,15 @@ def load_driver(
 ):
     expected = serializeraw.load_doctextstyle(textstyle)
     headlines = serializeraw.load_headlines(headlines, pages=pages)
-
+    if headlines:
+        for group in headlines.groups:
+            for headline in group.headlines:
+                if headline.page == -1:
+                    utila.error(f'remove invalid headline: {headline}')
+            # remove none page adjusted headlines
+            group.headlines = [
+                item for item in group.headlines if item.page >= 0
+            ]
     fontstore = serializeraw.create_fontstore(
         fontheader,
         fontcontent,
@@ -39,7 +48,6 @@ def load_driver(
         fontcontent,
         pages=pages,
     )
-
     data = protocol.driver(
         navigators=navigators,
         fontstore=fontstore,
