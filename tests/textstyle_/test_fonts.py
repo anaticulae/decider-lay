@@ -15,35 +15,35 @@ import decider_textstyle.path
 import tests.textstyle_
 
 
-def decide_text_fonts(source, testdir, monkeypatch, msgids: str = None):
+def decide_text_fonts(source, td, mp, msgids: str = None):
     utilatest.fixture_requires(source)
     source = power.link(source)
     tests.textstyle_.run(
-        f'--fonts -i {testdir.tmpdir} -i {source}',
-        monkeypatch=monkeypatch,
+        f'--fonts -i {td.tmpdir} -i {source}',
+        mp=mp,
     )
-    path = decider_textstyle.path.fonts(testdir.tmpdir)
+    path = decider_textstyle.path.fonts(td.tmpdir)
     findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 
-def test_decider_fonts_diss266_text_distance_invalid(testdir, monkeypatch):
+def test_decider_fonts_diss266_text_distance_invalid(td, mp):
     source = power.DISS266_PDF
     findings = decide_text_fonts(
         source,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=7581,
     )
     assert len(findings) == 1
 
 
-def test_decider_fonts_master072_text_distance_valid(testdir, monkeypatch):
+def test_decider_fonts_master072_text_distance_valid(td, mp):
     source = power.MASTER072_PDF
     findings = decide_text_fonts(
         source,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=7581,
     )
     assert findings

@@ -16,7 +16,7 @@ import tests.textstyle_
 
 
 @utilatest.requires(power.HOME025_PDF)
-def test_headline_size_validation_page4(testdir, monkeypatch):
+def test_headline_size_validation_page4(td, mp):
     """Verify that extracted headline container line to text line.
 
     If the mapping is wrong, the wrong text size is selected and an
@@ -24,7 +24,7 @@ def test_headline_size_validation_page4(testdir, monkeypatch):
     """
     source = power.link(power.HOME025_PDF)
     cmd = f'-i {source}  --headlines --pages=4'
-    tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    tests.textstyle_.run(cmd, mp=mp)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     loaded = serializeraw.load_findings(path, msgids={7500, 7510, 7520})
     assert not loaded

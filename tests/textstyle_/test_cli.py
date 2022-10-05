@@ -13,11 +13,11 @@ import utilatest
 import tests.textstyle_
 
 
-def test_decider_textstyle_cli_help(monkeypatch):
-    tests.textstyle_.run('--help', monkeypatch=monkeypatch)
+def test_decider_textstyle_cli_help(mp):
+    tests.textstyle_.run('--help', mp=mp)
 
 
 @utilatest.nightly
-def test_decider_textstyle_master72(testdir, monkeypatch):
+def test_decider_textstyle_master72(td, mp):  # pylint:disable=W0613
     source = power.link(power.MASTER072_PDF)
-    tests.textstyle_.run(f'-i {source}', monkeypatch=monkeypatch)
+    tests.textstyle_.run(f'-i {source}', mp=mp)

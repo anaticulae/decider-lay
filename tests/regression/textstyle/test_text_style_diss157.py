@@ -18,11 +18,11 @@ import tests.textstyle_
 @pytest.mark.xfail(
     reason='improve algo leads to fewer findings which are not disabled anymore.'
 )
-def test_textstyle_diss157_disable_huge_finding_count(testdir, monkeypatch):
+def test_textstyle_diss157_disable_huge_finding_count(td, mp):
     source = power.link(power.DISS157_PDF)
     cmd = f'-i {source}  --text --pages=70:80'
-    tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
-    path = decider_textstyle.path.text(testdir.tmpdir)
+    tests.textstyle_.run(cmd, mp=mp)
+    path = decider_textstyle.path.text(td.tmpdir)
     findings = serializeraw.load_findings(
         path,
         pages=77,

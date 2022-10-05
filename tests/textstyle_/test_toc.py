@@ -16,25 +16,25 @@ import decider_textstyle.path
 import tests.textstyle_
 
 
-def decide_text_toc(source, testdir, monkeypatch, msgids: str = None):
+def decide_text_toc(source, td, mp, msgids: str = None):
     utilatest.fixture_requires(source)
     source = power.link(source)
     tests.textstyle_.run(
-        f'--toc -i {testdir.tmpdir} -i {source}',
-        monkeypatch=monkeypatch,
+        f'--toc -i {td.tmpdir} -i {source}',
+        mp=mp,
     )
-    path = decider_textstyle.path.toc(testdir.tmpdir)
+    path = decider_textstyle.path.toc(td.tmpdir)
     findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 
 @pytest.mark.xfail(reason='incomplete impl.')
-def test_decider_toc_bachelor32p1(testdir, monkeypatch):
+def test_decider_toc_bachelor32p1(td, mp):
     source = power.BACHELOR032_PDF
     findings = decide_text_toc(
         source,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
     )
     assert findings
     # assert 0

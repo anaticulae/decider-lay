@@ -16,13 +16,13 @@ import tests.textstyle_
 
 
 @utilatest.requires(power.MASTER098_PDF)
-def test_textsize_in_table_page55(testdir, monkeypatch):
+def test_textsize_in_table_page55(td, mp):
     """Verify that normal text size check does not run in table data."""
     # TODO: ADD TABLE CONTENT STYLE CHECKER
     source = power.link(power.MASTER098_PDF)
     cmd = f'-i {source}  --text --pages=51:55'
-    tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
-    path = decider_textstyle.path.text(testdir.tmpdir)
+    tests.textstyle_.run(cmd, mp=mp)
+    path = decider_textstyle.path.text(td.tmpdir)
     loaded = serializeraw.load_findings(path, msgids={7550})
     loaded = [item for item in loaded if item.location.page == 54]
     assert not loaded

@@ -23,12 +23,12 @@ import tests.border_
 @pytest.mark.parametrize('source', [
     pytest.param(power.TECH024_PDF, id='tech024'),
 ])
-def test_border_cli_decider_simple(source, testdir, monkeypatch):
-    root = testdir.tmpdir
-    detected = tests.border_.extract_border_hits(root, source, monkeypatch)
+def test_border_cli_decider_simple(source, td, mp):
+    root = td.tmpdir
+    detected = tests.border_.extract_border_hits(root, source, mp)
     assert detected
     loaded = serializeraw.load_findings(
-        decider_border.path.border_user(testdir.tmpdir))
+        decider_border.path.border_user(td.tmpdir))
     assert loaded
 
 
@@ -40,16 +40,16 @@ def test_border_cli_decider_simple(source, testdir, monkeypatch):
 def test_border_cli_decider_list(
     source,
     validate,
-    testdir,
-    monkeypatch,
+    td,
+    mp,
 ):  # pylint:disable=W0621
     """Run `border` to extract common BoundingBox and check pages
     against this common box."""
-    with patch_zero_border_tolerance(monkeypatch):
+    with patch_zero_border_tolerance(mp):
         detected_hits = tests.border_.extract_border_hits(
-            testdir.tmpdir,
+            td.tmpdir,
             source,
-            monkeypatch,
+            mp,
         )
     assert detected_hits
     # validated
@@ -57,7 +57,7 @@ def test_border_cli_decider_list(
         f'expected hits: {validate}\ncurrent: {len(detected_hits)}\n'
         f'hits: {detected_hits}')
     loaded = serializeraw.load_findings(
-        decider_border.path.border_user(testdir.tmpdir))
+        decider_border.path.border_user(td.tmpdir))
     assert loaded
 
 
@@ -81,22 +81,22 @@ def validate_leftright(hits):
 def test_border_cli_decider_complex_validation(
     source,
     validate,
-    testdir,
-    monkeypatch,
+    td,
+    mp,
 ):  # pylint:disable=W0621
     """Ensure to run border detection and load linter result later."""
-    root = testdir.tmpdir
-    with patch_zero_border_tolerance(monkeypatch):
-        detected = tests.border_.extract_border_hits(root, source, monkeypatch)
+    root = td.tmpdir
+    with patch_zero_border_tolerance(mp):
+        detected = tests.border_.extract_border_hits(root, source, mp)
     validate(detected)
     loaded = serializeraw.load_findings(
-        decider_border.path.border_user(testdir.tmpdir))
+        decider_border.path.border_user(td.tmpdir))
     assert loaded
 
 
 @contextlib.contextmanager
-def patch_zero_border_tolerance(monkeypatch):
-    with monkeypatch.context() as context:
+def patch_zero_border_tolerance(mp):
+    with mp.context() as context:
         context.setattr(decider_border.detection.hits, 'BORDER_LEFT', 0)
         context.setattr(decider_border.detection.hits, 'BORDER_RIGHT', 0)
         context.setattr(decider_border.detection.hits, 'BORDER_TOP', 0)
@@ -104,28 +104,28 @@ def patch_zero_border_tolerance(monkeypatch):
         yield
 
 
-def test_border_included_pdf_page_as_image(testdir, monkeypatch):
+def test_border_included_pdf_page_as_image(td, mp):
     """Do not detect included pdf pages as bounding error."""
     source = power.MASTER116_PDF
-    root = testdir.tmpdir
+    root = td.tmpdir
     extracted = tests.border_.extract_border_hits(
         root,
         source,
-        monkeypatch=monkeypatch,
+        mp=mp,
         pages='2',
     )
     hits = utila.select_page(extracted, page=2).hits
     assert not hits
 
 
-def test_border_whitespace_only(testdir, monkeypatch):
+def test_border_whitespace_only(td, mp):
     """Do not detect included pdf pages as bounding error."""
     source = power.BACHELOR076_PDF
-    root = testdir.tmpdir
+    root = td.tmpdir
     extracted = tests.border_.extract_border_hits(
         root,
         source,
-        monkeypatch=monkeypatch,
+        mp=mp,
         pages='0',
     )
     hits = utila.select_page(extracted, page=0).hits

@@ -17,7 +17,7 @@ import tests.textstyle_
 
 @utilatest.longrun
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_font_family_bachelor90_page13(testdir, monkeypatch):
+def test_font_family_bachelor90_page13(td, mp):
     """This is a regression test for false detected level 2 headline
     style judging.
 
@@ -27,7 +27,7 @@ def test_font_family_bachelor90_page13(testdir, monkeypatch):
     """
     source = power.link(power.BACHELOR090_PDF)
     cmd = f'-i {source}  --headlines --pages=13'
-    tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    tests.textstyle_.run(cmd, mp=mp)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     loaded = serializeraw.load_findings(path, msgids={7511})
     assert not loaded

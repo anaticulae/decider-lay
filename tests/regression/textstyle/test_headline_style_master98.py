@@ -17,7 +17,7 @@ import tests.textstyle_
 
 
 @utilatest.requires(power.MASTER098_PDF)
-def test_headline_font_family_validation_page6(testdir, monkeypatch):
+def test_headline_font_family_validation_page6(td, mp):
     """The headline text is formatted in Times New Roman.
 
     The whitespace between text and number is formatted in Arial. In
@@ -26,39 +26,39 @@ def test_headline_font_family_validation_page6(testdir, monkeypatch):
     """
     source = power.link(power.MASTER098_PDF)
     cmd = f'-i {source}  --headlines --pages=6'
-    tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    tests.textstyle_.run(cmd, mp=mp)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     loaded = serializeraw.load_findings(path, msgids={7501})
     assert not loaded
 
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         # run linter in ``expert`` mode
         context.setattr(
             decider_textstyle.headlines.style,
             'WHITESPACE_LINTING',
             True,
         )
-        tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
+        tests.textstyle_.run(cmd, mp=mp)
     loaded = serializeraw.load_findings(path, msgids={7501})
     assert len(loaded) == 1
 
 
 @utilatest.requires(power.MASTER098_PDF)
-def test_headline_font_family_char_marker(testdir, monkeypatch):
+def test_headline_font_family_char_marker(td, mp):
     """Ensure that linting is marked to wrong character and not to the
     whole line."""
     source = power.link(power.MASTER098_PDF)
     cmd = f'-i {source}  --headlines --pages=6'
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    path = decider_textstyle.path.headlines(td.tmpdir)
 
-    with monkeypatch.context() as context:
+    with mp.context() as context:
         # run linter in ``expert`` mode
         context.setattr(
             decider_textstyle.headlines.style,
             'WHITESPACE_LINTING',
             True,
         )
-        tests.textstyle_.run(cmd, monkeypatch=monkeypatch)
+        tests.textstyle_.run(cmd, mp=mp)
 
     # Analyze linter result
     loaded = serializeraw.load_findings(path, msgids={7501})

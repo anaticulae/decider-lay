@@ -23,33 +23,33 @@ NO_STYLE = iamraw.DocTextStyle()
 def decide_text_style(
     source,
     pages,
-    testdir,
-    monkeypatch,
+    td,
+    mp,
     style=None,
     msgids=None,
 ):
     utilatest.fixture_requires(source)
     source = power.link(source)
     if style:
-        tests.textstyle_.write_docstyle(style, testdir.tmpdir)
+        tests.textstyle_.write_docstyle(style, td.tmpdir)
     tests.textstyle_.run(
-        f'--text -i {testdir.tmpdir} -i {source} --pages={pages}',
-        monkeypatch=monkeypatch,
+        f'--text -i {td.tmpdir} -i {source} --pages={pages}',
+        mp=mp,
     )
-    path = decider_textstyle.path.text(testdir.tmpdir)
+    path = decider_textstyle.path.text(td.tmpdir)
     findings = serializeraw.load_findings(path, msgids=msgids)
     return findings
 
 
 @utilatest.nightly
-def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
+def test_decider_text_master72_2_20_fontsize(td, mp):
     style = iamraw.DocTextStyle(text_size=12.0)
     pages = '2:20'
     findings = decide_text_style(
         power.MASTER072_PDF,
         pages,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         style,
     )
     # no text family error, cause only whitespace error is detected
@@ -59,15 +59,15 @@ def test_decider_text_master72_2_20_fontsize(testdir, monkeypatch):
 
 
 @utilatest.longrun
-def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
+def test_decider_text_master72_2_10_fontfamily(td, mp):
     # Hint: adjust text_family after text parser change
     style = iamraw.DocTextStyle(text_family=-1702503278)
     pages = '2:10'
     findings = decide_text_style(
         power.MASTER072_PDF,
         pages,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         style,
     )
     # not correct, but indicates that algo changed
@@ -75,13 +75,13 @@ def test_decider_text_master72_2_10_fontfamily(testdir, monkeypatch):
 
 
 @utilatest.longrun
-def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
+def test_decider_text_bachelor76_4_10_bold_font(td, mp):
     pages = '2:10'
     findings = decide_text_style(
         power.BACHELOR076_PDF,
         pages,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         NO_STYLE,
     )
     # five words marked bold
@@ -90,20 +90,20 @@ def test_decider_text_bachelor76_4_10_bold_font(testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='long time broken, don\'t know why')
 @utilatest.nightly
-def test_decider_textstyle_merge_connected_findings(testdir, monkeypatch):
+def test_decider_textstyle_merge_connected_findings(td, mp):
     """Merge more than one line with the same finding into a single finding."""
     pages = '18:22'
     findings = decide_text_style(
         power.MASTER072_PDF,
         pages,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=7550,
     )
     assert len(findings) == 1, len(findings)
 
 
-def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
+def test_textstyle_warning_in_wordfigure_bachelor51_pag30(td, mp):
     """Regression test that figure text is not detected as text style error.
 
     This was an error cause figure was not extracted correctly and
@@ -114,8 +114,8 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
     findings = decide_text_style(
         power.BACHELOR051_PDF,
         pages,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids=7550,
     )
     # select page 30
@@ -124,14 +124,14 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='bad formula parser')
-def test_textstyle_master110_page29(testdir, monkeypatch):
+def test_textstyle_master110_page29(td, mp):
     """Investigate text style errors, especially in connection with formulas."""
     pages = '20:30'
     findings = decide_text_style(
         power.MASTER110_PDF,
         pages,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         msgids={7550, 7551},
     )
     # select page 29

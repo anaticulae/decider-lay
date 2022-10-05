@@ -38,30 +38,30 @@ BACHELOR_76_DOCSTYLE = iamraw.DocTextStyle(
 NO_STYLE = iamraw.DocTextStyle()
 
 
-def decide_headline_style(source, pages, style, testdir, monkeypatch):
+def decide_headline_style(source, pages, style, td, mp):
     utilatest.fixture_requires(source)
     source = power.link(source)
-    tests.textstyle_.write_docstyle(style, testdir.tmpdir)
+    tests.textstyle_.write_docstyle(style, td.tmpdir)
     tests.textstyle_.run(
-        f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
-        monkeypatch=monkeypatch,
+        f'--headlines -i {td.tmpdir} -i {source} --pages={pages}',
+        mp=mp,
     )
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     findings = serializeraw.load_findings(path)
     return findings
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.nightly
-def test_decider_headlines_master72_2_20_fontsize(testdir, monkeypatch):
+def test_decider_headlines_master72_2_20_fontsize(td, mp):
     source = power.MASTER072_PDF
     pages = '2:20'
     findings = decide_headline_style(
         source,
         pages,
         MASTER_72_DOCSTYLE,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
     )
     # no font size error
     assert not protocol.count_findings(findings, 7500)
@@ -72,22 +72,22 @@ def test_decider_headlines_master72_2_20_fontsize(testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='failing magic/list parer')
 @utilatest.nightly
-def test_decider_headlines_master72_all(testdir, monkeypatch):
+def test_decider_headlines_master72_all(td, mp):
     source = power.MASTER072_PDF
     pages = '3:65'
     findings = decide_headline_style(
         source,
         pages,
         MASTER_72_DOCSTYLE,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
     )
     # no font size error
     assert not findings
 
 
 @utilatest.longrun
-def test_decider_headlines_bachelor76(testdir, monkeypatch):
+def test_decider_headlines_bachelor76(td, mp):
     # TODO: EXTEND THIS TESTS, specify expected findings
     source = power.BACHELOR076_PDF
     pages = '4:67'
@@ -95,8 +95,8 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
         source,
         pages,
         BACHELOR_76_DOCSTYLE,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
     )
     # TODO: IMPROVE HEADLINE EXTRACTOR
     expected = (31, 32)  # not correct, but indicates that algo changed
@@ -105,37 +105,37 @@ def test_decider_headlines_bachelor76(testdir, monkeypatch):
 
 
 @utilatest.longrun
-def test_decider_headlines_chapter_on_new_page(testdir, monkeypatch):
+def test_decider_headlines_chapter_on_new_page(td, mp):
     source = power.BACHELOR076_PDF
     pages = '0:42'
     findings = decide_headline_style(
         source,
         pages,
         NO_STYLE,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
     )
     no_new_page_start = protocol.select_findings(findings, 7540)
     assert len(no_new_page_start) == 2, str(no_new_page_start)
 
 
 @utilatest.longrun
-def test_chapter_on_new_page_with_decoration(testdir, monkeypatch):
+def test_chapter_on_new_page_with_decoration(td, mp):
     source = power.MASTER110_PDF
     pages = '18:20'
     findings = decide_headline_style(
         source,
         pages,
         NO_STYLE,
-        testdir,
-        monkeypatch,
+        td,
+        mp,
     )
     new_chapter_page_start_error = protocol.select_findings(findings, 7540)
     assert not new_chapter_page_start_error
 
 
 @utilatest.requires(power.BACHELOR063_PDF)
-def test_headlines_bachelor63_page17(testdir, monkeypatch):
+def test_headlines_bachelor63_page17(td, mp):
     """Do not parse font size error for white spaces in first level headlines.
 
     Regression test after fixing docstyle extractor.
@@ -143,35 +143,35 @@ def test_headlines_bachelor63_page17(testdir, monkeypatch):
     source = power.link(power.BACHELOR063_PDF)
     pages = 17
     tests.textstyle_.run(
-        f'--headlines -i {testdir.tmpdir} -i {source} --pages={pages}',
-        monkeypatch=monkeypatch,
+        f'--headlines -i {td.tmpdir} -i {source} --pages={pages}',
+        mp=mp,
     )
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     findings = serializeraw.load_findings(path, msgids={7500, 7510, 7520})
     assert not findings
 
 
 @utilatest.longrun
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_headlines_bachelor90_page17_divide_headline(testdir, monkeypatch):
+def test_headlines_bachelor90_page17_divide_headline(td, mp):
     source = power.link(power.BACHELOR090_PDF)
     tests.textstyle_.run(
-        f'--headlines -i {testdir.tmpdir} -i {source} --pages=17',
-        monkeypatch=monkeypatch,
+        f'--headlines -i {td.tmpdir} -i {source} --pages=17',
+        mp=mp,
     )
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     findings = serializeraw.load_findings(path, msgids={7560})
     assert findings
 
 
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_headlines_bachelor90_all_divide_headline(testdir, monkeypatch):
+def test_headlines_bachelor90_all_divide_headline(td, mp):
     source = power.link(power.BACHELOR090_PDF)
     tests.textstyle_.run(
-        f'--headlines -i {testdir.tmpdir} -i {source}',
-        monkeypatch=monkeypatch,
+        f'--headlines -i {td.tmpdir} -i {source}',
+        mp=mp,
     )
-    path = decider_textstyle.path.headlines(testdir.tmpdir)
+    path = decider_textstyle.path.headlines(td.tmpdir)
     findings = serializeraw.load_findings(path, msgids={7560})
     pages = [finding.location.page for finding in findings]
     assert pages == [15, 17, 64]
