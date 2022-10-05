@@ -57,11 +57,8 @@ def extract(resources):
     print_resources(resources)
     genex.extract(
         files=resources,
-        destination=power.generated(),
         full=True,
         worker=WORKER,
-        base=power.REPOSITORY,
-        pages=':',
     )
 
 
