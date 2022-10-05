@@ -11,6 +11,7 @@ import genex
 import power
 import pytest
 import utila
+import utilatest
 import writers
 
 import decider_lay
@@ -18,8 +19,6 @@ import decider_lay
 PACKAGE = decider_lay.PACKAGE
 
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
-
-WORKER = 6
 
 RESOURCES = [
     (power.BACHELOR032_PDF, '0:10'),
@@ -46,6 +45,7 @@ RESOURCES = [
     power.HOME025_PDF,
     power.MASTER072_PDF,
 ]
+WORKER = utilatest.worker_count(6, onci=len(RESOURCES))
 
 
 @pytest.mark.usefixtures('session')
