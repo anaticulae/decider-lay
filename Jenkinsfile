@@ -38,6 +38,11 @@ pipeline{
                 sh 'baw lint'
             }
         }
+        stage('generate'){
+            steps{
+                sh 'baw test skip --generate'
+            }
+        }
         stage('all'){
             steps{
                 sh 'baw test all -n16 --cov --junit_xml=report.xml'
