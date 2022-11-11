@@ -8,7 +8,6 @@
 # =============================================================================
 
 import power
-import pytest
 import serializeraw
 import utilatest
 
@@ -16,7 +15,6 @@ import decider_textstyle
 import tests.textstyle_
 
 
-@pytest.mark.xfail(reason='???')
 @utilatest.longrun
 @utilatest.requires(power.MASTER116_PDF)
 def test_textstyle_formula_master116_page22(td, mp):
