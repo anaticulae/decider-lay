@@ -69,7 +69,7 @@ def validate_leftright(hits):
     # TODO: reduce after extracting symbol as one
     expected_hits.extend([0] * 16)
 
-    hits = utila.flatten(item.hits for item in hits)
+    hits = utila.flat(item.hits for item in hits)
     assert len(hits) >= len(expected_hits), (
         f'expected hits: {expected_hits}\n current: {len(hits)}\n')
 

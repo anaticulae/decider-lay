@@ -51,7 +51,7 @@ def tocpages(toc: str, pages: str):
     if not toc:
         return False
     toc: list = utila.flat(toc)
-    toc_pages = utila.make_unique(item.raw_location for item in toc)
+    toc_pages = utila.unique(item.raw_location for item in toc)
     result = tuple(item for item in toc_pages if not utila.should_skip(
         page=item,
         pages=pages,

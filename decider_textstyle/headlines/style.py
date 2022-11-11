@@ -316,7 +316,7 @@ def validate_headline_size(
     level,
     expected_size,
 ):
-    flats = utila.flatten(headlines)
+    flats = utila.flat(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
         containero = utila.crange(headline.container)
@@ -355,7 +355,7 @@ def validate_headlines_family(
     level,
     expected_family,
 ):
-    flats = utila.flatten(headlines)
+    flats = utila.flat(headlines)
     headlines = [item for item in flats if item.level == level]
     if not fontstore[expected_family]:
         utila.error(f'no expected headline family: {expected_family}')
@@ -424,7 +424,7 @@ def validate_headline_distance(  # pylint:disable=R1260
     expected_distance,
     check_before: bool = True,
 ):
-    flats = utila.flatten(headlines)
+    flats = utila.flat(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
         containero = utila.crange(headline.container)

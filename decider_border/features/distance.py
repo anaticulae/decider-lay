@@ -17,7 +17,6 @@ textual ojects(table, images, diagrams).
 """
 
 import math
-import typing
 
 import configo
 import groupme.feature.distance
@@ -34,7 +33,7 @@ def work(
     area: str,
     xdistances: str,
     pages: tuple = None,
-) -> typing.Tuple[str, str]:
+) -> tuple[str, str]:
     driver = create_driver(
         area=area,
         distances=xdistances,
@@ -71,7 +70,7 @@ Mindestabstand: {{min_distance}}
 def check_3030_text_before_to_near(linter, driver):
     for page in driver.distances:
         area = utila.select_page(driver.area, page.page)
-        bounds = utila.flatten(list(area.border.values()))
+        bounds = utila.flat(list(area.border.values()))
         for item, bounding in zip(page.content, bounds):
             location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,
@@ -102,7 +101,7 @@ Mindestabstand: {{min_distance}}
 def check_3031_text_after_to_near(linter, driver):
     for page in driver.distances:
         area = utila.select_page(driver.area, page.page)
-        bounds = utila.flatten(list(area.border.values()))
+        bounds = utila.flat(list(area.border.values()))
         for item, bounding in zip(page.content, bounds):
             location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,

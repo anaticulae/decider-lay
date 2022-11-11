@@ -39,7 +39,7 @@ def load_driver(  # pylint:disable=R0913,R0914
         fontcontent,
         pages=pages,
     )
-    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
+    navigators = serializeraw.ptcn_fromfile(
         text=text,
         textpositions=textpositions,
         sizeandborder=sizeandborders,

@@ -27,7 +27,7 @@ def check_7560_split_headline(linter: callable, driver):
     if not driver.style:
         protocol.skip_method('improve: require document style')
         return
-    headlines = utila.flatten(driver.headlines)
+    headlines = utila.flat(driver.headlines)
     for headline in headlines:
         if not require_split(
                 headline,

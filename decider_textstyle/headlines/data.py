@@ -39,7 +39,7 @@ def load_driver(
         fontcontent,
         pages=pages,
     )
-    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
+    navigators = serializeraw.ptcn_fromfile(
         text,
         textpositions,
         sizeandborders,

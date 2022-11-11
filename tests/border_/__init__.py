@@ -23,13 +23,13 @@ run = functools.partial(
     utilatest.run_command,
     main=decider_border.cli.main,
     process=decider_border.PROCESS,
-    success=True,
+    expect=True,
 )
 fail = functools.partial(
     utilatest.run_command,
     main=decider_border.cli.main,
     process=decider_border.PROCESS,
-    success=False,
+    expect=False,
 )
 
 

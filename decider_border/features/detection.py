@@ -22,8 +22,6 @@ are a lot of `hit the box` errors.
 * TODO: MARK EMPTY STRING LAYOUT ERRORS.
 """
 
-import typing
-
 import configo
 import iamraw
 import protocol
@@ -43,7 +41,7 @@ def work(
     border_leftright: str,
     pagenumbers: str,
     pages: tuple = None,
-) -> typing.Tuple[str, str, str]:
+) -> tuple[str, str, str]:
     utila.call('work: border detection')
     # create driver
     driver = create_driver(
@@ -93,7 +91,7 @@ def load_pagenumbers(pagenumbers, pages: tuple = None) -> dict:
     pagenumbers = serializeraw.load_pagenumbers(pagenumbers, pages=pages)
     if isinstance(pagenumbers, tuple):
         pagenumbers = pagenumbers[0] + pagenumbers[1]
-    result = {page.pdfpage: tuple(page.bounding) for page in pagenumbers}
+    result = {page.pdfpage: tuple(page.bounding) for page in pagenumbers}  # pylint:disable=E1101
     return result
 
 
@@ -150,7 +148,7 @@ def check_2025_multiple_bounding_error(linter, driver):
     for page in unique:
         if len(page.hits) <= MULTIPLE_BOUNDING_ERROR_COUNT:
             continue
-        bounding = utila.rectangle_max([bound for _, bound in page.hits])
+        bounding = utila.rect_max([bound for _, bound in page.hits])
         location = iamraw.BoundingLocation.fromtuple(
             bounding=bounding,
             page=page.page,

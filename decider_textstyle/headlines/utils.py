@@ -32,7 +32,7 @@ def container_textfamily(items, skip_whitespaces: bool = True):
 
 def textsizes(style: texmex.TextInfo) -> utila.Floats:
     sizes = [item.size for item in style.content]
-    sizes = utila.make_unique(sizes)
+    sizes = utila.unique(sizes)
     result = sorted(sizes)
     return result
 
@@ -52,8 +52,8 @@ def textfamily(
                 continue
         fonts.append(style.font)
         positions.append((style.start, style.end))
-    if len(utila.make_unique(fonts)) == 1:
-        fonts = utila.make_unique(fonts)
+    if len(utila.unique(fonts)) == 1:
+        fonts = utila.unique(fonts)
         positions = [(0, len(item.text))]
     return fonts, positions
 

@@ -58,7 +58,7 @@ def boxes_outside_border(
         for index, bounding in page.boundings:
             if contentbox_inside(bounding, contentbox, pagesize):
                 continue
-            if pagenumber_bounding and utila.rectangle_inside(
+            if pagenumber_bounding and utila.rect_inside(
                     first=pagenumber_bounding,
                     second=bounding,
             ):
@@ -81,7 +81,7 @@ def boxes_repeating(
     count_min = int(len(pagecontenthits) * required_ratio)
     collected = []
     for page in pagecontenthits:
-        collected.extend(utila.make_unique([item[1] for item in page.hits]))
+        collected.extend(utila.unique([item[1] for item in page.hits]))
     clustered = utila.same_area_cluster(
         collected,
         max_difference=2.5,
@@ -140,13 +140,13 @@ def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
 def contentbox_inside(bounding, contentbox, pagesize) -> bool:
     # BOUNDING:     'left, top,   right, bottom'
     # move bounding to center of page to make approach more robust
-    rounded_bounding = utila.rectangle_roundsmall(bounding)
-    if utila.rectangle_inside(contentbox, rounded_bounding):
+    rounded_bounding = utila.rect_roundsmall(bounding)
+    if utila.rect_inside(contentbox, rounded_bounding):
         # all items in the box
         return True
     if covers_completepage(bounding, pagesize):
         return True
-    if utila.rectangle_size(rounded_bounding) <= CONTENTBOX_SIZE_MAX:
+    if utila.rect_size(rounded_bounding) <= CONTENTBOX_SIZE_MAX:
         # white space pdf printer errors
         # TODO: USE THIS INFORMATION FOR EXPERT LINTING
         return True

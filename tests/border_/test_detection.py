@@ -25,7 +25,7 @@ def test_border_repeating_element(td, mp):
     source = power.link(power.BACHELOR056_PDF)
     tests.border_.run(f'-i {source}', mp=mp)
     findings = protocol.findings_from_path(td.tmpdir)
-    findings = utila.flatten([item.content for item in findings])
+    findings = utila.flat([item.content for item in findings])
     findings = protocol.select_findings(findings, 2020)
     assert len(findings) == 8  # TODO: NOT VALIDATED
 

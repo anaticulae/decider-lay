@@ -21,13 +21,13 @@ run = functools.partial(
     utilatest.run_command,
     main=decider_textstyle.cli.main,
     process=decider_textstyle.PROCESS,
-    success=True,
+    expect=True,
 )
 fail = functools.partial(
     utilatest.run_command,
     main=decider_textstyle.cli.main,
     process=decider_textstyle.PROCESS,
-    success=False,
+    expect=False,
 )
 
 

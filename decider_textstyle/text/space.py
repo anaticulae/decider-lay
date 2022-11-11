@@ -43,8 +43,8 @@ def check_7770_text_hole_simple(linter: callable, driver):
                 # skip hole checker in captions and formula
                 continue
             for space in line:
-                width = utila.rectangle_width(space)
-                height = utila.rectangle_height(space)
+                width = utila.rect_width(space)
+                height = utila.rect_height(space)
                 if width <= MAXWIDTH(height):
                     continue
                 location = iamraw.BoundingLocation.fromtuple(
@@ -98,7 +98,7 @@ def check_7771_text_hole_line(linter: callable, driver):  # pylint:disable=W0613
 
     baselinter.check_findings(unite_text_hole)
     for page, line, items in todo:
-        boundings = utila.flatten([item.location.value for item in items])
+        boundings = utila.flat([item.location.value for item in items])
         location = iamraw.BoundingLocation.fromtuple(
             bounding=tuple(boundings),
             page=page,
