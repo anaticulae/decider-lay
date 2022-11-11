@@ -18,6 +18,7 @@ def test_decider_textstyle_cli_help(mp):
 
 
 @utilatest.nightly
+@utilatest.requires(power.MASTER072_PDF)
 def test_decider_textstyle_master72(td, mp):  # pylint:disable=W0613
     source = power.link(power.MASTER072_PDF)
     tests.textstyle_.run(f'-i {source}', mp=mp)
