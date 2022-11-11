@@ -20,7 +20,7 @@ import tests.textstyle_
 def test_textstyle_formula_master116_page22(td, mp):
     """Ensure that formulas are not treated as font size errors."""
     source = power.link(power.MASTER116_PDF)
-    cmd = f'-i {source}  --text --pages=21,22'
+    cmd = f'-i {source} --text --pages=21,22'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.text(td.tmpdir)
     findings = serializeraw.load_findings(
