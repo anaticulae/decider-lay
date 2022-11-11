@@ -19,6 +19,7 @@ textual ojects(table, images, diagrams).
 import math
 
 import configo
+import groupme.feature.area
 import groupme.feature.distance
 import iamraw
 import protocol
