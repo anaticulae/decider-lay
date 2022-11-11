@@ -99,7 +99,7 @@ def test_decider_headlines_bachelor76(td, mp):
         mp,
     )
     # TODO: IMPROVE HEADLINE EXTRACTOR
-    expected = (31, 32)  # not correct, but indicates that algo changed
+    expected = (31, 32, 33)  # not correct, but indicates that algo changed
     # TODO: FILTER EXPECTED FINDINGS AND MAKE TEST MORE CONCRETE
     assert len(findings) in expected
 
