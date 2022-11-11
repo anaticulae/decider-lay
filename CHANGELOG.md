@@ -2,6 +2,21 @@
 
 Every noteable change is logged here.
 
+## v0.12.0 (2022-11-11)
+
+### Feature
+
+* use modern data source (ea67eda7fbb0)
+
+### Chore
+
+* publish resources if all fails (d77d42031057)
+* add pipe library (587b5a86a162)
+* add separate generation step (a2d0c4f581de)
+* convert nightly to all (ddd9e54d3413)
+* upgrade environment (b38676ee2cc4)
+* upgrade requirements.txt (f1ba7bbdd607)
+
 ## v0.11.1
 
 ### Feature
