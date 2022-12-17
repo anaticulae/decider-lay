@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v0.13.1 (2022-12-17)
+
+### Fix
+
+* do not run out of time on too many page hits (670d98cfffbe)
+
+### Chore
+
+* upgrade requirements.txt (ee1e006a9e19)
+* upgrade Pipeline (4bb53a795ba2)
+
 ## v0.13.0 (2022-11-11)
 
 ### Feature
