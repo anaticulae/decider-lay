@@ -78,6 +78,7 @@ def boxes_repeating(
     pagecontenthits: iamraw.PageContentHits,
     required_ratio: float = 0.6,
 ) -> set:
+    """Determine page hits on multiple pages."""
     count_min = int(len(pagecontenthits) * required_ratio)
     collected = []
     for page in pagecontenthits:

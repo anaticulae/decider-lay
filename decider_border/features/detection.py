@@ -105,18 +105,25 @@ Passen Sie die Formatierung an, so dass der Inhalt nicht mehr in den \
 Seitenrad ragt.
 """
 
+BOXES_HIT_COUNT_MAX = configo.HV_INT_PLUS(default=1000)
+
 
 def check_2020_content_inside_box(linter, driver):
     """Ensure that content fits in detected content box."""
     hits: iamraw.PageContentHits = driver.hits
     if len(driver.hits_pagenumbers) < PAGENUMBER_ERROR_MIN:
         hits.extend(driver.hits_pagenumbers)
-
+    hitcount = len(utila.flat([item[1] for item in hits]))
+    if hitcount > BOXES_HIT_COUNT_MAX:
+        # TODO: ENABLE AFTER boxes_repeating PERFORMS FASTER
+        for item in hits:
+            utila.debug(len(item[1]))
+        protocol.skip_method(f'too many box hits: {hitcount}')
+        return
     # determine multi page hits
     repeating = decider_border.detection.hits.boxes_repeating(hits)
     # remove multi page hits
     unique = decider_border.detection.hits.hits_unique(hits, repeating)
-
     for page in unique:
         if len(page.hits) > MULTIPLE_BOUNDING_ERROR_COUNT:
             # switch to 2025
@@ -140,11 +147,15 @@ Seitenrand überprüfen
 def check_2025_multiple_bounding_error(linter, driver):
     """Ensure that content fits in detected content box."""
     hits: iamraw.PageContentHits = driver.hits
+    hitcount = len(utila.flat([item[1] for item in hits]))
+    if hitcount > BOXES_HIT_COUNT_MAX:
+        # TODO: ENABLE AFTER boxes_repeating PERFORMS FASTER
+        protocol.skip_method(f'too many box hits: {hitcount}')
+        return
     # determine multi page hits
     repeating = decider_border.detection.hits.boxes_repeating(hits)
     # remove multi page hits
     unique = decider_border.detection.hits.hits_unique(hits, repeating)
-
     for page in unique:
         if len(page.hits) <= MULTIPLE_BOUNDING_ERROR_COUNT:
             continue
