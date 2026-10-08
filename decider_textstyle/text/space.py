@@ -9,10 +9,10 @@
 
 import collections
 
-import configo
+import configos
 import iamraw
-import protocol
-import utila
+import protoerror
+import utilo
 
 VALID_AREA = {
     None,
@@ -20,7 +20,7 @@ VALID_AREA = {
     iamraw.PageContentType.TEXT,
 }
 
-MORETHAN = configo.HV_INT_PLUS(default=10)
+MORETHAN = configos.HV_INT_PLUS(default=10)
 
 SOLUTION_7770 = """\
 Loch im Textbild erhalten
@@ -29,10 +29,10 @@ Fügen Sie Trennungen ein um das Schriftbild zu verbessern.
 """
 
 
-@protocol.disable_perpage(morethan=MORETHAN)
+@protoerror.disable_perpage(morethan=MORETHAN)
 def check_7770_text_hole_simple(linter: callable, driver):
     if not driver.wordspaces:
-        utila.error('no wordspaces skip 7770')
+        utilo.error('no wordspaces skip 7770')
         return
     skipper = driver.magiccontent_oneline
     for page in driver.wordspaces:
@@ -43,8 +43,8 @@ def check_7770_text_hole_simple(linter: callable, driver):
                 # skip hole checker in captions and formula
                 continue
             for space in line:
-                width = utila.rect_width(space)
-                height = utila.rect_height(space)
+                width = utilo.rect_width(space)
+                height = utilo.rect_height(space)
                 if width <= MAXWIDTH(height):
                     continue
                 location = iamraw.BoundingLocation.fromtuple(
@@ -55,14 +55,14 @@ def check_7770_text_hole_simple(linter: callable, driver):
                 linter(location=location)
 
 
-MAXWIDTH = configo.HolyTable(  # TODO: ADJUST LATER
+MAXWIDTH = configos.HolyTable(  # TODO: ADJUST LATER
     items=[
         (0, 15.0),
         (9, 15.0),
         (12, 25.0),
         (30, 35.0),
     ],
-    strategy=utila.Strategy.LOWER,
+    strategy=utilo.Strategy.LOWER,
     left_outranges_none=False,
     right_outranges_none=False,
 )
@@ -81,7 +81,7 @@ def check_7771_text_hole_line(linter: callable, driver):  # pylint:disable=W0613
     todo = []
 
     def unite_text_hole(items):
-        unite, result = utila.partition(
+        unite, result = utilo.partition(
             items=items,
             key=lambda x: x.msgid == 7770,
         )
@@ -98,7 +98,7 @@ def check_7771_text_hole_line(linter: callable, driver):  # pylint:disable=W0613
 
     baselinter.check_findings(unite_text_hole)
     for page, line, items in todo:
-        boundings = utila.flat([item.location.value for item in items])
+        boundings = utilo.flat([item.location.value for item in items])
         location = iamraw.BoundingLocation.fromtuple(
             bounding=tuple(boundings),
             page=page,

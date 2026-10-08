@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 
 import decider_lay
 
-power.setup(decider_lay.ROOT)
+hoverpower.setup(decider_lay.ROOT)

@@ -7,19 +7,19 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle
 import tests.textstyle_
 
 
-@utilatest.longrun
-@utilatest.requires(power.MASTER116_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.MASTER116_PDF)
 def test_textstyle_formula_master116_page22(td, mp):
     """Ensure that formulas are not treated as font size errors."""
-    source = power.link(power.MASTER116_PDF)
+    source = hoverpower.link(hoverpower.MASTER116_PDF)
     cmd = f'-i {source} --text --pages=21,22'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.text(td.tmpdir)

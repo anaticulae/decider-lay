@@ -9,7 +9,7 @@
 
 import os
 
-import configo
+import configos
 
 import decider_lay
 
@@ -17,4 +17,4 @@ __version__ = decider_lay.__version__
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 PROCESS = 'decider_border'
 
-configo.cloud_lookup(PROCESS)
+configos.cloud_lookup(PROCESS)

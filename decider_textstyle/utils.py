@@ -11,7 +11,7 @@ import operator
 
 import iamraw
 import texmex.style
-import utila
+import utilo
 
 
 def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
@@ -29,18 +29,18 @@ def text_chunks(  # pylint:disable=R0912,R0914,R1260,W0613
         magicvalid = [iamraw.PageContentType.TEXT]
     magiccontent = magiccontent if magiccontent else []
     # TODO: SO BAD
-    headlines = utila.flat(headlines)
+    headlines = utilo.flat(headlines)
 
-    visited = utila.Single()
+    visited = utilo.Single()
 
     flat = []
     for headline in headlines:
         # mark contaienr id as visited
-        for container in utila.crange(headline.container):
+        for container in utilo.crange(headline.container):
             visited.contains((headline.page, container))
         position = (
             headline.page,
-            utila.cstart(headline.container),
+            utilo.cstart(headline.container),
         )
         flat.append((*position, headline))
 
@@ -84,14 +84,14 @@ def box_fromrange(
     navigator: texmex.NavigatorMixin,
 ) -> iamraw.BoundingLocation:
     try:
-        selected = [navigator[index] for index in utila.crange(crange)]
+        selected = [navigator[index] for index in utilo.crange(crange)]
     except IndexError:
         selected = None
     if not selected:
-        utila.error(f'crange errror: {crange} on page: {navigator.page}')
+        utilo.error(f'crange errror: {crange} on page: {navigator.page}')
         return iamraw.Location.from_page(page=navigator.page)
     boundings = [item.bounding for item in selected]
-    rectangle = utila.rect_max(boundings)
+    rectangle = utilo.rect_max(boundings)
     result = iamraw.BoundingLocation.fromtuple(
         bounding=rectangle,
         page=navigator.page,
@@ -100,7 +100,7 @@ def box_fromrange(
 
 
 def box_fromheadline(headline, navigators) -> iamraw.BoundingLocation:
-    navigator = utila.select_page(
+    navigator = utilo.select_page(
         navigators,
         page=headline.page,
     )

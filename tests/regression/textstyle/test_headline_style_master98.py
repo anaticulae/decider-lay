@@ -7,16 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle.headlines.style
 import decider_textstyle.path
 import tests.textstyle_
 
 
-@utilatest.requires(power.MASTER098_PDF)
+@utilotest.requires(hoverpower.MASTER098_PDF)
 def test_headline_font_family_validation_page6(td, mp):
     """The headline text is formatted in Times New Roman.
 
@@ -24,7 +24,7 @@ def test_headline_font_family_validation_page6(td, mp):
     normal mode, this is not a problem and we skip this. Therefore no
     linting must occur.
     """
-    source = power.link(power.MASTER098_PDF)
+    source = hoverpower.link(hoverpower.MASTER098_PDF)
     cmd = f'-i {source}  --headlines --pages=6'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.headlines(td.tmpdir)
@@ -43,11 +43,11 @@ def test_headline_font_family_validation_page6(td, mp):
     assert len(loaded) == 1
 
 
-@utilatest.requires(power.MASTER098_PDF)
+@utilotest.requires(hoverpower.MASTER098_PDF)
 def test_headline_font_family_char_marker(td, mp):
     """Ensure that linting is marked to wrong character and not to the
     whole line."""
-    source = power.link(power.MASTER098_PDF)
+    source = hoverpower.link(hoverpower.MASTER098_PDF)
     cmd = f'-i {source}  --headlines --pages=6'
     path = decider_textstyle.path.headlines(td.tmpdir)
 

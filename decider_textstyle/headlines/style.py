@@ -9,12 +9,12 @@
 
 import string
 
-import configo
-import configo.holyvalue.access
+import configos
+import configos.holyvalue.access
 import doctextstyle.parser
 import iamraw
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_textstyle.headlines.utils
 
@@ -46,9 +46,9 @@ Der Abstand **{{current}}** nach der $headline „{{title}}“ weicht vom \
 erwarteten Abstand **{{expected}}** ab.
 """)
 
-HEADLINE_DIFF_REL_MAX = configo.HV_PERCENT_PLUS(default=10)
+HEADLINE_DIFF_REL_MAX = configos.HV_PERCENT_PLUS(default=10)
 
-HEADLINE_DIFF_ABS_MAX = configo.HolyTable(
+HEADLINE_DIFF_ABS_MAX = configos.HolyTable(
     items=[
         (8, 0.5),
         (12, 1.0),
@@ -56,10 +56,10 @@ HEADLINE_DIFF_ABS_MAX = configo.HolyTable(
         (25, 5),
         (50, 5),
     ],
-    strategy=utila.Strategy.LINEARISE,
+    strategy=utilo.Strategy.LINEARISE,
 )
 
-WHITESPACE_LINTING = configo.holyvalue.access.HV_BOOL(default=False)
+WHITESPACE_LINTING = configos.holyvalue.access.HV_BOOL(default=False)
 
 LEVEL_1 = 1
 
@@ -259,9 +259,9 @@ def check_7523_check_h3_distance_after(linter: callable, driver):
     )
 
 
-H1_FONT_SIZE_MAX = configo.HV_FLOAT_PLUS(default=48.0)
+H1_FONT_SIZE_MAX = configos.HV_FLOAT_PLUS(default=48.0)
 
-H2_FONT_SIZE_MAX = configo.HV_FLOAT_PLUS(default=30.0)
+H2_FONT_SIZE_MAX = configos.HV_FLOAT_PLUS(default=30.0)
 
 SOLUTION_7535 = """\
 Erwartete Schriftgröße der Kapitel zu groß
@@ -280,7 +280,7 @@ def check_7535_headline_h1_too_huge(linter: callable, driver):
     if style.h1_size <= H1_FONT_SIZE_MAX:
         return
     linter(
-        location=protocol.OVERVIEW,
+        location=protoerror.OVERVIEW,
         current=style.h1_size,
         max_font_size=H1_FONT_SIZE_MAX,
     )
@@ -303,7 +303,7 @@ def check_7536_headline_h2_too_huge(linter: callable, driver):
     if style.h2_size <= H2_FONT_SIZE_MAX:
         return
     linter(
-        location=protocol.OVERVIEW,
+        location=protoerror.OVERVIEW,
         current=style.h2_size,
         max_font_size=H2_FONT_SIZE_MAX,
     )
@@ -316,21 +316,21 @@ def validate_headline_size(
     level,
     expected_size,
 ):
-    flats = utila.flat(headlines)
+    flats = utilo.flat(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
-        containero = utila.crange(headline.container)
-        navigator = utila.select_page(navigators, headline.page)
+        containero = utilo.crange(headline.container)
+        navigator = utilo.select_page(navigators, headline.page)
         try:
             lines_selected = [navigator[index] for index in containero]
         except IndexError:
             msg = f'headline size: {containero} out of bounds on page: {navigator.page}'
-            utila.error(msg)
+            utilo.error(msg)
             continue
         textsizes_ = decider_textstyle.headlines.utils.container_textsizes(
             lines_selected)
         maxdiff = HEADLINE_DIFF_ABS_MAX(expected_size)
-        if all((utila.near(item, expected_size, diff=maxdiff)
+        if all((utilo.near(item, expected_size, diff=maxdiff)
                 for item in textsizes_)):
             continue
         # font size diff
@@ -355,10 +355,10 @@ def validate_headlines_family(
     level,
     expected_family,
 ):
-    flats = utila.flat(headlines)
+    flats = utilo.flat(headlines)
     headlines = [item for item in flats if item.level == level]
     if not fontstore[expected_family]:
-        utila.error(f'no expected headline family: {expected_family}')
+        utilo.error(f'no expected headline family: {expected_family}')
         return
     expected_family = fontstore[expected_family].name
     for headline in headlines:
@@ -383,13 +383,13 @@ def validate_headlines_family(
 
 
 def validate_headline_family(headline, navigators, fontstore, expected_family):  # pylint:disable=R0914
-    containero = utila.crange(headline.container)
-    navigator = utila.select_page(navigators, headline.page)
+    containero = utilo.crange(headline.container)
+    navigator = utilo.select_page(navigators, headline.page)
     try:
         lines_selected = [navigator[index] for index in containero]
     except IndexError:
         msg = f'headline family: {containero} out of bounds on page: {navigator.page}'
-        utila.error(msg)
+        utilo.error(msg)
         return None
     textfamily_ = []
     skip_whitespaces = not WHITESPACE_LINTING
@@ -402,7 +402,7 @@ def validate_headline_family(headline, navigators, fontstore, expected_family): 
         if headline_family:
             textfamily_.append(headline_family.name)
         else:
-            utila.error(f'headline: font not found {item}')
+            utilo.error(f'headline: font not found {item}')
     matched = [item == expected_family for item in textfamily_]
     if all(matched):
         return None
@@ -412,7 +412,7 @@ def validate_headline_family(headline, navigators, fontstore, expected_family): 
     ]
     textfamilies = [item for item in textfamily_ if item != expected_family]
     # font family diff
-    current = utila.from_tuple(textfamilies, ', ')
+    current = utilo.from_tuple(textfamilies, ', ')
     return current, positions
 
 
@@ -424,23 +424,23 @@ def validate_headline_distance(  # pylint:disable=R1260
     expected_distance,
     check_before: bool = True,
 ):
-    flats = utila.flat(headlines)
+    flats = utilo.flat(headlines)
     headlines = [item for item in flats if item.level == level]
     for headline in headlines:
-        containero = utila.crange(headline.container)
-        navigator = utila.select_page(navigators, headline.page)
+        containero = utilo.crange(headline.container)
+        navigator = utilo.select_page(navigators, headline.page)
         distances = doctextstyle.parser.textdistances(navigator)
         if check_before:
             # TODO: SOLVE THIS ISSUE
             try:
                 before = distances[containero[0]][0]
             except IndexError:
-                utila.error(f'validate headline distance: {containero} '
+                utilo.error(f'validate headline distance: {containero} '
                             f'before out of bounds {len(distances)}')
                 continue
             if before is None:
                 continue
-            if utila.pnear(
+            if utilo.pnear(
                     expected_distance,
                     before,
                     abs_tol=HEADLINE_DIFF_ABS_MAX(expected_distance),
@@ -448,7 +448,7 @@ def validate_headline_distance(  # pylint:disable=R1260
             ):
                 continue
             if before > 100.0:
-                utila.error(f'distance to high: {before}, use table etc.')
+                utilo.error(f'distance to high: {before}, use table etc.')
                 # TODO: USE FIGURES, TABLES ETC.
                 continue
         else:
@@ -456,12 +456,12 @@ def validate_headline_distance(  # pylint:disable=R1260
             try:
                 after = distances[containero[-1]][1]
             except IndexError:
-                utila.error(f'validate headline distance: {containero} '
+                utilo.error(f'validate headline distance: {containero} '
                             f'after out of bounds {len(distances)}')
                 continue
             if after is None:
                 continue
-            if utila.pnear(
+            if utilo.pnear(
                     expected_distance,
                     after,
                     abs_tol=HEADLINE_DIFF_ABS_MAX(expected_distance),
@@ -469,7 +469,7 @@ def validate_headline_distance(  # pylint:disable=R1260
             ):
                 continue
             if after > 100.0:
-                utila.error(f'distance to high: {after}, use table etc.')
+                utilo.error(f'distance to high: {after}, use table etc.')
                 # TODO: USE FIGURES, TABLES ETC.
                 continue
         # distance diff

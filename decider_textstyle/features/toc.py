@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider_textstyle.toc.split
 
@@ -23,9 +23,9 @@ def work(
     fontcontent: str,
     tocx: str,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     if (pages := tocpages(toc=tocx, pages=pages)) is False:  # pylint:disable=compare-to-zero
-        return protocol.RESULT_EMPTY
+        return protoerror.RESULT_EMPTY
     tocx = serializeraw.load_toc(tocx)
     ptcns = serializeraw.ptcn_fromfile(
         text=textx,
@@ -40,19 +40,19 @@ def work(
         toc=tocx,
         ptcns=ptcns,
     )
-    return protocol.RESULT_EMPTY
+    return protoerror.RESULT_EMPTY
 
 
 def tocpages(toc: str, pages: str):
-    if not utila.exists(toc):
-        utila.error(f'missing {toc}, skip decider_textstyle --toc')
+    if not utilo.exists(toc):
+        utilo.error(f'missing {toc}, skip decider_textstyle --toc')
         return False
     toc = serializeraw.load_toc(toc)
     if not toc:
         return False
-    toc: list = utila.flat(toc)
-    toc_pages = utila.unique(item.raw_location for item in toc)
-    result = tuple(item for item in toc_pages if not utila.should_skip(
+    toc: list = utilo.flat(toc)
+    toc_pages = utilo.unique(item.raw_location for item in toc)
+    result = tuple(item for item in toc_pages if not utilo.should_skip(
         page=item,
         pages=pages,
     ))

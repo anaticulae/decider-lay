@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw
-import power
-import protocol
+import protoerror
 import pytest
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle.path
 import tests
@@ -39,8 +39,8 @@ NO_STYLE = iamraw.DocTextStyle()
 
 
 def decide_headline_style(source, pages, style, td, mp):
-    utilatest.fixture_requires(source)
-    source = power.link(source)
+    utilotest.fixture_requires(source)
+    source = hoverpower.link(source)
     tests.textstyle_.write_docstyle(style, td.tmpdir)
     tests.textstyle_.run(
         f'--headlines -i {td.tmpdir} -i {source} --pages={pages}',
@@ -52,9 +52,9 @@ def decide_headline_style(source, pages, style, td, mp):
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
-@utilatest.nightly
+@utilotest.nightly
 def test_decider_headlines_master72_2_20_fontsize(td, mp):
-    source = power.MASTER072_PDF
+    source = hoverpower.MASTER072_PDF
     pages = '2:20'
     findings = decide_headline_style(
         source,
@@ -64,16 +64,16 @@ def test_decider_headlines_master72_2_20_fontsize(td, mp):
         mp,
     )
     # no font size error
-    assert not protocol.count_findings(findings, 7500)
-    assert not protocol.count_findings(findings, 7510)
-    assert not protocol.count_findings(findings, 7520)
+    assert not protoerror.count_findings(findings, 7500)
+    assert not protoerror.count_findings(findings, 7510)
+    assert not protoerror.count_findings(findings, 7520)
     assert not findings
 
 
 @pytest.mark.xfail(reason='failing magic/list parer')
-@utilatest.nightly
+@utilotest.nightly
 def test_decider_headlines_master72_all(td, mp):
-    source = power.MASTER072_PDF
+    source = hoverpower.MASTER072_PDF
     pages = '3:65'
     findings = decide_headline_style(
         source,
@@ -86,10 +86,10 @@ def test_decider_headlines_master72_all(td, mp):
     assert not findings
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_decider_headlines_bachelor76(td, mp):
     # TODO: EXTEND THIS TESTS, specify expected findings
-    source = power.BACHELOR076_PDF
+    source = hoverpower.BACHELOR076_PDF
     pages = '4:67'
     findings = decide_headline_style(
         source,
@@ -104,9 +104,9 @@ def test_decider_headlines_bachelor76(td, mp):
     assert len(findings) in expected
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_decider_headlines_chapter_on_new_page(td, mp):
-    source = power.BACHELOR076_PDF
+    source = hoverpower.BACHELOR076_PDF
     pages = '0:42'
     findings = decide_headline_style(
         source,
@@ -115,13 +115,13 @@ def test_decider_headlines_chapter_on_new_page(td, mp):
         td,
         mp,
     )
-    no_new_page_start = protocol.select_findings(findings, 7540)
+    no_new_page_start = protoerror.select_findings(findings, 7540)
     assert len(no_new_page_start) == 2, str(no_new_page_start)
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_chapter_on_new_page_with_decoration(td, mp):
-    source = power.MASTER110_PDF
+    source = hoverpower.MASTER110_PDF
     pages = '18:20'
     findings = decide_headline_style(
         source,
@@ -130,17 +130,17 @@ def test_chapter_on_new_page_with_decoration(td, mp):
         td,
         mp,
     )
-    new_chapter_page_start_error = protocol.select_findings(findings, 7540)
+    new_chapter_page_start_error = protoerror.select_findings(findings, 7540)
     assert not new_chapter_page_start_error
 
 
-@utilatest.requires(power.BACHELOR063_PDF)
+@utilotest.requires(hoverpower.BACHELOR063_PDF)
 def test_headlines_bachelor63_page17(td, mp):
     """Do not parse font size error for white spaces in first level headlines.
 
     Regression test after fixing docstyle extractor.
     """
-    source = power.link(power.BACHELOR063_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR063_PDF)
     pages = 17
     tests.textstyle_.run(
         f'--headlines -i {td.tmpdir} -i {source} --pages={pages}',
@@ -151,10 +151,10 @@ def test_headlines_bachelor63_page17(td, mp):
     assert not findings
 
 
-@utilatest.longrun
-@utilatest.requires(power.BACHELOR090_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.BACHELOR090_PDF)
 def test_headlines_bachelor90_page17_divide_headline(td, mp):
-    source = power.link(power.BACHELOR090_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR090_PDF)
     tests.textstyle_.run(
         f'--headlines -i {td.tmpdir} -i {source} --pages=17',
         mp=mp,
@@ -164,9 +164,9 @@ def test_headlines_bachelor90_page17_divide_headline(td, mp):
     assert findings
 
 
-@utilatest.requires(power.BACHELOR090_PDF)
+@utilotest.requires(hoverpower.BACHELOR090_PDF)
 def test_headlines_bachelor90_all_divide_headline(td, mp):
-    source = power.link(power.BACHELOR090_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR090_PDF)
     tests.textstyle_.run(
         f'--headlines -i {td.tmpdir} -i {source}',
         mp=mp,

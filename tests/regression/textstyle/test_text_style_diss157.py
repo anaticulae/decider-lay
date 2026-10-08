@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import pytest
 import serializeraw
 
@@ -19,7 +19,7 @@ import tests.textstyle_
     reason='improve algo leads to fewer findings which are not disabled anymore.'
 )
 def test_textstyle_diss157_disable_huge_finding_count(td, mp):
-    source = power.link(power.DISS157_PDF)
+    source = hoverpower.link(hoverpower.DISS157_PDF)
     cmd = f'-i {source}  --text --pages=70:80'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.text(td.tmpdir)

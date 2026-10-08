@@ -11,20 +11,20 @@ import functools
 import os
 
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import decider_textstyle.cli
 
 # pylint:disable=C0103
 run = functools.partial(
-    utilatest.run_command,
+    utilotest.run_command,
     main=decider_textstyle.cli.main,
     process=decider_textstyle.PROCESS,
     expect=True,
 )
 fail = functools.partial(
-    utilatest.run_command,
+    utilotest.run_command,
     main=decider_textstyle.cli.main,
     process=decider_textstyle.PROCESS,
     expect=False,
@@ -34,4 +34,4 @@ fail = functools.partial(
 def write_docstyle(style, path: str):
     outpath = os.path.join(path, 'doctextstyle__textstyle.yaml')
     dumped = serializeraw.dump_doctextstyle(style)
-    utila.file_create(outpath, dumped)
+    utilo.file_create(outpath, dumped)

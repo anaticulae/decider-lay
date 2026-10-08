@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_textstyle.headlines.data
 import decider_textstyle.headlines.improve
@@ -26,7 +26,7 @@ def work(
     sizeandborders: str,
     headerfooter: str,
     pages: tuple = None,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     driver = decider_textstyle.headlines.data.load_driver(
         textstyle,
         headliner,
@@ -39,15 +39,15 @@ def work(
         pages,
     )
     if not driver.headlines:  # pylint:disable=E1101
-        utila.error('no headlines given')
+        utilo.error('no headlines given')
     if not driver.navigators:  # pylint:disable=E1101
-        utila.error('no navigators given')
+        utilo.error('no navigators given')
 
     if not driver.navigators or not driver.headlines:  # pylint:disable=E1101
-        utila.error('could not run --headlines linter')
-        return protocol.RESULT_EMPTY
+        utilo.error('could not run --headlines linter')
+        return protoerror.RESULT_EMPTY
 
-    user, developer = protocol.run(
+    user, developer = protoerror.run(
         modulename=[
             decider_textstyle.headlines.improve,
             decider_textstyle.headlines.rules,

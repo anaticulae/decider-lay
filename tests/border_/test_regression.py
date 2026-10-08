@@ -7,18 +7,18 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import pytest
-import utilatest
+import utilotest
 
 import tests.border_
 
 
 @pytest.mark.usefixtures('td')
-@utilatest.requires(power.DISS266_PDF)
+@utilotest.requires(hoverpower.DISS266_PDF)
 def test_decider_border_diss266(mp, capsys):
     """We have only one rotated page. Therefore we have no expected page
     size and have to skip this."""
-    source = power.link(power.DISS266_PDF)
+    source = hoverpower.link(hoverpower.DISS266_PDF)
     tests.border_.run(f'-i {source}', mp=mp)
-    assert 'no expected page size' in utilatest.stderr(capsys)
+    assert 'no expected page size' in utilotest.stderr(capsys)

@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import utilo
 
 import decider_textstyle.utils
 
@@ -32,11 +32,11 @@ verwenden Sie einen **manuellen Seitenumbruch**.
 
 def check_7540_chapter_on_new_page(linter: callable, driver):
     headlines = [
-        headline for headline in utila.iflat(driver.headlines)
+        headline for headline in utilo.iflat(driver.headlines)
         if headline.level == 1
     ]
     for headline in headlines:
-        start = utila.cstart(headline.container)
+        start = utilo.cstart(headline.container)
         if start == 0:  # pylint:disable=C2001
             # chapter starts at page begin
             # TODO: CHECK FOR HEADER OR PAGE NUMBER BEFORE HEADLINE? MAY
@@ -45,7 +45,7 @@ def check_7540_chapter_on_new_page(linter: callable, driver):
         if headline.decoration is not None:
             # Chapter-X-Pattern is detected before headline start
             continue
-        navigator = utila.select_page(
+        navigator = utilo.select_page(
             driver.navigators,
             page=headline.page,
         )

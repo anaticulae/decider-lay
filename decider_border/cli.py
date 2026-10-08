@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_border
 
@@ -24,21 +24,21 @@ border. There are four types of border.
 """
 
 WORKPLAN = [
-    utila.create_step(
+    utilo.create_step(
         'distance',
         [
-            utila.ResultFile('groupme', 'area_area'),
-            utila.ResultFile('groupme', 'distance_distance'),
+            utilo.ResultFile('groupme', 'area_area'),
+            utilo.ResultFile('groupme', 'distance_distance'),
         ],
         ('user', 'developer'),
     ),
-    utila.create_step(
+    utilo.create_step(
         'detection',
         [
-            utila.ResultFile('rawmaker', 'border_boundingboxes'),
-            utila.ResultFile('rawmaker', 'border_pages'),
-            utila.ResultFile('groupme', 'border_leftright'),
-            utila.ResultFile('pagenumber', 'result_result'),
+            utilo.ResultFile('rawmaker', 'border_boundingboxes'),
+            utilo.ResultFile('rawmaker', 'border_pages'),
+            utilo.ResultFile('groupme', 'border_leftright'),
+            utilo.ResultFile('pagenumber', 'result_result'),
         ],
         ('hits', 'user', 'developer'),
     )
@@ -46,15 +46,15 @@ WORKPLAN = [
 
 
 def main():
-    hook = protocol.integrate(
+    hook = protoerror.integrate(
         root=decider_border.ROOT,
         features='decider_border.features',
     )
-    utila.featurepack(
+    utilo.featurepack(
         workplan=WORKPLAN,
         root=decider_border.ROOT,
         featurepackage='decider_border.features',
-        config=utila.FeaturePackConfig(
+        config=utilo.FeaturePackConfig(
             cli_hook=hook,
             description=DESCRIPTION,
             multiprocessed=True,

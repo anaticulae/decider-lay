@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
+import protoerror
 import serializeraw
 
 import decider_textstyle.text.fonts
@@ -17,16 +17,16 @@ def work(
     textstyle: str,
     worddist: str,
     chardist: str,
-) -> protocol.ResultType:
+) -> protoerror.ResultType:
     textstyle = serializeraw.load_doctextstyle(textstyle)
     worddist = serializeraw.load_document_worddist(worddist)
     chardist = serializeraw.load_document_chardist(chardist)
-    driver = protocol.driver(
+    driver = protoerror.driver(
         textstyle=textstyle,
         worddist=worddist,
         chardist=chardist,
     )
-    user, developer = protocol.run(
+    user, developer = protoerror.run(
         modulename=[
             decider_textstyle.text.fonts,
         ],

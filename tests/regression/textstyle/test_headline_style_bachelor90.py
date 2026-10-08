@@ -7,16 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle
 import tests.textstyle_
 
 
-@utilatest.longrun
-@utilatest.requires(power.BACHELOR090_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.BACHELOR090_PDF)
 def test_font_family_bachelor90_page13(td, mp):
     """This is a regression test for false detected level 2 headline
     style judging.
@@ -25,7 +25,7 @@ def test_font_family_bachelor90_page13(td, mp):
     normal font header. Therefore the style current headline style was
     judged wrongly.
     """
-    source = power.link(power.BACHELOR090_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR090_PDF)
     cmd = f'-i {source}  --headlines --pages=13'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.headlines(td.tmpdir)

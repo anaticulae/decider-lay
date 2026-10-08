@@ -7,18 +7,18 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import pytest
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle.path
 import tests.textstyle_
 
 
 def decide_text_toc(source, td, mp, msgids: str = None):
-    utilatest.fixture_requires(source)
-    source = power.link(source)
+    utilotest.fixture_requires(source)
+    source = hoverpower.link(source)
     tests.textstyle_.run(
         f'--toc -i {td.tmpdir} -i {source}',
         mp=mp,
@@ -30,7 +30,7 @@ def decide_text_toc(source, td, mp, msgids: str = None):
 
 @pytest.mark.xfail(reason='incomplete impl.')
 def test_decider_toc_bachelor32p1(td, mp):
-    source = power.BACHELOR032_PDF
+    source = hoverpower.BACHELOR032_PDF
     findings = decide_text_toc(
         source,
         td,

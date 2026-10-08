@@ -7,71 +7,71 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
-import utila
+import protoerror
+import utilo
 
 import decider_textstyle
 
 DESCRIPTION = ''
 
 WORKPLAN = [
-    utila.create_step(
+    utilo.create_step(
         'headlines',
         inputs=[
-            utila.ResultFile('doctextstyle', 'textstyle'),
-            utila.ResultFile('headlines', 'result_result'),
-            utila.ResultFile('rawmaker', 'oneline_text_text'),
-            utila.ResultFile('rawmaker', 'oneline_text_positions'),
-            utila.ResultFile('rawmaker', 'oneline_fonts_header'),
-            utila.ResultFile('rawmaker', 'oneline_fonts_content'),
-            utila.ResultFile('rawmaker', 'border_pages'),
-            utila.ResultFile('groupme', 'hefopa_result'),
+            utilo.ResultFile('doctextstyle', 'textstyle'),
+            utilo.ResultFile('headlines', 'result_result'),
+            utilo.ResultFile('rawmaker', 'oneline_text_text'),
+            utilo.ResultFile('rawmaker', 'oneline_text_positions'),
+            utilo.ResultFile('rawmaker', 'oneline_fonts_header'),
+            utilo.ResultFile('rawmaker', 'oneline_fonts_content'),
+            utilo.ResultFile('rawmaker', 'border_pages'),
+            utilo.ResultFile('groupme', 'hefopa_result'),
         ],
-        output=protocol.ResultDefault,
+        output=protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'text',
         inputs=[
-            utila.ResultFile('doctextstyle', 'textstyle'),
-            utila.ResultFile('headlines', 'result_result'),
-            utila.ResultFile('rawmaker', 'oneline_text_text'),
-            utila.ResultFile('rawmaker', 'oneline_text_positions'),
-            utila.ResultFile('rawmaker', 'border_pages'),
-            utila.ResultFile('groupme', 'hefopa_result'),
-            utila.ResultFile('rawmaker', 'oneline_fonts_header'),
-            utila.ResultFile('rawmaker', 'oneline_fonts_content'),
-            utila.ResultFile('textflow', 'wordspace_wordspace', optional=True),
-            utila.ResultFile('magic', 'oneline_content', optional=True),
+            utilo.ResultFile('doctextstyle', 'textstyle'),
+            utilo.ResultFile('headlines', 'result_result'),
+            utilo.ResultFile('rawmaker', 'oneline_text_text'),
+            utilo.ResultFile('rawmaker', 'oneline_text_positions'),
+            utilo.ResultFile('rawmaker', 'border_pages'),
+            utilo.ResultFile('groupme', 'hefopa_result'),
+            utilo.ResultFile('rawmaker', 'oneline_fonts_header'),
+            utilo.ResultFile('rawmaker', 'oneline_fonts_content'),
+            utilo.ResultFile('textflow', 'wordspace_wordspace', optional=True),
+            utilo.ResultFile('magic', 'oneline_content', optional=True),
         ],
-        output=protocol.ResultDefault,
+        output=protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'fonts',
         inputs=[
-            utila.ResultFile('doctextstyle', 'textstyle'),
-            utila.ResultFile('spacestation', 'worddist_worddist'),
-            utila.ResultFile('spacestation', 'chardist_chardist'),
+            utilo.ResultFile('doctextstyle', 'textstyle'),
+            utilo.ResultFile('spacestation', 'worddist_worddist'),
+            utilo.ResultFile('spacestation', 'chardist_chardist'),
         ],
-        output=protocol.ResultDefault,
+        output=protoerror.ResultDefault,
     ),
-    utila.create_step(
+    utilo.create_step(
         'toc',
         inputs=[
-            utila.ResultFile('rawmaker', 'text_text'),
-            utila.ResultFile('rawmaker', 'text_positions'),
-            utila.ResultFile('groupme', 'hefopa_result'),
-            utila.ResultFile('rawmaker', 'border_pages'),
-            utila.ResultFile('rawmaker', 'fonts_header'),
-            utila.ResultFile('rawmaker', 'fonts_content'),
-            utila.ResultFile('reftable', 'toc_toc'),
+            utilo.ResultFile('rawmaker', 'text_text'),
+            utilo.ResultFile('rawmaker', 'text_positions'),
+            utilo.ResultFile('groupme', 'hefopa_result'),
+            utilo.ResultFile('rawmaker', 'border_pages'),
+            utilo.ResultFile('rawmaker', 'fonts_header'),
+            utilo.ResultFile('rawmaker', 'fonts_content'),
+            utilo.ResultFile('reftable', 'toc_toc'),
         ],
-        output=protocol.ResultDefault,
+        output=protoerror.ResultDefault,
     ),
 ]
 
 
 def main():
-    hook = protocol.integrate(
+    hook = protoerror.integrate(
         root=decider_textstyle.ROOT,
         features=[
             'decider_textstyle.features',
@@ -79,11 +79,11 @@ def main():
             'decider_textstyle.text',
         ],
     )
-    utila.featurepack(
+    utilo.featurepack(
         workplan=WORKPLAN,
         root=decider_textstyle.ROOT,
         featurepackage='decider_textstyle.features',
-        config=utila.FeaturePackConfig(
+        config=utilo.FeaturePackConfig(
             cli_hook=hook,
             description=DESCRIPTION,
             multiprocessed=True,

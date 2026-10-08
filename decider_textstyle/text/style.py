@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 import iamraw
-import protocol
-import utila
+import protoerror
+import utilo
 
-MORE_THAN = configo.HV_INT_PLUS(default=10)
+MORE_THAN = configos.HV_INT_PLUS(default=10)
 
 SOLUTION_7550 = """\
 Schriftgröße des Texts weicht ab
@@ -22,7 +22,7 @@ der erwarteten Schriftgröße **{{expected}}**.
 """
 
 
-@protocol.disable_perpage(morethan=MORE_THAN)
+@protoerror.disable_perpage(morethan=MORE_THAN)
 def check_7550_text_size(linter: callable, driver):
     if not driver.style.text_size:
         return
@@ -47,15 +47,15 @@ der erwarteten Schriftart **{{expected}}** ab.
 """
 
 
-@protocol.disable_perpage(morethan=MORE_THAN)
+@protoerror.disable_perpage(morethan=MORE_THAN)
 def check_7551_text_family(linter: callable, driver):
     if not driver.style.text_family:
-        utila.error('7551: no text family given - driver')
+        utilo.error('7551: no text family given - driver')
         return
     chunks = driver.text_chunks
     expected = driver.fontstore[driver.style.text_family]
     if not expected:
-        utila.error('7551: no text family given - fontstore')
+        utilo.error('7551: no text family given - fontstore')
         return
     expected = expected.name
     for page, line, item in chunks:
@@ -63,7 +63,7 @@ def check_7551_text_family(linter: callable, driver):
             continue
         for style in item.style:
             if style.font == iamraw.NO_FONT:
-                utila.error(f'no font for {page} {line} {item}')
+                utilo.error(f'no font for {page} {line} {item}')
                 continue
             current = driver.fontstore[style.font].name
             if current == expected:
@@ -100,7 +100,7 @@ Grauwert des Texts und stören den Lesefluss. Es wird empfohlen \
 """
 
 
-@protocol.disable_perpage(morethan=MORE_THAN)
+@protoerror.disable_perpage(morethan=MORE_THAN)
 def check_7555_text_bold(linter: callable, driver):
     chunks = driver.text_chunks
     for page, line, item in chunks:
@@ -108,7 +108,7 @@ def check_7555_text_bold(linter: callable, driver):
             continue
         for style in item.style:
             if style.font == iamraw.NO_FONT:
-                utila.error(f'no font for {page} {line} {item}')
+                utilo.error(f'no font for {page} {line} {item}')
                 continue
             current = driver.fontstore[style.font]
             if current.weight != iamraw.fonts.Weight.BOLD:

@@ -9,7 +9,7 @@
 
 import iamraw
 import texmex
-import utila
+import utilo
 
 
 def container_textsizes(items):
@@ -30,9 +30,9 @@ def container_textfamily(items, skip_whitespaces: bool = True):
     return families, positions
 
 
-def textsizes(style: texmex.TextInfo) -> utila.Floats:
+def textsizes(style: texmex.TextInfo) -> utilo.Floats:
     sizes = [item.size for item in style.content]
-    sizes = utila.unique(sizes)
+    sizes = utilo.unique(sizes)
     result = sorted(sizes)
     return result
 
@@ -40,7 +40,7 @@ def textsizes(style: texmex.TextInfo) -> utila.Floats:
 def textfamily(
     item: texmex.TextInfo,
     skip_whitespaces: bool = True,
-) -> utila.Ints:
+) -> utilo.Ints:
     fonts = []
     positions = []
     for style in item.style.content:
@@ -52,14 +52,14 @@ def textfamily(
                 continue
         fonts.append(style.font)
         positions.append((style.start, style.end))
-    if len(utila.unique(fonts)) == 1:
-        fonts = utila.unique(fonts)
+    if len(utilo.unique(fonts)) == 1:
+        fonts = utilo.unique(fonts)
         positions = [(0, len(item.text))]
     return fonts, positions
 
 
 def headline_location(headline, chars: list = None) -> iamraw.RangedLocation:
-    containero = utila.crange(headline.container)
+    containero = utilo.crange(headline.container)
     # TODO: REPLACE TOKEN WITH CHAR
     location = iamraw.RangedLocation(
         page=headline.page,

@@ -9,11 +9,11 @@
 
 import contextlib
 
-import power
+import hoverpower
 import pytest
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import decider_border.detection.hits
 import decider_border.path
@@ -21,7 +21,7 @@ import tests.border_
 
 
 @pytest.mark.parametrize('source', [
-    pytest.param(power.TECH024_PDF, id='tech024'),
+    pytest.param(hoverpower.TECH024_PDF, id='tech024'),
 ])
 def test_border_cli_decider_simple(source, td, mp):
     root = td.tmpdir
@@ -33,10 +33,10 @@ def test_border_cli_decider_simple(source, td, mp):
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(power.DOCU035_PDF, [4, 4], id='docu035'),
-    pytest.param(power.MASTER078_PDF, [6, 8], id='master078'),
+    pytest.param(hoverpower.DOCU035_PDF, [4, 4], id='docu035'),
+    pytest.param(hoverpower.MASTER078_PDF, [6, 8], id='master078'),
 ])
-@utilatest.longrun
+@utilotest.longrun
 def test_border_cli_decider_list(
     source,
     validate,
@@ -69,15 +69,15 @@ def validate_leftright(hits):
     # TODO: reduce after extracting symbol as one
     expected_hits.extend([0] * 16)
 
-    hits = utila.flat(item.hits for item in hits)
+    hits = utilo.flat(item.hits for item in hits)
     assert len(hits) >= len(expected_hits), (
         f'expected hits: {expected_hits}\n current: {len(hits)}\n')
 
 
 @pytest.mark.parametrize('source, validate', [
-    pytest.param(power.BOOK007_PDF, validate_leftright, id='book007'),
+    pytest.param(hoverpower.BOOK007_PDF, validate_leftright, id='book007'),
 ])
-@utilatest.longrun
+@utilotest.longrun
 def test_border_cli_decider_complex_validation(
     source,
     validate,
@@ -106,7 +106,7 @@ def patch_zero_border_tolerance(mp):
 
 def test_border_included_pdf_page_as_image(td, mp):
     """Do not detect included pdf pages as bounding error."""
-    source = power.MASTER116_PDF
+    source = hoverpower.MASTER116_PDF
     root = td.tmpdir
     extracted = tests.border_.extract_border_hits(
         root,
@@ -114,13 +114,13 @@ def test_border_included_pdf_page_as_image(td, mp):
         mp=mp,
         pages='2',
     )
-    hits = utila.select_page(extracted, page=2).hits
+    hits = utilo.select_page(extracted, page=2).hits
     assert not hits
 
 
 def test_border_whitespace_only(td, mp):
     """Do not detect included pdf pages as bounding error."""
-    source = power.BACHELOR076_PDF
+    source = hoverpower.BACHELOR076_PDF
     root = td.tmpdir
     extracted = tests.border_.extract_border_hits(
         root,
@@ -128,5 +128,5 @@ def test_border_whitespace_only(td, mp):
         mp=mp,
         pages='0',
     )
-    hits = utila.select_page(extracted, page=0).hits
+    hits = utilo.select_page(extracted, page=0).hits
     assert not hits

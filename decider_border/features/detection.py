@@ -22,17 +22,17 @@ are a lot of `hit the box` errors.
 * TODO: MARK EMPTY STRING LAYOUT ERRORS.
 """
 
-import configo
+import configos
 import iamraw
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider_border.detection.hits
 
-MULTIPLE_BOUNDING_ERROR_COUNT = configo.HV_INT_PLUS(default=10)
+MULTIPLE_BOUNDING_ERROR_COUNT = configos.HV_INT_PLUS(default=10)
 
-PAGENUMBER_ERROR_MIN = configo.HV_INT_PLUS(default=5)
+PAGENUMBER_ERROR_MIN = configos.HV_INT_PLUS(default=5)
 
 
 def work(
@@ -42,7 +42,7 @@ def work(
     pagenumbers: str,
     pages: tuple = None,
 ) -> tuple[str, str, str]:
-    utila.call('work: border detection')
+    utilo.call('work: border detection')
     # create driver
     driver = create_driver(
         border_boxes,
@@ -52,7 +52,7 @@ def work(
         pages,
     )
     # evaluate lintings
-    user, developer = protocol.run(modulename=__name__, driver=driver)
+    user, developer = protoerror.run(modulename=__name__, driver=driver)
     # dump hits
     dumped = serializeraw.dump_hits(driver.hits)
     return dumped, user, developer
@@ -78,8 +78,8 @@ def create_driver(
         expected,
         pagenumbers=pagenumbers,
     )
-    utila.debug(hits)
-    result = protocol.driver(
+    utilo.debug(hits)
+    result = protoerror.driver(
         hits=hits,
         hits_pagenumbers=hits_pagenumbers,
     )
@@ -105,7 +105,7 @@ Passen Sie die Formatierung an, so dass der Inhalt nicht mehr in den \
 Seitenrad ragt.
 """
 
-BOXES_HIT_COUNT_MAX = configo.HV_INT_PLUS(default=1000)
+BOXES_HIT_COUNT_MAX = configos.HV_INT_PLUS(default=1000)
 
 
 def check_2020_content_inside_box(linter, driver):
@@ -113,12 +113,12 @@ def check_2020_content_inside_box(linter, driver):
     hits: iamraw.PageContentHits = driver.hits
     if len(driver.hits_pagenumbers) < PAGENUMBER_ERROR_MIN:
         hits.extend(driver.hits_pagenumbers)
-    hitcount = len(utila.flat([item[1] for item in hits]))
+    hitcount = len(utilo.flat([item[1] for item in hits]))
     if hitcount > BOXES_HIT_COUNT_MAX:
         # TODO: ENABLE AFTER boxes_repeating PERFORMS FASTER
         for item in hits:
-            utila.debug(len(item[1]))
-        protocol.skip_method(f'too many box hits: {hitcount}')
+            utilo.debug(len(item[1]))
+        protoerror.skip_method(f'too many box hits: {hitcount}')
         return
     # determine multi page hits
     repeating = decider_border.detection.hits.boxes_repeating(hits)
@@ -147,10 +147,10 @@ Seitenrand überprüfen
 def check_2025_multiple_bounding_error(linter, driver):
     """Ensure that content fits in detected content box."""
     hits: iamraw.PageContentHits = driver.hits
-    hitcount = len(utila.flat([item[1] for item in hits]))
+    hitcount = len(utilo.flat([item[1] for item in hits]))
     if hitcount > BOXES_HIT_COUNT_MAX:
         # TODO: ENABLE AFTER boxes_repeating PERFORMS FASTER
-        protocol.skip_method(f'too many box hits: {hitcount}')
+        protoerror.skip_method(f'too many box hits: {hitcount}')
         return
     # determine multi page hits
     repeating = decider_border.detection.hits.boxes_repeating(hits)
@@ -159,7 +159,7 @@ def check_2025_multiple_bounding_error(linter, driver):
     for page in unique:
         if len(page.hits) <= MULTIPLE_BOUNDING_ERROR_COUNT:
             continue
-        bounding = utila.rect_max([bound for _, bound in page.hits])
+        bounding = utilo.rect_max([bound for _, bound in page.hits])
         location = iamraw.BoundingLocation.fromtuple(
             bounding=bounding,
             page=page.page,
@@ -183,5 +183,5 @@ def check_2026_pagenumber_bounding(linter, driver):
         return
     linter(
         number=len(driver.hits_pagenumbers),
-        location=protocol.OVERVIEW,
+        location=protoerror.OVERVIEW,
     )

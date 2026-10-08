@@ -9,19 +9,19 @@
 
 import contextlib
 
-import configo
+import configos
 import iamraw
-import utila
+import utilo
 
-BORDER_LEFT = configo.HV_FLOAT_PLUS(default=25.0)
+BORDER_LEFT = configos.HV_FLOAT_PLUS(default=25.0)
 
-BORDER_RIGHT = configo.HV_FLOAT_PLUS(default=25.0)
+BORDER_RIGHT = configos.HV_FLOAT_PLUS(default=25.0)
 
-BORDER_TOP = configo.HV_FLOAT_PLUS(default=25.0)
+BORDER_TOP = configos.HV_FLOAT_PLUS(default=25.0)
 
-BORDER_BOTTOM = configo.HV_FLOAT_PLUS(default=25.0)
+BORDER_BOTTOM = configos.HV_FLOAT_PLUS(default=25.0)
 
-CONTENTBOX_SIZE_MAX = configo.HV_FLOAT_PLUS(default=50.0)
+CONTENTBOX_SIZE_MAX = configos.HV_FLOAT_PLUS(default=50.0)
 
 
 class BorderExpected:
@@ -32,7 +32,7 @@ class BorderExpected:
     def __call__(self, page) -> tuple:
         with contextlib.suppress(KeyError):
             return self.expected[page]
-        utila.error(f'no expected page size: {page}')
+        utilo.error(f'no expected page size: {page}')
         return None
 
 
@@ -58,7 +58,7 @@ def boxes_outside_border(
         for index, bounding in page.boundings:
             if contentbox_inside(bounding, contentbox, pagesize):
                 continue
-            if pagenumber_bounding and utila.rect_inside(
+            if pagenumber_bounding and utilo.rect_inside(
                     first=pagenumber_bounding,
                     second=bounding,
             ):
@@ -82,8 +82,8 @@ def boxes_repeating(
     count_min = int(len(pagecontenthits) * required_ratio)
     collected = []
     for page in pagecontenthits:
-        collected.extend(utila.unique([item[1] for item in page.hits]))
-    clustered = utila.same_area_cluster(
+        collected.extend(utilo.unique([item[1] for item in page.hits]))
+    clustered = utilo.same_area_cluster(
         collected,
         max_difference=2.5,
         selector=lambda x: x,
@@ -113,7 +113,7 @@ def hits_unique(
     return result
 
 
-HITS_MATCH_DIFF_MAX = configo.HV_FLOAT_PLUS(default=10.0)
+HITS_MATCH_DIFF_MAX = configos.HV_FLOAT_PLUS(default=10.0)
 
 
 def hits_match(
@@ -121,7 +121,7 @@ def hits_match(
     hits: set,
     maxdiff: float = HITS_MATCH_DIFF_MAX,
 ) -> bool:
-    if any(utila.nears(bounding, item, diff=maxdiff.value) for item in hits):
+    if any(utilo.nears(bounding, item, diff=maxdiff.value) for item in hits):
         return True
     return False
 
@@ -129,7 +129,7 @@ def hits_match(
 def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
     if tol is None:
         tol = (BORDER_LEFT, BORDER_RIGHT, BORDER_TOP, BORDER_BOTTOM)
-    valid = utila.roundme((
+    valid = utilo.roundme((
         border_box[0] - tol[0],  # x0
         border_box[2] - tol[2],  # y0
         pagesize.width - border_box[1] + tol[1],  # x1
@@ -141,26 +141,26 @@ def contentbox_valid(border_box, pagesize, tol=None) -> tuple:
 def contentbox_inside(bounding, contentbox, pagesize) -> bool:
     # BOUNDING:     'left, top,   right, bottom'
     # move bounding to center of page to make approach more robust
-    rounded_bounding = utila.rect_roundsmall(bounding)
-    if utila.rect_inside(contentbox, rounded_bounding):
+    rounded_bounding = utilo.rect_roundsmall(bounding)
+    if utilo.rect_inside(contentbox, rounded_bounding):
         # all items in the box
         return True
     if covers_completepage(bounding, pagesize):
         return True
-    if utila.rect_size(rounded_bounding) <= CONTENTBOX_SIZE_MAX:
+    if utilo.rect_size(rounded_bounding) <= CONTENTBOX_SIZE_MAX:
         # white space pdf printer errors
         # TODO: USE THIS INFORMATION FOR EXPERT LINTING
         return True
     return False
 
 
-COMPLETEPAGE_DIFF_MAX = configo.HV_FLOAT_PLUS(default=5.0)
+COMPLETEPAGE_DIFF_MAX = configos.HV_FLOAT_PLUS(default=5.0)
 
 
 def covers_completepage(bounding: tuple, page) -> bool:
     """Bounding covers the complete page."""
     expected = (0, 0, page.width, page.height)
-    if utila.nears(
+    if utilo.nears(
             bounding,
             expected,
             diff=CONTENTBOX_SIZE_MAX.value,

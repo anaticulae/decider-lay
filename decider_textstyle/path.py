@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-from utila import pathconnector as connect
+from utilo import pathconnector as connect
 
 import decider_textstyle
 

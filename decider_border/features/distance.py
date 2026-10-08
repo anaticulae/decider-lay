@@ -18,16 +18,16 @@ textual ojects(table, images, diagrams).
 
 import math
 
-import configo
-import groupme.feature.area
-import groupme.feature.distance
+import configos
+import groupmes.feature.area
+import groupmes.feature.distance
 import iamraw
-import protocol
-import utila
+import protoerror
+import utilo
 
-DISTANCE_BEFORE_MN = configo.HV_FLOAT_PLUS(default=10.0)
+DISTANCE_BEFORE_MN = configos.HV_FLOAT_PLUS(default=10.0)
 
-DISTANCE_AFTER_MIN = configo.HV_FLOAT_PLUS(default=10.0)
+DISTANCE_AFTER_MIN = configos.HV_FLOAT_PLUS(default=10.0)
 
 
 def work(
@@ -40,14 +40,14 @@ def work(
         distances=xdistances,
         pages=pages,
     )
-    user, developer = protocol.run(modulename=__name__, driver=driver)
+    user, developer = protoerror.run(modulename=__name__, driver=driver)
     return user, developer
 
 
 def create_driver(area, distances, pages):
-    area = groupme.feature.area.load_area(area, pages=pages)
-    distances = groupme.feature.distance.load_distance(distances, pages=pages)
-    result = protocol.driver(
+    area = groupmes.feature.area.load_area(area, pages=pages)
+    distances = groupmes.feature.distance.load_distance(distances, pages=pages)
+    result = protoerror.driver(
         area=area,
         distances=distances,
     )
@@ -70,8 +70,8 @@ Mindestabstand: {{min_distance}}
 
 def check_3030_text_before_to_near(linter, driver):
     for page in driver.distances:
-        area = utila.select_page(driver.area, page.page)
-        bounds = utila.flat(list(area.border.values()))
+        area = utilo.select_page(driver.area, page.page)
+        bounds = utilo.flat(list(area.border.values()))
         for item, bounding in zip(page.content, bounds):
             location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,
@@ -101,8 +101,8 @@ Mindestabstand: {{min_distance}}
 
 def check_3031_text_after_to_near(linter, driver):
     for page in driver.distances:
-        area = utila.select_page(driver.area, page.page)
-        bounds = utila.flat(list(area.border.values()))
+        area = utilo.select_page(driver.area, page.page)
+        bounds = utilo.flat(list(area.border.values()))
         for item, bounding in zip(page.content, bounds):
             location = iamraw.BoundingLocation.fromtuple(
                 bounding=bounding,

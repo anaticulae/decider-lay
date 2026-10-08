@@ -9,9 +9,9 @@
 
 import os
 
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 import decider_textstyle
 import decider_textstyle.magic
@@ -52,16 +52,16 @@ def load_driver(  # pylint:disable=R0913,R0914
     if os.path.exists(magiccontent):
         magiccontent = serializeraw.load_types(magiccontent, pages=pages)
     else:
-        utila.error('no magic content')
+        utilo.error('no magic content')
         magiccontent = []
 
     if not headlines:
-        utila.error('no headlines given')
+        utilo.error('no headlines given')
     if not navigators:
-        utila.error('no navigators given')
+        utilo.error('no navigators given')
 
     if navigators and headlines:
-        if utila.exists(wordspaces):
+        if utilo.exists(wordspaces):
             wordspaces = serializeraw.load_wordspaces(
                 wordspaces,
                 pages=pages,
@@ -77,7 +77,7 @@ def load_driver(  # pylint:disable=R0913,R0914
             yieldnone=True,
         )
         magic_oneline = decider_textstyle.magic.MagicSkipper(magiccontent)
-        data = protocol.driver(
+        data = protoerror.driver(
             fontstore=fontstore,
             headlines=headlines,
             style=expected,

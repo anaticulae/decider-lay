@@ -7,19 +7,19 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle
 import tests.textstyle_
 
 
-@utilatest.requires(power.MASTER098_PDF)
+@utilotest.requires(hoverpower.MASTER098_PDF)
 def test_textsize_in_table_page55(td, mp):
     """Verify that normal text size check does not run in table data."""
     # TODO: ADD TABLE CONTENT STYLE CHECKER
-    source = power.link(power.MASTER098_PDF)
+    source = hoverpower.link(hoverpower.MASTER098_PDF)
     cmd = f'-i {source}  --text --pages=51:55'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.text(td.tmpdir)

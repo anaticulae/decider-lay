@@ -7,22 +7,22 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle
 import tests.textstyle_
 
 
-@utilatest.requires(power.HOME025_PDF)
+@utilotest.requires(hoverpower.HOME025_PDF)
 def test_headline_size_validation_page4(td, mp):
     """Verify that extracted headline container line to text line.
 
     If the mapping is wrong, the wrong text size is selected and an
     incorrect linting is fired.
     """
-    source = power.link(power.HOME025_PDF)
+    source = hoverpower.link(hoverpower.HOME025_PDF)
     cmd = f'-i {source}  --headlines --pages=4'
     tests.textstyle_.run(cmd, mp=mp)
     path = decider_textstyle.path.headlines(td.tmpdir)

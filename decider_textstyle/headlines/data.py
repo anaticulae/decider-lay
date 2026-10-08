@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import protocol
+import protoerror
 import serializeraw
-import utila
+import utilo
 
 
 def load_driver(
@@ -29,7 +29,7 @@ def load_driver(
         for group in headlines.groups:
             for headline in group.headlines:
                 if headline.page == -1:
-                    utila.error(f'remove invalid headline: {headline}')
+                    utilo.error(f'remove invalid headline: {headline}')
             # remove none page adjusted headlines
             group.headlines = [
                 item for item in group.headlines if item.page >= 0
@@ -48,7 +48,7 @@ def load_driver(
         fontcontent,
         pages=pages,
     )
-    data = protocol.driver(
+    data = protoerror.driver(
         navigators=navigators,
         fontstore=fontstore,
         headlines=headlines,

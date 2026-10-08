@@ -7,17 +7,17 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle.path
 import tests.textstyle_
 
 
 def decide_text_fonts(source, td, mp, msgids: str = None):
-    utilatest.fixture_requires(source)
-    source = power.link(source)
+    utilotest.fixture_requires(source)
+    source = hoverpower.link(source)
     tests.textstyle_.run(
         f'--fonts -i {td.tmpdir} -i {source}',
         mp=mp,
@@ -28,7 +28,7 @@ def decide_text_fonts(source, td, mp, msgids: str = None):
 
 
 def test_decider_fonts_diss266_text_distance_invalid(td, mp):
-    source = power.DISS266_PDF
+    source = hoverpower.DISS266_PDF
     findings = decide_text_fonts(
         source,
         td,
@@ -39,7 +39,7 @@ def test_decider_fonts_diss266_text_distance_invalid(td, mp):
 
 
 def test_decider_fonts_master072_text_distance_valid(td, mp):
-    source = power.MASTER072_PDF
+    source = hoverpower.MASTER072_PDF
     findings = decide_text_fonts(
         source,
         td,

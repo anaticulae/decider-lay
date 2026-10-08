@@ -7,13 +7,13 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import utilo
 
 import decider_border
 
 
 def border_user(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(
+    return utilo.pathconnector(
         path,
         decider_border.PROCESS,
         'detection_user',
@@ -22,7 +22,7 @@ def border_user(path: str, prefix: str = '') -> str:
 
 
 def decider_border_hits(path: str, prefix: str = '') -> str:
-    return utila.pathconnector(
+    return utilo.pathconnector(
         path,
         decider_border.PROCESS,
         'detection_hits',

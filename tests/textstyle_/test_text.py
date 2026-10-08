@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw
-import power
-import protocol
+import protoerror
 import pytest
 import serializeraw
-import utilatest
+import utilotest
 
 import decider_textstyle.path
 import tests.textstyle_
@@ -28,8 +28,8 @@ def decide_text_style(
     style=None,
     msgids=None,
 ):
-    utilatest.fixture_requires(source)
-    source = power.link(source)
+    utilotest.fixture_requires(source)
+    source = hoverpower.link(source)
     if style:
         tests.textstyle_.write_docstyle(style, td.tmpdir)
     tests.textstyle_.run(
@@ -41,60 +41,60 @@ def decide_text_style(
     return findings
 
 
-@utilatest.nightly
+@utilotest.nightly
 def test_decider_text_master72_2_20_fontsize(td, mp):
     style = iamraw.DocTextStyle(text_size=12.0)
     pages = '2:20'
     findings = decide_text_style(
-        power.MASTER072_PDF,
+        hoverpower.MASTER072_PDF,
         pages,
         td,
         mp,
         style,
     )
     # no text family error, cause only whitespace error is detected
-    assert not protocol.count_findings(findings, 7551)
+    assert not protoerror.count_findings(findings, 7551)
     # text size
-    assert not protocol.count_findings(findings, 7550)
+    assert not protoerror.count_findings(findings, 7550)
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_decider_text_master72_2_10_fontfamily(td, mp):
     # Hint: adjust text_family after text parser change
     style = iamraw.DocTextStyle(text_family=-1702503278)
     pages = '2:10'
     findings = decide_text_style(
-        power.MASTER072_PDF,
+        hoverpower.MASTER072_PDF,
         pages,
         td,
         mp,
         style,
     )
     # not correct, but indicates that algo changed
-    assert not protocol.count_findings(findings, 7551)
+    assert not protoerror.count_findings(findings, 7551)
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_decider_text_bachelor76_4_10_bold_font(td, mp):
     pages = '2:10'
     findings = decide_text_style(
-        power.BACHELOR076_PDF,
+        hoverpower.BACHELOR076_PDF,
         pages,
         td,
         mp,
         NO_STYLE,
     )
     # five words marked bold
-    assert protocol.count_findings(findings, msgid=7555) == 5
+    assert protoerror.count_findings(findings, msgid=7555) == 5
 
 
 @pytest.mark.xfail(reason='long time broken, don\'t know why')
-@utilatest.nightly
+@utilotest.nightly
 def test_decider_textstyle_merge_connected_findings(td, mp):
     """Merge more than one line with the same finding into a single finding."""
     pages = '18:22'
     findings = decide_text_style(
-        power.MASTER072_PDF,
+        hoverpower.MASTER072_PDF,
         pages,
         td,
         mp,
@@ -112,14 +112,14 @@ def test_textstyle_warning_in_wordfigure_bachelor51_pag30(td, mp):
     # 28: is required, cause we require the first headline
     pages = '28:31'
     findings = decide_text_style(
-        power.BACHELOR051_PDF,
+        hoverpower.BACHELOR051_PDF,
         pages,
         td,
         mp,
         msgids=7550,
     )
     # select page 30
-    findings = protocol.select_pages(findings, 30)
+    findings = protoerror.select_pages(findings, 30)
     assert not findings
 
 
@@ -128,13 +128,13 @@ def test_textstyle_master110_page29(td, mp):
     """Investigate text style errors, especially in connection with formulas."""
     pages = '20:30'
     findings = decide_text_style(
-        power.MASTER110_PDF,
+        hoverpower.MASTER110_PDF,
         pages,
         td,
         mp,
         msgids={7550, 7551},
     )
     # select page 29
-    findings = protocol.select_pages(findings, 29)
+    findings = protoerror.select_pages(findings, 29)
     # invalid formula detection produces math style error
     assert len(findings) == 8  # may change in the future
