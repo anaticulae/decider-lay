@@ -14,6 +14,7 @@ import serializeraw
 import utilotest
 
 import decider_textstyle
+import decider_textstyle.path
 import decider_textstyle.text.space
 import tests.textstyle_
 
