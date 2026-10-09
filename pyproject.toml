@@ -21,7 +21,6 @@ dependencies = [
     "texes>=1.0.1,<2.0.0",
     "utilo>=2.112.1,<3.0.0",
     "verbo>=1.23.4,<2.0.0",
-    "writers>=1.7.1,<2.0.0",
 ]
 keywords = []
 classifiers = [
@@ -44,6 +43,7 @@ dev = [
     "genref==1.4.4",
     "hoverpower==1.7.0",
     "utilotest==1.1.1",
+    "writers>=1.7.1,<2.0.0",
 ]
 
 [project.urls]
