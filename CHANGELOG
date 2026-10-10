@@ -1,219 +1,786 @@
-# Changelog
+# CHANGELOG
 
-Every noteable change is logged here.
+
+## v1.0.0 (2026-10-10)
+
+### Chores
+
+- **github**: Add .github
+  ([`d8d6e8d`](https://github.com/anaticulae/decider-lay/commit/d8d6e8d55aadc505e041f9036281b9b25fe4c24d))
+
+- **pyproject**: Add modern layout
+  ([`7ae9edd`](https://github.com/anaticulae/decider-lay/commit/7ae9edd1fde24253ace4df93b4dba82d3dc0df4e))
+
+- **pyproject**: Move unneeded dependency
+  ([`4889b1e`](https://github.com/anaticulae/decider-lay/commit/4889b1e326cc102f093e9ae520b8c9596d218dfe))
+
+- **readme**: Adjust file names
+  ([`087b2c3`](https://github.com/anaticulae/decider-lay/commit/087b2c3952648b4cdd3a30e836d3da8a90f1a19c))
+
+- **requirements**: Upgrade pyproject.toml
+  ([`e265f16`](https://github.com/anaticulae/decider-lay/commit/e265f16298ac3cf555dc33e066d6d855a0c92938))
+
+- **requirements**: Upgrade pyproject.toml
+  ([`8acf7d3`](https://github.com/anaticulae/decider-lay/commit/8acf7d3fe1e533824c434f6038ecda8471e8c55d))
+
+### Code Style
+
+- **test**: Add missing import
+  ([`9a61d37`](https://github.com/anaticulae/decider-lay/commit/9a61d37974e410677527f3d3d61794c3c7a83777))
+
+### Refactoring
+
+- **packages**: Adjust names
+  ([`7723ed1`](https://github.com/anaticulae/decider-lay/commit/7723ed1299f814e3f267d74f65253e94648d8952))
+
+### Testing
+
+- **headline**: Make tests run
+  ([`7d75499`](https://github.com/anaticulae/decider-lay/commit/7d75499ef3d200f4ea10a3ab22a07b46ec43dbe2))
+
 
 ## v0.13.2 (2022-12-18)
 
-### Chore
+### Chores
 
-* add rebase step (865d7e548fae)
-* upgrade requirements.txt (b7c14ea6eaab)
-* upgrade Jenkinsfile (4fd9ec3a5548)
-* upgrade pipe library (28ea32fe7bda)
+- **Jenkins**: Add rebase step
+  ([`865d7e5`](https://github.com/anaticulae/decider-lay/commit/865d7e548faed253a5a9aecd211707e0563af823))
+
+- **Jenkins**: Upgrade Jenkinsfile
+  ([`4fd9ec3`](https://github.com/anaticulae/decider-lay/commit/4fd9ec3a554877ffb35b2bb899fbae4970122a7c))
+
+- **Jenkins**: Upgrade pipe library
+  ([`28ea32f`](https://github.com/anaticulae/decider-lay/commit/28ea32fe7bda2c27fe03fb6a4cc470d204c1316b))
+
+- **requirements**: Upgrade requirements.txt
+  ([`b7c14ea`](https://github.com/anaticulae/decider-lay/commit/b7c14ea6eaabd8d6108beac0b884ba3e96941dd9))
+
 
 ## v0.13.1 (2022-12-17)
 
-### Fix
+### Bug Fixes
 
-* do not run out of time on too many page hits (670d98cfffbe)
+- **hits**: Do not run out of time on too many page hits
+  ([`670d98c`](https://github.com/anaticulae/decider-lay/commit/670d98cfffbedec74d3376983ec68b74973669cf))
 
-### Chore
+### Chores
 
-* upgrade requirements.txt (ee1e006a9e19)
-* upgrade Pipeline (4bb53a795ba2)
+- **Jenkins**: Upgrade Pipeline
+  ([`4bb53a7`](https://github.com/anaticulae/decider-lay/commit/4bb53a795ba2d394e60960b0c0f010116d13aba8))
+
+- **requirements**: Upgrade requirements.txt
+  ([`ee1e006`](https://github.com/anaticulae/decider-lay/commit/ee1e006a9e1960e5beebe93e5cd8c06c0c8b27f7))
+
 
 ## v0.13.0 (2022-11-11)
 
-### Feature
+### Code Style
 
-* use more modern data source (717aff2ea6d5)
+- **imports**: Organize imports
+  ([`9a45a20`](https://github.com/anaticulae/decider-lay/commit/9a45a20c724f905d9b679aac097b53b347855566))
+
+### Features
+
+- **cli**: Use more modern data source
+  ([`717aff2`](https://github.com/anaticulae/decider-lay/commit/717aff2ea6d540ca12f3aea56223d3efe55aa527))
+
 
 ## v0.12.0 (2022-11-11)
 
-### Feature
+### Chores
 
-* use modern data source (ea67eda7fbb0)
+- **Jenkins**: Add pipe library
+  ([`587b5a8`](https://github.com/anaticulae/decider-lay/commit/587b5a86a162327aacdb6eb6a55d5b4cecda5935))
 
-### Chore
+- **Jenkins**: Add separate generation step
+  ([`a2d0c4f`](https://github.com/anaticulae/decider-lay/commit/a2d0c4f581dee3f35b8df8add6112995927f750e))
 
-* publish resources if all fails (d77d42031057)
-* add pipe library (587b5a86a162)
-* add separate generation step (a2d0c4f581de)
-* convert nightly to all (ddd9e54d3413)
-* upgrade environment (b38676ee2cc4)
-* upgrade requirements.txt (f1ba7bbdd607)
+- **Jenkins**: Convert nightly to all
+  ([`ddd9e54`](https://github.com/anaticulae/decider-lay/commit/ddd9e54d3413615a52607b25039a6c2443a237ce))
 
-## v0.11.1
+- **Jenkins**: Publish resources if all fails
+  ([`d77d420`](https://github.com/anaticulae/decider-lay/commit/d77d420310571d63831f10d56fa47ffea309baa5))
 
-### Feature
+- **Jenkins**: Upgrade environment
+  ([`b38676e`](https://github.com/anaticulae/decider-lay/commit/b38676ee2cc4feb39728aec07c5c39f792617c09))
 
-* use new headlines data (c376ed351040)
+- **requirements**: Upgrade requirements.txt
+  ([`f1ba7bb`](https://github.com/anaticulae/decider-lay/commit/f1ba7bbdd607a0323439e9e8d4d789a4c1198a78))
 
-### Fix
+### Code Style
 
-* do not fail on crange error (390fa89d80a4)
+- **changelog**: Adjust for automation tool
+  ([`f68dd15`](https://github.com/anaticulae/decider-lay/commit/f68dd15866ca5d7814261917ad2cd9e0200a1779))
 
-## v0.11.0
+- **test**: Whitespace error
+  ([`f952759`](https://github.com/anaticulae/decider-lay/commit/f9527594c8506153667bb627a31839996f6e67be))
 
-### Feature
+### Features
 
-* use bounding as rectangle result (677625aa857c)
-* add bounding to finding result (7a25490b7f80)
+- **cli**: Use modern data source
+  ([`ea67eda`](https://github.com/anaticulae/decider-lay/commit/ea67eda7fbb0ccdb22ad8c7eb40cee3d6fb5c614))
 
-### Fix
+### Refactoring
 
-* do not detect headline split on rotated page (ecf1f16f3a67)
+- **replace**: Automated replacement
+  ([`2aabc7d`](https://github.com/anaticulae/decider-lay/commit/2aabc7df66cd9fa335702d7bbee5f6ce5ac21461))
+
+### Testing
+
+- **border**: Use modern test runner
+  ([`4cbd1e0`](https://github.com/anaticulae/decider-lay/commit/4cbd1e009ea1e02085621156eeec9683476a282c))
+
+- **disable**: Disable unit test
+  ([`d294b26`](https://github.com/anaticulae/decider-lay/commit/d294b2633e92d1dd0243ec501fe368bdd88287b1))
+
+- **fix**: Skip test if data is not generated
+  ([`b3fa854`](https://github.com/anaticulae/decider-lay/commit/b3fa854e0e616df7870da9966a892e50eb1fa560))
+
+- **headlines**: Adjust unit test
+  ([`2221576`](https://github.com/anaticulae/decider-lay/commit/2221576cae4e28228af16b71166cd6de2c14940a))
+
+
+## v0.11.2 (2022-10-06)
+
+### Bug Fixes
+
+- **textstyle**: Do not fail on non adjust headline
+  ([`c5cf42b`](https://github.com/anaticulae/decider-lay/commit/c5cf42bace7323618160cbdeab6ed74c753d7125))
+
+### Chores
+
+- **ci**: Add Jenkinsfile
+  ([`d8eee92`](https://github.com/anaticulae/decider-lay/commit/d8eee92dc41706358941f17328135a9384590377))
+
+- **ci**: Increase worker count on CI
+  ([`bca2b26`](https://github.com/anaticulae/decider-lay/commit/bca2b260e219a8e20478a82496a95e4f6f840b6f))
+
+- **requirements**: Add missing dev requirement
+  ([`9d59638`](https://github.com/anaticulae/decider-lay/commit/9d596381bd573db2812836a886ff03958b735291))
+
+- **requirements**: Upgrade requirements.txt
+  ([`b679cfd`](https://github.com/anaticulae/decider-lay/commit/b679cfd9992888d7ff4fdf4b0bb46eb79f53e6b6))
+
+- **resources**: Remove defaults
+  ([`7b9c80a`](https://github.com/anaticulae/decider-lay/commit/7b9c80a8c6d3bea918315f2f90457efe3400a7df))
+
+### Testing
+
+- **refactor**: Use fixture shortcuts
+  ([`2a2d8b7`](https://github.com/anaticulae/decider-lay/commit/2a2d8b72817539ebafce204ff8fa17e49cf6c48e))
+
+
+## v0.11.1 (2022-06-21)
+
+### Bug Fixes
+
+- **utils**: Do not fail on crange error
+  ([`390fa89`](https://github.com/anaticulae/decider-lay/commit/390fa89d80a4f5f0ef011f71572befd6f9a08f99))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`38e60cc`](https://github.com/anaticulae/decider-lay/commit/38e60ccdd04928856dda6ed3c0e5d31b0041c5cd))
+
+- **resources**: Sort alphabetically
+  ([`3d876c8`](https://github.com/anaticulae/decider-lay/commit/3d876c8c13e9588225d19b01730c1aa24512999b))
+
+### Features
+
+- **textstyle**: Use new headlines data
+  ([`c376ed3`](https://github.com/anaticulae/decider-lay/commit/c376ed351040cefdc2916b41687549308495f5a9))
+
+
+## v0.11.0 (2022-06-21)
+
+### Bug Fixes
+
+- **improve**: Do not detect headline split on rotated page
+  ([`ecf1f16`](https://github.com/anaticulae/decider-lay/commit/ecf1f16f3a67dd4761e43c3939b01eb568215cb0))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`8ac4dd3`](https://github.com/anaticulae/decider-lay/commit/8ac4dd3dd4f40ab39f94bc848f3d7a9c4f9b8c20))
+
+- **requirements**: Upgrade requirements.txt
+  ([`45313c2`](https://github.com/anaticulae/decider-lay/commit/45313c207c9d63a30ddbb137066dca9093e50dfc))
 
 ### Documentation
 
-* extend interface documentation (9af71b9726e3)
+- **utils**: Extend interface documentation
+  ([`9af71b9`](https://github.com/anaticulae/decider-lay/commit/9af71b9726e3c9d5a78e6da10779c4c6e931e1d8))
 
-## v0.10.3
+### Features
 
-### Feature
+- **headlines**: Add bounding to finding result
+  ([`7a25490`](https://github.com/anaticulae/decider-lay/commit/7a25490b7f80be23f0ac0c965d4eb76cda185a07))
 
-* add toc style checker (219692170264)
+- **improve**: Use bounding as rectangle result
+  ([`677625a`](https://github.com/anaticulae/decider-lay/commit/677625aa857cf0cd823f7b6e9568d600c3b02645))
 
-## v0.10.2
+### Refactoring
 
-### Feature
+- **improve**: Reduce complexity
+  ([`8ce6897`](https://github.com/anaticulae/decider-lay/commit/8ce6897dc4fd4e83ed8eb59d8e703163c2bdc02c))
 
-* make wordspaces 7770 optional depending on data availability (0791667762a3)
+- **replace**: Replace with utila code
+  ([`5f8815e`](https://github.com/anaticulae/decider-lay/commit/5f8815e69bc5377e910c9bb0602aed908eb90cef))
 
-### Fix
+- **rules**: Replace with utila code
+  ([`f0c0cbf`](https://github.com/anaticulae/decider-lay/commit/f0c0cbf49238d1b7c08640621108c256f4a77dc1))
 
-* adjust message location (1f1dfebd624d)
+- **textstyle**: Replace with protocol code
+  ([`559dec5`](https://github.com/anaticulae/decider-lay/commit/559dec54fac708cd499af21a6e9c637ec48196ac))
+
+
+## v0.10.3 (2022-05-04)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`926e2fd`](https://github.com/anaticulae/decider-lay/commit/926e2fd2cda87897e0f2d90130d2c527fa081668))
+
+- **resources**: Extend test data generator
+  ([`31a98ea`](https://github.com/anaticulae/decider-lay/commit/31a98ea09cf2abcba5c8bcae6eb6061d7d763940))
+
+### Features
+
+- **toc**: Add toc style checker
+  ([`2196921`](https://github.com/anaticulae/decider-lay/commit/219692170264e208f23baf3577585e1b93effb34))
+
+### Refactoring
+
+- **rename**: Adjust interface name
+  ([`11f69ca`](https://github.com/anaticulae/decider-lay/commit/11f69ca3613fe21200f98f482fbd9daa5f3f50da))
+
+### Testing
+
+- **adjust**: Adjust tests after regenerating resources
+  ([`089d953`](https://github.com/anaticulae/decider-lay/commit/089d9538361d4973c2fc70f1041c1f6ed8efa787))
+
+- **fix**: Adjust missing refactoring
+  ([`a288d9a`](https://github.com/anaticulae/decider-lay/commit/a288d9a91d1c44dc16c99036088e2ba4595dcb18))
+
+
+## v0.10.2 (2022-03-28)
+
+### Bug Fixes
+
+- **detection**: Adjust message location
+  ([`1f1dfeb`](https://github.com/anaticulae/decider-lay/commit/1f1dfebd624d9a8571604cdfa778fe087edd6eaf))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`7ad80e8`](https://github.com/anaticulae/decider-lay/commit/7ad80e882827f2be6ecefb5cd6d59db43d1d0cb8))
 
 ### Documentation
 
-* adjust modules path (f698754dd5d0)
-* Happy New Year! (1a99782945cd)
+- **copyright**: Happy New Year!
+  ([`1a99782`](https://github.com/anaticulae/decider-lay/commit/1a99782945cdda63e27d58fafaab7d072453f081))
 
-## v0.10.1
+- **fix**: Adjust modules path
+  ([`f698754`](https://github.com/anaticulae/decider-lay/commit/f698754dd5d063b62861e602c1e4ff6b892dc367))
 
-### Fix
+### Features
 
-* fix accessing page number (e69c23a5d538)
+- **cli**: Make wordspaces 7770 optional depending on data availability
+  ([`0791667`](https://github.com/anaticulae/decider-lay/commit/0791667762a3f28260d952af2ab234a125956992))
 
-## v0.10.0
+### Testing
 
-### Feature
+- **skip**: Skip test if resources are not generated
+  ([`e403165`](https://github.com/anaticulae/decider-lay/commit/e403165ea9c59f1405056eb7ee2933e73772c23d))
 
-* inform user about page number hits (a4d391daa8ee)
-* do not detect page number hits as bounding hits (96dcd6f7888d)
+- **style**: Format docs
+  ([`d0ecbbd`](https://github.com/anaticulae/decider-lay/commit/d0ecbbd6a0c6e5bb95a71e5d022196d02a4bf608))
 
-## v0.9.2
 
-## v0.9.1
+## v0.10.1 (2021-12-27)
 
-### Fix
+### Bug Fixes
 
-* remove magic parameter (7f12a0703360)
+- **distance**: Fix accessing page number
+  ([`e69c23a`](https://github.com/anaticulae/decider-lay/commit/e69c23a5d5388ccf46075dfa85569c2356325a70))
 
-## v0.9.0
 
-### Feature
+## v0.10.0 (2021-12-27)
 
-* add cloud lookup (9a055e3065e5)
-* replace with real holy values (79a980755c39)
-* do not lint math text as wrong font family (cebbc4b68aaf)
+### Chores
 
-### Fix
+- **requirements**: Upgrade requirements.txt
+  ([`8ff3e33`](https://github.com/anaticulae/decider-lay/commit/8ff3e33b47605400792fa8cd75591e639577edc0))
 
-* skip very huge distance (fec76936d6b9)
-* remove white space error (a5c35fb51db8)
+- **resources**: Extend test data generator
+  ([`942d189`](https://github.com/anaticulae/decider-lay/commit/942d1896a005a54a70bbc3a8c8c25d56285b954f))
 
-## v0.8.0
+### Features
 
-### Feature
+- **border**: Inform user about page number hits
+  ([`a4d391d`](https://github.com/anaticulae/decider-lay/commit/a4d391daa8ee5438d350421393d1f413d4592e2e))
 
-* skip too many text linting (7168a9bb2661)
-* merge multiple space holes into a single one (19cda201a213)
+- **detection**: Do not detect page number hits as bounding hits
+  ([`96dcd6f`](https://github.com/anaticulae/decider-lay/commit/96dcd6f7888d2c23e82b3d741d4bfb45a63321f0))
 
-## v0.7.0
+### Refactoring
 
-### Feature
+- **cli**: Simplify code
+  ([`ccfbead`](https://github.com/anaticulae/decider-lay/commit/ccfbeada6569aa17a23daea83c4a01e47d425193))
 
-* add font decider step (2a1355bc32a6)
-* add path to fonts linting (7cbb7bea8513)
+- **detector**: Add hv default value
+  ([`61d600a`](https://github.com/anaticulae/decider-lay/commit/61d600aa75b923793d2c9207bf8bdae16295987f))
 
-### Fix
+- **distance**: Improve code style
+  ([`592edad`](https://github.com/anaticulae/decider-lay/commit/592edad01b3fcc5374080a2f5a44d522367a8025))
 
-* improve text hint (c414541e3c82)
+- **distance**: Use improved linter approach
+  ([`f546a78`](https://github.com/anaticulae/decider-lay/commit/f546a78b2f79bbe93b5542bb7351631a11dd5eab))
 
-## v0.6.0
+### Testing
 
-### Feature
+- **detection**: Add test to verify page information hit
+  ([`2946f12`](https://github.com/anaticulae/decider-lay/commit/2946f12719ade57f299b7139bf88017588da33e7))
 
-* skip to many text holes on a single page (d6ae0389eeb4)
-* do not lint white space font face errors (87c7d6646d11)
-* add link to article (9d990f4baa7e)
-* make space check font size dependent (c6274733dc29)
-* extend linter information (b4f51626bf40)
-* disable text style error if occurs to often (b5659ef31958)
-* clarify headline message (b7f85669aff7)
-* add bounding detection merger (73a21c616a0f)
-* skip hole checker in caption and formula (56a36f7547e8)
 
-### Fix
+## v0.9.2 (2021-12-07)
 
-* fix error message (e23b9adfc629)
-* fix newlines (a1f6f9024631)
+### Chores
 
-## v0.5.1
+- **requirements**: Upgrade requirements.txt
+  ([`e969930`](https://github.com/anaticulae/decider-lay/commit/e969930a4f34f6effba3042d4b3ca44e0b2f339b))
 
-### Fix
 
-* add missing feature packages (0a94f5f9bc8b)
+## v0.9.1 (2021-11-11)
 
-## v0.5.0
+### Bug Fixes
 
-### Feature
+- **cli**: Remove magic parameter
+  ([`7f12a07`](https://github.com/anaticulae/decider-lay/commit/7f12a0703360d5f2062b878d433a2f1ea9803b53))
 
-* add protoerror show list (72a78d68ee02)
+### Chores
 
-## v0.4.0
+- **config**: Move project config
+  ([`80ea493`](https://github.com/anaticulae/decider-lay/commit/80ea49382c9ba4ea06479b2c98fdf37d483b49f5))
 
-### Feature
+- **requirements**: Upgrade requirements.txt
+  ([`3d08eff`](https://github.com/anaticulae/decider-lay/commit/3d08eff48173c0c3f785eb8bbc16466aa976c50b))
 
-* do not lint duplicated page bounding errors (8190e18e6445)
+### Refactoring
 
-### Fix
+- **fonts**: Replace with holy value
+  ([`cc62bef`](https://github.com/anaticulae/decider-lay/commit/cc62bef7490856c30f98086f51e939373d83cc4f))
 
-* adjust valid space to fixed number (eae939ee9510)
 
-## v0.3.1
+## v0.9.0 (2021-10-19)
 
-### Fix
+### Bug Fixes
 
-* add missing import (1347db2fffc5)
+- **style**: Remove white space error
+  ([`a5c35fb`](https://github.com/anaticulae/decider-lay/commit/a5c35fb51db81c54da4da852b6175f07f2105bfb))
 
-## v0.3.0
+- **style**: Skip very huge distance
+  ([`fec7693`](https://github.com/anaticulae/decider-lay/commit/fec76936d6b98137209ada553f412b61510cd109))
 
-### Feature
+### Chores
 
-* add space validation step (e63d6163a9a6)
+- **requirements**: Upgrade requirements.txt
+  ([`9459e69`](https://github.com/anaticulae/decider-lay/commit/9459e6983a3caf1e41e4cdf30b79b24dd3a69739))
 
-## v0.2.1
+- **requirements**: Upgrade requirements.txt
+  ([`a4c4060`](https://github.com/anaticulae/decider-lay/commit/a4c4060e94e71813df2906f6d2e45cc0d00c3f04))
 
-### Feature
+### Code Style
 
-* extend logging information (e252f7bf4abb)
+- **cleanup**: Shorten variable
+  ([`290348d`](https://github.com/anaticulae/decider-lay/commit/290348dc5889d29e4f56054d9a998427242d99ce))
 
-## v0.2.0
+### Features
 
-### Feature
+- **configo**: Add cloud lookup
+  ([`9a055e3`](https://github.com/anaticulae/decider-lay/commit/9a055e3065e5960fcca8fc6c208947820e981b57))
 
-* move decider_textstyle from decider project (5fb567ef3761)
+- **hv**: Replace with real holy values
+  ([`79a9807`](https://github.com/anaticulae/decider-lay/commit/79a980755c39feaa180c24a19e4a72b5cef4b71b))
 
-### Fix
+- **text**: Do not lint math text as wrong font family
+  ([`cebbc4b`](https://github.com/anaticulae/decider-lay/commit/cebbc4b68aaf85d5554ed02f6c6837ccc3f76403))
 
-* adjust test after changing headline generator (524771877baa)
+### Refactoring
 
-## v0.1.0
+- **detection**: Replace with protocol code
+  ([`77e6e85`](https://github.com/anaticulae/decider-lay/commit/77e6e85fac11c1a9c7ba3a76ed4f9a2c00656a8a))
 
-### Feature
+- **hv**: Fix hv access
+  ([`2fc938d`](https://github.com/anaticulae/decider-lay/commit/2fc938d6ef3cc83f58fc002b04f1d67441c41546))
 
-* move decider_border from decider project (fc267a1087d2)
+- **rename**: Improve naming
+  ([`9eff2d3`](https://github.com/anaticulae/decider-lay/commit/9eff2d318034f1fe6bc10de6e01614c51f49de8b))
 
-## v0.0.0 Initial release
+### Testing
+
+- **disable**: Disable failing unit test
+  ([`fe0a327`](https://github.com/anaticulae/decider-lay/commit/fe0a3274418ba36572a2d885c97aeaf983f67591))
+
+
+## v0.8.0 (2021-08-20)
+
+### Chores
+
+- **refactor**: Simplify code
+  ([`82c99a6`](https://github.com/anaticulae/decider-lay/commit/82c99a6cf36088d3d69857698034824635106d89))
+
+- **requirements**: Upgrade requirements.txt
+  ([`46df9c4`](https://github.com/anaticulae/decider-lay/commit/46df9c466ba1042ef84c4cc6756b0ff37ac75ab4))
+
+- **requirements**: Upgrade requirements.txt
+  ([`d3a92c9`](https://github.com/anaticulae/decider-lay/commit/d3a92c9574994b4ba87208eac8e63b5fe96f30c8))
+
+- **resources**: Extend test data generator
+  ([`59f0541`](https://github.com/anaticulae/decider-lay/commit/59f0541bd336f739ddf17a44c4cbdf85689ca468))
+
+- **resources**: Extend test data generator
+  ([`bde6518`](https://github.com/anaticulae/decider-lay/commit/bde6518ec581bf3214f11a1638820a8325016fe8))
+
+### Features
+
+- **text**: Merge multiple space holes into a single one
+  ([`19cda20`](https://github.com/anaticulae/decider-lay/commit/19cda201a213dea9decb9844068ee37af3dfd643))
+
+- **text**: Skip too many text linting
+  ([`7168a9b`](https://github.com/anaticulae/decider-lay/commit/7168a9bb2661da4f4830c4451c7c610f48212f91))
+
+### Refactoring
+
+- **rename**: Improve naming
+  ([`a31abdc`](https://github.com/anaticulae/decider-lay/commit/a31abdcdcb420286f8758f656b5ac11072c3f634))
+
+### Testing
+
+- **refactor**: Simplify code
+  ([`f288c5d`](https://github.com/anaticulae/decider-lay/commit/f288c5de1b403a7eb1fc280ea66e4feaedc85713))
+
+- **refactor**: Simplify text style tests
+  ([`7adb24f`](https://github.com/anaticulae/decider-lay/commit/7adb24fea3eecb84c632f2b13c4558db3c8179fc))
+
+- **text**: Adjust unit test
+  ([`b2f7f34`](https://github.com/anaticulae/decider-lay/commit/b2f7f34c64ae2284c93572e1e89a11d350c12b91))
+
+
+## v0.7.0 (2021-07-06)
+
+### Bug Fixes
+
+- **style**: Improve text hint
+  ([`c414541`](https://github.com/anaticulae/decider-lay/commit/c414541e3c8233326ef87b75ac99bf2e8ef7707c))
+
+### Chores
+
+- **requirements**: Split words
+  ([`8d20ce7`](https://github.com/anaticulae/decider-lay/commit/8d20ce74bf972da69a75358640ef57a1e3487d00))
+
+- **requirements**: Upgrade requirements.txt
+  ([`555ae9e`](https://github.com/anaticulae/decider-lay/commit/555ae9eaa238370803040697051fddd015a3d06f))
+
+### Code Style
+
+- **format**: Format code
+  ([`57cd3df`](https://github.com/anaticulae/decider-lay/commit/57cd3df692bfe084342e8c9d5b0707267e0ab243))
+
+### Features
+
+- **cli**: Add font decider step
+  ([`2a1355b`](https://github.com/anaticulae/decider-lay/commit/2a1355bc32a64ac76d90e4c31059bd5f42097394))
+
+- **textstyle**: Add path to fonts linting
+  ([`7cbb7be`](https://github.com/anaticulae/decider-lay/commit/7cbb7bea85134a40e797213c135969c888c1fef1))
+
+### Refactoring
+
+- **style**: Improve code style
+  ([`5452868`](https://github.com/anaticulae/decider-lay/commit/54528680cad773db8348d774a0d2797131ac1c0c))
+
+
+## v0.6.0 (2021-06-22)
+
+### Bug Fixes
+
+- **docs**: Fix newlines
+  ([`a1f6f90`](https://github.com/anaticulae/decider-lay/commit/a1f6f90246316b931e8ac69f71f057905a857273))
+
+- **headlines**: Fix error message
+  ([`e23b9ad`](https://github.com/anaticulae/decider-lay/commit/e23b9adfc62964666a328f07bfd0028ae2999843))
+
+### Chores
+
+- **requirements**: Add configo package
+  ([`67fca25`](https://github.com/anaticulae/decider-lay/commit/67fca254867fb3290c6e504c49a53b7903df1a2d))
+
+- **requirements**: Upgrade requirements.txt
+  ([`b2c7055`](https://github.com/anaticulae/decider-lay/commit/b2c7055d44e792ad35c850347eaada807a0ee64e))
+
+- **requirements**: Upgrade requirements.txt
+  ([`28545fa`](https://github.com/anaticulae/decider-lay/commit/28545fadf4746b23f197c71fc9cc427abc1dc949))
+
+- **resources**: Extend test data generator
+  ([`12de42d`](https://github.com/anaticulae/decider-lay/commit/12de42d3b6b74f2c2ab97375c244ef685b0cd267))
+
+- **resources**: Extend test data generator
+  ([`97fe343`](https://github.com/anaticulae/decider-lay/commit/97fe343c5935c92733030485a03a82ad6e5db045))
+
+- **resources**: Extend test data generator
+  ([`5354fab`](https://github.com/anaticulae/decider-lay/commit/5354fab74a2d873bf7a139f8321c2fab968ae291))
+
+### Code Style
+
+- **format**: Use improved yapf formatter
+  ([`24563a5`](https://github.com/anaticulae/decider-lay/commit/24563a5428a78b298d6fb3afebb4adedcb47abae))
+
+- **typo**: Fix typo
+  ([`9724193`](https://github.com/anaticulae/decider-lay/commit/972419352d05be323ea8f91fc94a5d31174f1da0))
+
+### Features
+
+- **detection**: Add bounding detection merger
+  ([`73a21c6`](https://github.com/anaticulae/decider-lay/commit/73a21c616a0fb508c26c02a1b8674bc2b601dcee))
+
+- **headline**: Clarify headline message
+  ([`b7f8566`](https://github.com/anaticulae/decider-lay/commit/b7f85669aff7427d7a6e126688959b19531d154f))
+
+- **space**: Extend linter information
+  ([`b4f5162`](https://github.com/anaticulae/decider-lay/commit/b4f51626bf40da66f25fb913133770da39fcba8c))
+
+- **space**: Make space check font size dependent
+  ([`c627473`](https://github.com/anaticulae/decider-lay/commit/c6274733dc2907ee8f2fd7af4b9f010a9451e27c))
+
+- **space**: Skip to many text holes on a single page
+  ([`d6ae038`](https://github.com/anaticulae/decider-lay/commit/d6ae0389eeb434a08a0aaf577770bd31f945aece))
+
+- **spaces**: Skip hole checker in caption and formula
+  ([`56a36f7`](https://github.com/anaticulae/decider-lay/commit/56a36f7547e8da84898235afa3af9cb05b395014))
+
+- **style**: Add link to article
+  ([`9d990f4`](https://github.com/anaticulae/decider-lay/commit/9d990f4baa7ed3f17fd188ce81cc9b0c882bdbbe))
+
+- **style**: Disable text style error if occurs to often
+  ([`b5659ef`](https://github.com/anaticulae/decider-lay/commit/b5659ef31958ac40742f52f183a53f0613c28722))
+
+- **style**: Do not lint white space font face errors
+  ([`87c7d66`](https://github.com/anaticulae/decider-lay/commit/87c7d6646d11ef3b2702cb78cd2aa75bac757b4c))
+
+### Refactoring
+
+- **border**: Use more modern linter approach
+  ([`6cf1298`](https://github.com/anaticulae/decider-lay/commit/6cf1298655a9f1c563b6cc4fc6f7e9701db0f44a))
+
+- **move**: Move border validation to separate module
+  ([`3c02ec5`](https://github.com/anaticulae/decider-lay/commit/3c02ec594a20257b21c7f97af0b35da95b7673f4))
+
+- **rename**: Rename variable to use later for other purpose
+  ([`7b2d02c`](https://github.com/anaticulae/decider-lay/commit/7b2d02c99eab5c8e5b7699eb6dd8d8e5259f2161))
+
+- **replace**: Replace with utila code
+  ([`c14fb13`](https://github.com/anaticulae/decider-lay/commit/c14fb1346076713aeb0df67eb6695bb17a66754f))
+
+- **space**: Improve clarity
+  ([`e358eee`](https://github.com/anaticulae/decider-lay/commit/e358eee196d1ca1f2d5a9f6013df2d76a6a6f546))
+
+- **textstyle**: Use modern concept
+  ([`cf0610d`](https://github.com/anaticulae/decider-lay/commit/cf0610d4c7548e74b3d553bb34abc501e7dabf59))
+
+### Testing
+
+- **border**: Add border merge test
+  ([`785c2dc`](https://github.com/anaticulae/decider-lay/commit/785c2dcc38078e9e67522f6bf821c41bafadec19))
+
+- **disable**: Disable failing test
+  ([`7d3d704`](https://github.com/anaticulae/decider-lay/commit/7d3d70410d5bf616e1e5a5b996590a5512573ab7))
+
+- **spaces**: Add negative textstyle caption hole
+  ([`602fdc6`](https://github.com/anaticulae/decider-lay/commit/602fdc6070f6154d9b13fdde9d67f4f79df27f31))
+
+
+## v0.5.1 (2021-03-11)
+
+### Bug Fixes
+
+- **cli**: Add missing feature packages
+  ([`0a94f5f`](https://github.com/anaticulae/decider-lay/commit/0a94f5f9bc8b327c7f9b00a5bf6bf54abdaca67a))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`f69e030`](https://github.com/anaticulae/decider-lay/commit/f69e030625dd41376b71cb49c72b205a750400c0))
+
+- **resources**: Use new base feature
+  ([`f760ea8`](https://github.com/anaticulae/decider-lay/commit/f760ea8ab1a02b7a656c626aca83e46912c054a1))
+
+### Refactoring
+
+- **replace**: Replace with protocol code
+  ([`13ff503`](https://github.com/anaticulae/decider-lay/commit/13ff50361b2cf211ec18b94d7b6692f2e8474982))
+
+
+## v0.5.0 (2021-01-30)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`7e9f6d4`](https://github.com/anaticulae/decider-lay/commit/7e9f6d48a56021041b706280b6472c63eecb52fd))
+
+### Features
+
+- **cli**: Add protocol show list
+  ([`72a78d6`](https://github.com/anaticulae/decider-lay/commit/72a78d68ee02c3bd16494b8bea49648dc4b13ccc))
+
+
+## v0.4.0 (2021-01-15)
+
+### Bug Fixes
+
+- **space**: Adjust valid space to fixed number
+  ([`eae939e`](https://github.com/anaticulae/decider-lay/commit/eae939ee951031a3a83c9953608967ee8dcb313f))
+
+### Chores
+
+- **resources**: Extend test data generator
+  ([`2871c9f`](https://github.com/anaticulae/decider-lay/commit/2871c9f781ed544bf51ddbd20bb5818a95816980))
+
+### Code Style
+
+- **header**: Add missing copyright header
+  ([`6d35be9`](https://github.com/anaticulae/decider-lay/commit/6d35be9282f6d8bf44fe5bd891ac57a78bc2ee5d))
+
+### Features
+
+- **border**: Do not lint duplicated page bounding errors
+  ([`8190e18`](https://github.com/anaticulae/decider-lay/commit/8190e18e6445a0db9a11cf04cf4a491056c6d58d))
+
+### Refactoring
+
+- **border**: Split methods to simplify code
+  ([`82f915b`](https://github.com/anaticulae/decider-lay/commit/82f915bfdfea3acf920376bb544a2be0ce3d4509))
+
+- **remove**: Remove outdated code
+  ([`c109cfc`](https://github.com/anaticulae/decider-lay/commit/c109cfcf8c0825b8e87e3c23df611d30e7be2262))
+
+
+## v0.3.1 (2021-01-13)
+
+### Bug Fixes
+
+- **import**: Add missing import
+  ([`1347db2`](https://github.com/anaticulae/decider-lay/commit/1347db2fffc509d7a48b86136dcccf005b877ab3))
+
+
+## v0.3.0 (2021-01-13)
+
+### Features
+
+- **textstyle**: Add space validation step
+  ([`e63d616`](https://github.com/anaticulae/decider-lay/commit/e63d6163a9a6aa98b37e11a1180b6f280087f214))
+
+### Refactoring
+
+- **headline**: Simplify code
+  ([`5861fba`](https://github.com/anaticulae/decider-lay/commit/5861fba6810fea8e0873e424e4dc3af0209b9b70))
+
+- **text**: Simplify document text linter
+  ([`6a678b2`](https://github.com/anaticulae/decider-lay/commit/6a678b2a51a72e3e6b48c53a48ddda0ed92f04a5))
+
+- **textstyle**: Clarify checker method name
+  ([`471dd2f`](https://github.com/anaticulae/decider-lay/commit/471dd2f28dfc4dd884099b2730f169f1f91b78f4))
+
+
+## v0.2.1 (2021-01-13)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`39210d5`](https://github.com/anaticulae/decider-lay/commit/39210d5378e00544e72d97564c1f78c38b4688b7))
+
+- **test**: Keep release build fast
+  ([`2ecb260`](https://github.com/anaticulae/decider-lay/commit/2ecb2607912df6b1cbcbf3ed2b8b7f78925c2847))
+
+### Features
+
+- **textstyle**: Extend logging information
+  ([`e252f7b`](https://github.com/anaticulae/decider-lay/commit/e252f7bf4abb20e65012fb8380ad82f8491254ef))
+
+### Refactoring
+
+- **test**: Clarify unit test
+  ([`e9278e2`](https://github.com/anaticulae/decider-lay/commit/e9278e293998032988868053216f24b7239c3455))
+
+- **test**: Replace with protocol code
+  ([`c879327`](https://github.com/anaticulae/decider-lay/commit/c8793279bd932cdb4ac58c26d1cce79731c830c9))
+
+- **textstyle**: Replace with protocol code
+  ([`715f031`](https://github.com/anaticulae/decider-lay/commit/715f0315e60b5c9de50cf7af6af2f08cc7c007a3))
+
+### Testing
+
+- **fix**: Adjust xpassed unit test
+  ([`5d36532`](https://github.com/anaticulae/decider-lay/commit/5d365328bac551bc1a42210229f404a120c9cd95))
+
+- **fix**: Enable xfailed test
+  ([`70db380`](https://github.com/anaticulae/decider-lay/commit/70db3801fdf3dfbe7beb4b216b783cb97ffa1782))
+
+
+## v0.2.0 (2021-01-13)
+
+### Bug Fixes
+
+- **headlines**: Adjust test after changing headline generator
+  ([`5247718`](https://github.com/anaticulae/decider-lay/commit/524771877baa2f20506583be0f33b26eebf60883))
+
+### Chores
+
+- **requirements**: Add words package
+  ([`bde424b`](https://github.com/anaticulae/decider-lay/commit/bde424be8e0d30c91a946afd1a2f0d71fa3e2d31))
+
+- **requirements**: Upgrade requirements.txt
+  ([`41ec974`](https://github.com/anaticulae/decider-lay/commit/41ec974a531272a251f145108cf3af0df56260c0))
+
+- **requirements**: Upgrade requirements.txt
+  ([`9dc1bd7`](https://github.com/anaticulae/decider-lay/commit/9dc1bd75e39147666271827dff2a7db875207c65))
+
+- **resources**: Extend test data generator
+  ([`bd59bad`](https://github.com/anaticulae/decider-lay/commit/bd59badaaeb6a2226a6ddcbd634ade3f015469b0))
+
+### Features
+
+- **move**: Move decider_textstyle from decider project
+  ([`5fb567e`](https://github.com/anaticulae/decider-lay/commit/5fb567ef376139c2ad2163a2b2f81643a14879db))
+
+
+## v0.1.0 (2021-01-12)
+
+### Chores
+
+- **requirements**: Add packages to implement default cli
+  ([`e054c98`](https://github.com/anaticulae/decider-lay/commit/e054c986e7cd9269c3432936781022eb16d7b0f1))
+
+- **requirements**: Add test execution packages
+  ([`e02b0b0`](https://github.com/anaticulae/decider-lay/commit/e02b0b0c73a596233acd5453dd6736cab972702e))
+
+- **resources**: Extend resource generator
+  ([`ddc5e57`](https://github.com/anaticulae/decider-lay/commit/ddc5e57aeb44b31edfdf2fd574f0545f4bebd312))
+
+- **setup**: Clean up setup file
+  ([`9a38b05`](https://github.com/anaticulae/decider-lay/commit/9a38b0580713384e6d91ca479f6b051c048b7706))
+
+### Features
+
+- **move**: Move decider_border from decider project
+  ([`fc267a1`](https://github.com/anaticulae/decider-lay/commit/fc267a1087d2e77f8b8d237beb6151f2edc9c76b))
+
+### Testing
+
+- **regression**: Add expected border regression test
+  ([`6b7fdb5`](https://github.com/anaticulae/decider-lay/commit/6b7fdb55266997e3a7084aa69f5a688ae0b961c2))
+
+
+## v0.0.0 (2021-01-12)
+
+- Initial Release
